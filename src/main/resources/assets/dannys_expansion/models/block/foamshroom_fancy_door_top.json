@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top",
+  "textures": {
+    "top": "dannys_expansion:block/foamshroom_fancy_door_top",
+    "bottom": "dannys_expansion:block/foamshroom_fancy_door_bottom"
+  }
+}

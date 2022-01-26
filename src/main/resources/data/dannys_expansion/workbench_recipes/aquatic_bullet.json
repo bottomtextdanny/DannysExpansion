@@ -1,0 +1,17 @@
+{
+  "index": 13,
+  "ingredients": [
+    {
+      "item": "dannys_expansion:bullet",
+      "count": 12
+    },
+    {
+      "item": "dannys_expansion:prismarine_shard",
+      "count": 20
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:aquatic_bullet",
+    "count": 12
+  }
+}

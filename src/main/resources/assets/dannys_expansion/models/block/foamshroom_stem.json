@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "dannys_expansion:block/foamshroom_stem",
+    "side": "dannys_expansion:block/foamshroom_stem"
+  }
+}

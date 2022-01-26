@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_rh",
+  "textures": {
+    "top": "dannys_expansion:block/_name_top",
+    "bottom": "dannys_expansion:block/_name_bottom"
+  }
+}

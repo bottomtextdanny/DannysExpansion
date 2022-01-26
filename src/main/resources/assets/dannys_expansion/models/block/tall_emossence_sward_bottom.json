@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "dannys_expansion:block/tall_emossence_sward_bottom"
+  }
+}

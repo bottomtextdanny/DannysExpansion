@@ -1,0 +1,17 @@
+{
+  "index": 0,
+  "ingredients": [
+    {
+      "tag": "minecraft:planks",
+      "count": 8
+    },
+    {
+      "item": "minecraft:hay_block",
+      "count": 5
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:test_dummy",
+    "count": 1
+  }
+}

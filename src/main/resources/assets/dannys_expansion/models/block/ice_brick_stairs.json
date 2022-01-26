@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "dannys_expansion:block/ice_bricks",
+    "top": "dannys_expansion:block/ice_bricks",
+    "side": "dannys_expansion:block/ice_bricks"
+  }
+}

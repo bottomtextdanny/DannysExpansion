@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "dannys_expansion:block/tall_emossence_sward_bottom"
+    },
+    "half=upper": {
+      "model": "dannys_expansion:block/tall_emossence_sward_top"
+    }
+  }
+}

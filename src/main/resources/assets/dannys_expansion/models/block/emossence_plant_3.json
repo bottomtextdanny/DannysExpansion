@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "dannys_expansion:block/emossence_plant_3"
+  }
+}

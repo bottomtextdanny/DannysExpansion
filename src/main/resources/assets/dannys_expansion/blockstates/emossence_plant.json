@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "dannys_expansion:block/emossence_plant_0"
+      },
+      {
+        "model": "dannys_expansion:block/emossence_plant_1"
+      },
+      {
+        "model": "dannys_expansion:block/emossence_plant_2"
+      },
+      {
+        "model": "dannys_expansion:block/emossence_plant_3"
+      },
+      {
+        "model": "dannys_expansion:block/emossence_plant_4"
+      },
+      {
+        "model": "dannys_expansion:block/emossence_plant_5"
+      }
+    ]
+  }
+}

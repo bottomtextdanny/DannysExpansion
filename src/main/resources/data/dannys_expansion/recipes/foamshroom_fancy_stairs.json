@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "dannys_expansion:foamshroom_fancy_planks"
+    }
+  },
+  "result": {
+    "item": "dannys_expansion:foamshroom_fancy_stairs",
+    "count": 4
+  },
+  "group": "wooden_stairs"
+}

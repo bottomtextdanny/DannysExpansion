@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "dannys_expansion:block/_name",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "dannys_expansion:block/_name"
+    },
+    "axis=z": {
+      "model": "dannys_expansion:block/_name",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "index": 14,
+  "ingredients": [
+    {
+      "item": "minecraft:saddle",
+      "count": 1
+    },
+    {
+      "item": "dannys_expansion:gel",
+      "count": 72
+    },
+    {
+      "item": "dannys_expansion:life_essence",
+      "count": 5
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:blue_slime",
+    "count": 1
+  }
+}

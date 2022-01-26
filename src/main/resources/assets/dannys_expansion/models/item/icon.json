@@ -1,0 +1,76 @@
+{
+  "credit": "Made with Blockbench",
+  "texture_size": [96, 64],
+  "textures": {
+    "0": "dannys_expansion:entity/possessed_armor/possessed_armor",
+    "particle": "dannys_expansion:entity/possessed_armor/possessed_armor"
+  },
+  "elements": [
+    {
+      "from": [-2, 0, -2],
+      "to": [18, 20, 18],
+      "rotation": {"angle": 0, "axis": "y", "origin": [6, 8, 6]},
+      "faces": {
+        "north": {"uv": [7.83333, 5, 9.16667, 7], "texture": "#0"},
+        "east": {"uv": [6.5, 5, 7.83333, 7], "texture": "#0"},
+        "south": {"uv": [10.5, 5, 11.83333, 7], "texture": "#0"},
+        "west": {"uv": [9.16667, 5, 10.5, 7], "texture": "#0"},
+        "up": {"uv": [7.83333, 3, 9.16667, 5], "texture": "#0"},
+        "down": {"uv": [9.16667, 3, 10.5, 5], "texture": "#0"}
+      }
+    },
+    {
+      "from": [5.5, 5, 3],
+      "to": [10.5, 25, 23],
+      "rotation": {"angle": 0, "axis": "y", "origin": [13.5, 13, 11]},
+      "faces": {
+        "north": {"uv": [6, 9.5, 6.33333, 11.5], "texture": "#0"},
+        "east": {"uv": [6.33333, 9.5, 7.66667, 11.5], "texture": "#0"},
+        "south": {"uv": [7.66667, 9.5, 8, 11.5], "texture": "#0"},
+        "west": {"uv": [4.66667, 9.5, 6, 11.5], "texture": "#0"},
+        "up": {"uv": [6, 7.5, 6.33333, 9.5], "texture": "#0"},
+        "down": {"uv": [6.33333, 7.5, 6.66667, 9.5], "texture": "#0"}
+      }
+    },
+    {
+      "from": [5.5, -5, 0.5],
+      "to": [5.5, 30, 28],
+      "rotation": {"angle": 0, "axis": "y", "origin": [15, 3, 8.5]},
+      "faces": {
+        "north": {"uv": [0, 0, 0, 3.5], "texture": "#0"},
+        "east": {"uv": [8.16667, 10, 10, 13.5], "texture": "#0"},
+        "south": {"uv": [0, 0, 0, 3.5], "texture": "#0"},
+        "west": {"uv": [10.33333, 10, 12.16667, 13.5], "texture": "#0"},
+        "up": {"uv": [0, 0, 0, 2.75], "texture": "#0"},
+        "down": {"uv": [0, 0, 0, 2.75], "texture": "#0"}
+      }
+    },
+    {
+      "from": [10.5, -5, 0.5],
+      "to": [10.5, 30, 28],
+      "rotation": {"angle": 0, "axis": "y", "origin": [18.5, 3, 8.5]},
+      "faces": {
+        "north": {"uv": [0, 0, 0, 3.5], "texture": "#0"},
+        "east": {"uv": [8.16667, 10, 10, 13.5], "texture": "#0"},
+        "south": {"uv": [0, 0, 0, 3.5], "texture": "#0"},
+        "west": {"uv": [10.33333, 10, 12.16667, 13.5], "texture": "#0"},
+        "up": {"uv": [0, 0, 0, 2.75], "texture": "#0"},
+        "down": {"uv": [0, 0, 0, 2.75], "texture": "#0"}
+      }
+    }
+  ],
+  "display": {
+    "gui": {
+      "rotation": [32, -135, 0],
+      "translation": [0.5, 0.0, 0],
+      "scale": [0.5, 0.5, 0.5]
+    }
+  },
+  "groups": [
+    {
+      "name": "group",
+      "origin": [8, 8, 8],
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

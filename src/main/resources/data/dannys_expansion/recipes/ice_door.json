@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "XX",
+    "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "dannys_expansion:ice_bricks"
+    }
+  },
+  "result": {
+    "item": "dannys_expansion:ice_door",
+    "count": 3
+  }
+}

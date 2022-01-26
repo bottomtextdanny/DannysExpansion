@@ -1,0 +1,6 @@
+{
+  "parent": "dannys_expansion:item/18bow",
+  "textures": {
+    "layer0": "dannys_expansion:item/netherite_bow_pulling_0"
+  }
+}

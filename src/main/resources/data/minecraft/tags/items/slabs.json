@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "dannys_expansion:ice_brick_slab",
+    "dannys_expansion:briostone_brick_slab",
+    "dannys_expansion:foamshroom_slab",
+    "dannys_expansion:foamshroom_fancy_slab",
+    "dannys_expansion:rubbold_slab",
+    "dannys_expansion:rubbold_brick_slab"
+  ]
+}

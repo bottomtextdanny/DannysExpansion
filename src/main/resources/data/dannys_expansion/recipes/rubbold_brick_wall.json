@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "dannys_expansion:rubbold_bricks_slab"
+    }
+  },
+  "result": {
+    "item": "dannys_expansion:rubbold_brick_wall",
+    "count": 6
+  }
+}

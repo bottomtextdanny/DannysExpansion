@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "dannys_expansion:block/nightshade_plant_top"
+  }
+}

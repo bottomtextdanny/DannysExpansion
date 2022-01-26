@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dannys_expansion:block/ice_brick_slab"
+    },
+    "type=double": {
+      "model": "dannys_expansion:block/ice_bricks"
+    },
+    "type=top": {
+      "model": "dannys_expansion:block/ice_brick_slab_top"
+    }
+  }
+}

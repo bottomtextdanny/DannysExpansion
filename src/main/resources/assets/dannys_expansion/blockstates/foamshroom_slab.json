@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dannys_expansion:block/foamshroom_slab"
+    },
+    "type=double": {
+      "model": "dannys_expansion:block/foamshroom_planks"
+    },
+    "type=top": {
+      "model": "dannys_expansion:block/foamshroom_slab_top"
+    }
+  }
+}

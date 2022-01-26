@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " WW",
+    " WW",
+    "X  "
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "minecraft:purple_wool"
+    }
+  },
+  "result": {
+    "item": "dannys_expansion:purple_kite"
+  }
+}

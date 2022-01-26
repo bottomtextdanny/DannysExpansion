@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "dannys_expansion:block/emossence_top",
+    "bottom": "minecraft:block/end_stone",
+    "side": "dannys_expansion:block/emossence_side",
+    "particle": "dannys_expansion:block/emossence_top"
+  }
+}

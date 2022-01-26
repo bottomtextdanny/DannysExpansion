@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "dannys_expansion:briostone_bricks"
+    }
+  },
+  "result": {
+    "item": "dannys_expansion:briostone_brick_stairs",
+    "count": 4
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "index": 11,
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot",
+      "count": 8
+    },
+    {
+      "item": "minecraft:gunpowder",
+      "count": 8
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:bullet",
+    "count": 12
+  }
+}

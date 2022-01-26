@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "dannys_expansion:block/_name"
+      },
+      {
+        "model": "dannys_expansion:block/_name",
+        "y": 90
+      },
+      {
+        "model": "dannys_expansion:block/_name",
+        "y": 180
+      },
+      {
+        "model": "dannys_expansion:block/_name",
+        "y": 270
+      }
+    ]
+  }
+}

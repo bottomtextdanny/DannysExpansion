@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "dannys_expansion:workbench",
+              "properties": {
+                "workbench_part": "main"
+              }
+            }
+          ],
+          "name": "dannys_expansion:workbench"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "survives_explosion"
+        }
+      ]
+    }
+  ]
+}

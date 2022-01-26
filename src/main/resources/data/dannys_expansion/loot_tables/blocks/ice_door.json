@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "dannys_expansion:ice_door",
+              "properties": {
+                "half": "lower"
+              }
+            }
+          ],
+          "name": "dannys_expansion:ice_door"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "survives_explosion"
+        }
+      ]
+    }
+  ]
+}

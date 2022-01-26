@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "dannys_expansion:block/_name"
+    },
+    "active=true": {
+      "model": "dannys_expansion:block/_name_active"
+    }
+  }
+}

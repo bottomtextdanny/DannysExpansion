@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dannys_expansion:block/_name"
+    },
+    "type=double": {
+      "model": "dannys_expansion:block/_whole"
+    },
+    "type=top": {
+      "model": "dannys_expansion:block/_name_top"
+    }
+  }
+}

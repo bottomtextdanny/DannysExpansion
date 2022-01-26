@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "X"
+  ],
+  "key": {
+    "X": {
+      "item": "dannys_expansion:rubbold_bricks"
+    }
+  },
+  "result": {
+    "item": "dannys_expansion:chiseled_rubbold_bricks",
+    "count": 1
+  }
+}

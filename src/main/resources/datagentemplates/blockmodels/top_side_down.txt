@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "_IDtop:block/_Btop",
+    "bottom": "_IDbottom:block/_Bbottom",
+    "side": "_IDside:block/_Bside",
+    "particle": "_IDtop:block/_Btop"
+  }
+}

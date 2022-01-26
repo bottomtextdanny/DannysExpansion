@@ -1,0 +1,17 @@
+{
+  "index": 7,
+  "ingredients": [
+    {
+      "item": "minecraft:netherite_sword",
+      "count": 1
+    },
+    {
+      "item": "dannys_expansion:scorpion_gland",
+      "count": 5
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:scorpion_sword",
+    "count": 1
+  }
+}

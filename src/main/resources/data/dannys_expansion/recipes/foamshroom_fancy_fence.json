@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XCX",
+    "XCX"
+  ],
+  "key": {
+    "X": {
+      "item": "dannys_expansion:foamshroom_fancy_planks"
+    },
+    "C": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "dannys_expansion:foamshroom_fancy_fence",
+    "count": 4
+  },
+  "group": "wooden_fence"
+}

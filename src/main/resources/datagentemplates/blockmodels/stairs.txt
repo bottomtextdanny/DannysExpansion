@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "dannys_expansion:block/_whole",
+    "top": "dannys_expansion:block/_whole",
+    "side": "dannys_expansion:block/_whole"
+  }
+}

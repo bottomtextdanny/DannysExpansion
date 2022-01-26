@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "dannys_expansion:block/_name_bottom"
+    },
+    "half=upper": {
+      "model": "dannys_expansion:block/_name_top"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "dannys_expansion:foamshroom"
+  },
+  "result": "dannys_expansion:hardened_foamshroom",
+  "experience": 0.01,
+  "cookingtime": 120
+}

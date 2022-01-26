@@ -1,0 +1,17 @@
+{
+  "index": 6,
+  "ingredients": [
+    {
+      "item": "dannys_expansion:strange_alloy",
+      "count": 8
+    },
+    {
+      "item": "minecraft:gold_ingot",
+      "count": 3
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:antique_helmet",
+    "count": 1
+  }
+}

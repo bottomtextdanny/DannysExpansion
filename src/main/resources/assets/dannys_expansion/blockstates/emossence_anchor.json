@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "dannys_expansion:block/emossence_anchor"
+    },
+    "active=true": {
+      "model": "dannys_expansion:block/emossence_anchor_active"
+    }
+  }
+}

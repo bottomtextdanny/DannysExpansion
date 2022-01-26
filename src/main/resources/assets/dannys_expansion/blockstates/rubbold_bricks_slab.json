@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dannys_expansion:block/rubbold_bricks_slab"
+    },
+    "type=double": {
+      "model": "dannys_expansion:block/rubbold_bricks"
+    },
+    "type=top": {
+      "model": "dannys_expansion:block/rubbold_bricks_slab_top"
+    }
+  }
+}

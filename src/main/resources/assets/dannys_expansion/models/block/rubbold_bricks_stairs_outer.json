@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "dannys_expansion:block/rubbold_bricks",
+    "top": "dannys_expansion:block/rubbold_bricks",
+    "side": "dannys_expansion:block/rubbold_bricks"
+  }
+}

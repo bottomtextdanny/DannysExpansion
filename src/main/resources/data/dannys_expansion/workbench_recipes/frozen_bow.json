@@ -1,0 +1,17 @@
+{
+  "index": 8,
+  "ingredients": [
+    {
+      "item": "minecraft:blue_ice",
+      "count": 128
+    },
+    {
+      "item": "dannys_expansion:ice_shard",
+      "count": 16
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:frozen_bow",
+    "count": 1
+  }
+}

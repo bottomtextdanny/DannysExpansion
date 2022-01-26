@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:block",
+  "functions": [
+    {}
+  ],
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "alternatives",
+          "children": [
+            {
+              "type": "item",
+              "name": "minecraft:diamond",
+              "conditions": [
+                {
+                  "condition": "minecraft:random_chance",
+                  "chance": 0.5
+                }
+              ]
+            },
+            {
+              "type": "item",
+              "name": "minecraft:wheat_seeds"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
