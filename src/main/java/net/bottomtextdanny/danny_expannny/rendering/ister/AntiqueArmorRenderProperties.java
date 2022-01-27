@@ -8,17 +8,5 @@ import net.minecraftforge.client.IItemRenderProperties;
 
 public class AntiqueArmorRenderProperties implements IItemRenderProperties {
 
-    @Override
-    public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
-//        if (DannyItems.ANTIQUE_ARMOR_HELMET.equals(itemStack.getItem())) {
-//            return (A) new AntiqueArmorHelmetModel<LivingEntity>();
-//        } else if (DannyItems.ANTIQUE_ARMOR_CHESTPLATE.equals(itemStack.getItem())) {
-//            return (A) new AntiqueArmorChestplateModel<LivingEntity>();
-//        } else if (DannyItems.ANTIQUE_ARMOR_LEGGINGS.equals(itemStack.getItem())) {
-//            return (A) new AntiqueArmorLeggingsModel<LivingEntity>();
-//        } else {
-//            return (A) new AntiqueArmorBootsModel<LivingEntity>();
-//        }
-        return null;
-    }
+
 }

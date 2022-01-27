@@ -167,7 +167,7 @@ public abstract class AbstractBulletEntity extends DEProjectile implements BCDat
         } else if (breakSound == SoundEvents.GLASS_BREAK || block.getTags().stream().anyMatch(res -> res.equals(Tags.Blocks.GLASS.getName()))) {
             this.level.playSound(null, this.getX(), this.getY(), this.getZ(), DESounds.ES_BULLET_IMPACT_GLASS.get(), SoundSource.NEUTRAL, 0.6F, 1.0F + 0.2F * this.random.nextFloat());
             this.soundPlayed = true;
-        } else if (breakSound == SoundEvents.GRASS_BREAK || breakSound == SoundEvents.GRAVEL_BREAK || block.getTags().stream().anyMatch(res -> res.equals(Tags.Blocks.DIRT.getName()))) {
+        } else if (breakSound == SoundEvents.GRASS_BREAK || breakSound == SoundEvents.GRAVEL_BREAK || block.getTags().stream().anyMatch(res -> res == Tags.Blocks.GRAVEL)) {
             this.level.playSound(null, this.getX(), this.getY(), this.getZ(), DESounds.ES_BULLET_IMPACT_DIRT.get(), SoundSource.NEUTRAL, 0.6F, 1.0F + 0.2F * this.random.nextFloat());
             this.soundPlayed = true;
         } else if (breakSound == SoundEvents.WOOD_BREAK) {

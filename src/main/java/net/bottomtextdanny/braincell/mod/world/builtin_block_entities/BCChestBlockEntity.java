@@ -82,11 +82,6 @@ public abstract class BCChestBlockEntity extends ChestBlockEntity implements BEC
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
     }
 
-    public CompoundTag save(CompoundTag p_59112_) {
-
-        return super.save(p_59112_);
-    }
-
     public static void lidAnimateTick(Level p_155344_, BlockPos p_155345_, BlockState p_155346_, BCChestBlockEntity p_155347_) {
         p_155347_.chestLidController.tickLid();
     }

@@ -223,9 +223,6 @@ public final class DannysExpansion {
 	    AbstractEvaluation._build();
 	    DEUtil.loadData();
 	    CapabilityManager.callForSomeReason();
-	    Registry.ENTITY_TYPE.forEach(e -> {
-		    ((IEntityTypeExt)e).DE_setRegId(Registry.ENTITY_TYPE.getId(e));
-	    });
 	    COMMON_SETUP_CALLS.forEach(Runnable::run);
 	    COMMON_SETUP_CALLS.clear();
     }
