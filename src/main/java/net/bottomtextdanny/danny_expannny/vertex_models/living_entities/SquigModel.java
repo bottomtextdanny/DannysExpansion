@@ -116,8 +116,8 @@ public class SquigModel extends BCEntityModel<SquigEntity> {
 	public void handleKeyframedAnimations(SquigEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
 		super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
 		
-		if (entity.mainAnimationHandler.isPlaying(entity.goAnimation)) {
-			EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.linearProgress());
+		if (entity.mainHandler.isPlaying(entity.goAnimation)) {
+			EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.linearProgress());
 			
 			animator.setupKeyframe(7.0F);
 			animator.rotate(this.tentBackLeft, 60.0F, 0.0F, 0.0F);

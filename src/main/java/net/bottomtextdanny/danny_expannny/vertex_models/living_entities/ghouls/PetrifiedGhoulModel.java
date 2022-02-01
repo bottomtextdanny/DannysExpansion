@@ -95,8 +95,8 @@ public class PetrifiedGhoulModel extends BCEntityModel<PetrifiedGhoul> {
 
     @Override
     public void handleKeyframedAnimations(PetrifiedGhoul entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
-        if (entity.mainAnimationHandler.isPlaying(entity.getSideAttackAnimation())) {
-            EntityModelAnimator attackAnimation = new EntityModelAnimator(this, entity.mainAnimationHandler.linearProgress());
+        if (entity.mainHandler.isPlaying(PetrifiedGhoul.SIDE_ATTACK)) {
+            EntityModelAnimator attackAnimation = new EntityModelAnimator(this, entity.mainHandler.linearProgress());
 
             attackAnimation.setupKeyframe(8.0F);
             attackAnimation.rotate(this.hip, -22.5F, 45.0F, 0.0F);
@@ -118,8 +118,8 @@ public class PetrifiedGhoulModel extends BCEntityModel<PetrifiedGhoul> {
 
             attackAnimation.emptyKeyframe(6.4F);
 
-        } else if (entity.mainAnimationHandler.isPlaying(entity.getStrongAttackAnimation())) {
-            EntityModelAnimator attackAnimation = new EntityModelAnimator(this, entity.mainAnimationHandler.linearProgress());
+        } else if (entity.mainHandler.isPlaying(PetrifiedGhoul.STRONG_ATTACK)) {
+            EntityModelAnimator attackAnimation = new EntityModelAnimator(this, entity.mainHandler.linearProgress());
 
             attackAnimation.setupKeyframe(8.0F);
             attackAnimation.rotate(this.hip, -15.0F, 0.0F, 0.0F);

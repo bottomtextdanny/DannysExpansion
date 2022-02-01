@@ -1,7 +1,7 @@
 package net.bottomtextdanny.braincell.mod.world.builtin_block_entities;
 
 import net.bottomtextdanny.braincell.mod.world.builtin_blocks.BCChestBlock;
-import net.bottomtextdanny.dannys_expansion.core.interfaces.BEClientManager;
+import net.bottomtextdanny.dannys_expansion.core.interfaces.BlockEntityClientMessenger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -30,9 +30,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
 
 import javax.annotation.Nonnull;
-import java.util.Optional;
 
-public abstract class BCChestBlockEntity extends ChestBlockEntity implements BEClientManager {
+public abstract class BCChestBlockEntity extends ChestBlockEntity implements BlockEntityClientMessenger {
     protected BCChestBlock auxiliaryBlock;
     protected static final int EVENT_SET_OPEN_COUNT = 1;
 

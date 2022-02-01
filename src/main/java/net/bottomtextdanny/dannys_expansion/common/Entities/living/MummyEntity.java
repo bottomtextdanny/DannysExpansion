@@ -1,7 +1,7 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.living;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.NullAnimation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
 import net.bottomtextdanny.braincell.mod.entity.serialization.EntityData;
 import net.bottomtextdanny.braincell.mod.entity.serialization.EntityDataReference;
@@ -58,11 +58,12 @@ public class MummyEntity extends ModuledMob implements Enemy {
                             () -> ItemStack.EMPTY,
                             "forehead")
             );
+    public static final SimpleAnimation RISE_SPIKE = new SimpleAnimation(26);
+    public static final SimpleAnimation THROW_ORB = new SimpleAnimation(26);
+    public static final SimpleAnimation THROW_EGG = new SimpleAnimation(26);
+    public static final SimpleAnimation SUMMON_ABOMINATION = new SimpleAnimation(30);
+    public static final AnimationManager ANIMATIONS = new AnimationManager(RISE_SPIKE, THROW_ORB, THROW_EGG, SUMMON_ABOMINATION);
     private final EntityData<ItemStack> forehead_item;
-    public final Animation riseSpike = addAnimation(new Animation(26));
-    public final Animation throwOrb = addAnimation(new Animation(26));
-    public final Animation throwEgg = addAnimation(new Animation(26));
-    public final Animation summonAbomination = addAnimation(new Animation(30));
     public Vec3 rightHandVec = Vec3.ZERO;
     public Vec3 leftHandVec = Vec3.ZERO;
     public Timer riseSpikeTimer;
@@ -118,15 +119,6 @@ public class MummyEntity extends ModuledMob implements Enemy {
         this.summonTimer = new Timer(250);
         this.summonTimer.setCount(70);
         this.eggTimer.setCount(200);
-    }
-
-    @Override
-    public void onDeathAnimationStart() {
-        super.onDeathAnimationStart();
-        if (getForeheadItem() != ItemStack.EMPTY) {
-            ItemEntity item = new ItemEntity(this.level, getX(), getY(), getZ(),getForeheadItem());
-            this.level.addFreshEntity(item);
-        }
     }
 
     protected void registerExtraGoals() {
@@ -186,14 +178,14 @@ public class MummyEntity extends ModuledMob implements Enemy {
                 }
             }
 
-            if (this.mainAnimationHandler.isPlaying(this.summonAbomination)) {
-                if (this.mainAnimationHandler.getTick() == 2) {
+            if (this.mainHandler.isPlaying(SUMMON_ABOMINATION)) {
+                if (this.mainHandler.getTick() == 2) {
                     playSound(DESounds.ES_MUMMY_SUMMON_ABOMINATION.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.1F);
                 }
             }
 
         } else {
-            if (this.mainAnimationHandler.isPlaying(this.summonAbomination)) {
+            if (this.mainHandler.isPlaying(SUMMON_ABOMINATION)) {
 
                 this.level.addParticle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.OAK_PLANKS.defaultBlockState()), this.rightHandVec.x, this.rightHandVec.y, this.rightHandVec.z, 0, -0.1, 0);
                 this.level.addParticle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.OAK_PLANKS.defaultBlockState()), this.leftHandVec.x, this.leftHandVec.y, this.leftHandVec.z, 0, -0.1, 0);
@@ -201,14 +193,14 @@ public class MummyEntity extends ModuledMob implements Enemy {
             }
         }
 
-        if (this.mainAnimationHandler.isPlaying(this.throwEgg)) {
+        if (this.mainHandler.isPlaying(this.THROW_EGG)) {
 
             if (!this.level.isClientSide()) {
 
                 if (hasAttackTarget()) {
                     getLookControl().setLookAt(getTarget(), 999.0F, 30.0F);
 
-                    if (this.mainAnimationHandler.getTick() == 6) {
+                    if (this.mainHandler.getTick() == 6) {
 
                         playSound(DESounds.ES_SWOOSH.get(), 1.0F, 0.6F);
                     }
@@ -226,6 +218,15 @@ public class MummyEntity extends ModuledMob implements Enemy {
 
     public ItemStack getForeheadItem() {
         return this.forehead_item.get();
+    }
+
+    @Override
+    public void onDeathAnimationStart() {
+        super.onDeathAnimationStart();
+        if (getForeheadItem() != ItemStack.EMPTY) {
+            ItemEntity item = new ItemEntity(this.level, getX(), getY(), getZ(),getForeheadItem());
+            this.level.addFreshEntity(item);
+        }
     }
 
     @Nullable
@@ -250,9 +251,9 @@ public class MummyEntity extends ModuledMob implements Enemy {
 
         public void start() {
             super.start();
-            MummyEntity.this.mainAnimationHandler.play(MummyEntity.this.throwOrb);
+            MummyEntity.this.mainHandler.play(MummyEntity.this.THROW_ORB);
             MummyEntity.this.rangedTimer.reset();
-            MummyEntity.this.sleepPathSchedule.setSleep(MummyEntity.this.mainAnimationHandler.get().getDuration());
+            MummyEntity.this.sleepPathSchedule.setSleep(MummyEntity.this.mainHandler.getAnimation().getDuration());
         }
 
         @Override
@@ -262,7 +263,7 @@ public class MummyEntity extends ModuledMob implements Enemy {
 
                 getLookControl().setLookAt(getTarget(), 30.0F, 30.0F);
 
-                if (MummyEntity.this.mainAnimationHandler.getTick() == 5) {
+                if (MummyEntity.this.mainHandler.getTick() == 5) {
                     BarrenOrbEntity barrenOrbEntity = DEEntities.BARREN_ORB.get().create(MummyEntity.this.level);
 
                     if (barrenOrbEntity != null) {
@@ -275,7 +276,7 @@ public class MummyEntity extends ModuledMob implements Enemy {
                         MummyEntity.this.level.addFreshEntity(barrenOrbEntity);
                     }
 
-                    if (MummyEntity.this.mainAnimationHandler.getTick() == 16) {
+                    if (MummyEntity.this.mainHandler.getTick() == 16) {
                         playSound(DESounds.ES_SWOOSH.get(), 0.6F, 1.0F + MummyEntity.this.random.nextFloat() * 0.1F);
                     }
                 }
@@ -284,12 +285,12 @@ public class MummyEntity extends ModuledMob implements Enemy {
 
         @Override
         public boolean canContinueToUse() {
-            return MummyEntity.this.mainAnimationHandler.isPlaying(MummyEntity.this.throwOrb);
+            return MummyEntity.this.mainHandler.isPlaying(MummyEntity.this.THROW_ORB);
         }
 
         @Override
         public boolean canUse() {
-            return hasAttackTarget() && MummyEntity.this.mainAnimationHandler.isPlayingNull() && hasLineOfSight(getTarget()) && MummyEntity.this.rangedTimer.hasEnded();
+            return hasAttackTarget() && MummyEntity.this.mainHandler.isPlayingNull() && hasLineOfSight(getTarget()) && MummyEntity.this.rangedTimer.hasEnded();
         }
 
         @Override
@@ -302,16 +303,16 @@ public class MummyEntity extends ModuledMob implements Enemy {
 
         public void start() {
             super.start();
-            MummyEntity.this.mainAnimationHandler.play(MummyEntity.this.throwEgg);
+            MummyEntity.this.mainHandler.play(MummyEntity.this.THROW_EGG);
             MummyEntity.this.eggTimer.reset();
-            MummyEntity.this.sleepPathSchedule.setSleep(MummyEntity.this.mainAnimationHandler.get().getDuration());
+            MummyEntity.this.sleepPathSchedule.setSleep(MummyEntity.this.mainHandler.getAnimation().getDuration());
 
         }
 
         @Override
         public void tick() {
             super.tick();
-            if (MummyEntity.this.mainAnimationHandler.getTick() == 9 && hasAttackTarget()) {
+            if (MummyEntity.this.mainHandler.getTick() == 9 && hasAttackTarget()) {
                 SandScarabEggEntity egg = DEEntities.SAND_SCARAB_EGG.get().create(MummyEntity.this.level);
 
                 if (egg != null) {
@@ -339,12 +340,12 @@ public class MummyEntity extends ModuledMob implements Enemy {
 
         @Override
         public boolean canContinueToUse() {
-            return MummyEntity.this.mainAnimationHandler.isPlaying(MummyEntity.this.throwEgg);
+            return MummyEntity.this.mainHandler.isPlaying(MummyEntity.this.THROW_EGG);
         }
 
         @Override
         public boolean canUse() {
-            return hasAttackTarget() && MummyEntity.this.mainAnimationHandler.isPlayingNull() && hasLineOfSight(getTarget()) && MummyEntity.this.eggTimer.hasEnded();
+            return hasAttackTarget() && MummyEntity.this.mainHandler.isPlayingNull() && hasLineOfSight(getTarget()) && MummyEntity.this.eggTimer.hasEnded();
         }
 
         @Override
@@ -357,15 +358,15 @@ public class MummyEntity extends ModuledMob implements Enemy {
 
         public void start() {
             super.start();
-            MummyEntity.this.mainAnimationHandler.play(MummyEntity.this.summonAbomination);
+            MummyEntity.this.mainHandler.play(MummyEntity.SUMMON_ABOMINATION);
             MummyEntity.this.summonTimer.reset();
-            MummyEntity.this.sleepPathSchedule.setSleep(MummyEntity.this.mainAnimationHandler.get().getDuration());
+            MummyEntity.this.sleepPathSchedule.setSleep(MummyEntity.this.mainHandler.getAnimation().getDuration());
         }
 
         @Override
         public void tick() {
             super.tick();
-            if (MummyEntity.this.mainAnimationHandler.getTick() == 10 && hasAttackTarget()) {
+            if (MummyEntity.this.mainHandler.getTick() == 10 && hasAttackTarget()) {
                 AridAbominationEntity abomination = DEEntities.ARID_ABOMINATION.get().create(MummyEntity.this.level);
 
                 if (abomination != null) {
@@ -394,12 +395,12 @@ public class MummyEntity extends ModuledMob implements Enemy {
 
         @Override
         public boolean canContinueToUse() {
-            return MummyEntity.this.mainAnimationHandler.isPlaying(MummyEntity.this.summonAbomination);
+            return MummyEntity.this.mainHandler.isPlaying(MummyEntity.SUMMON_ABOMINATION);
         }
 
         @Override
         public boolean canUse() {
-            return hasAttackTarget() && MummyEntity.this.mainAnimationHandler.isPlayingNull() && hasLineOfSight(getTarget()) && MummyEntity.this.summonTimer.hasEnded();
+            return hasAttackTarget() && MummyEntity.this.mainHandler.isPlayingNull() && hasLineOfSight(getTarget()) && MummyEntity.this.summonTimer.hasEnded();
         }
 
         @Override
@@ -414,21 +415,21 @@ public class MummyEntity extends ModuledMob implements Enemy {
 
         public void start() {
             super.start();
-            MummyEntity.this.mainAnimationHandler.play(MummyEntity.this.riseSpike);
+            MummyEntity.this.mainHandler.play(MummyEntity.this.RISE_SPIKE);
             MummyEntity.this.riseSpikeTimer.reset();
-            MummyEntity.this.sleepPathSchedule.setSleep(MummyEntity.this.mainAnimationHandler.get().getDuration());
+            MummyEntity.this.sleepPathSchedule.setSleep(MummyEntity.this.mainHandler.getAnimation().getDuration());
         }
 
         @Override
         public void tick() {
             super.tick();
             if (hasAttackTarget()) {
-                if (MummyEntity.this.mainAnimationHandler.getTick() == 11) {
+                if (MummyEntity.this.mainHandler.getTick() == 11) {
                     this.lastTickPozX = getTarget().xOld;
                     this.lastTickPozZ = getTarget().zOld;
 
                 }
-                if (MummyEntity.this.mainAnimationHandler.getTick() == 12) {
+                if (MummyEntity.this.mainHandler.getTick() == 12) {
                     DeserticFangEntity deserticFangEntity = DEEntities.DESERTIC_FANG.get().create(MummyEntity.this.level);
                     if (deserticFangEntity != null) {
                         double lastTickDifX = Mth.clamp(getTarget().getX() - this.lastTickPozX, -0.5, 0.5);
@@ -470,19 +471,19 @@ public class MummyEntity extends ModuledMob implements Enemy {
 
         @Override
         public boolean canContinueToUse() {
-            return MummyEntity.this.mainAnimationHandler.isPlaying(MummyEntity.this.riseSpike);
+            return MummyEntity.this.mainHandler.isPlaying(MummyEntity.this.RISE_SPIKE);
         }
 
         @Override
         public boolean canUse() {
-            return hasAttackTarget() && MummyEntity.this.mainAnimationHandler.isPlayingNull() && hasLineOfSight(getTarget()) && MummyEntity.this.riseSpikeTimer.hasEnded();
+            return hasAttackTarget() && MummyEntity.this.mainHandler.isPlayingNull() && hasLineOfSight(getTarget()) && MummyEntity.this.riseSpikeTimer.hasEnded();
         }
 
         @Override
         public void stop() {
             super.stop();
             MummyEntity.this.sleepPathSchedule.wake();
-            MummyEntity.this.mainAnimationHandler.play(NullAnimation.UNI);
+            MummyEntity.this.mainHandler.deactivate();
         }
     }
 }

@@ -1,6 +1,8 @@
 package net.bottomtextdanny.danny_expannny.objects.entities.mob.ender_beast;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.danny_expannny.object_tables.DEEntities;
 import net.bottomtextdanny.danny_expannny.object_tables.DESounds;
 import net.bottomtextdanny.dannys_expansion.common.Entities.ai.goals.PlayAnimationGoal;
@@ -13,8 +15,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class EnderBeastArcherEntity extends EnderBeastEntity {
-    public Animation shot;
-    public Animation punch;
+    public static final SimpleAnimation SHOT = new SimpleAnimation(40);
+    public static final SimpleAnimation PUNCH = new SimpleAnimation(28);
+    public static final AnimationManager ANIMATIONS = AnimationManager.marge(BASE_ANIMATIONS, SHOT, PUNCH);
 
     public EnderBeastArcherEntity(EntityType<? extends EnderBeastArcherEntity> type, Level worldIn) {
         super(type, worldIn);
@@ -22,20 +25,8 @@ public class EnderBeastArcherEntity extends EnderBeastEntity {
     }
 
     @Override
-    protected void commonInit() {
-        super.commonInit();
-        this.shot = addAnimation(new Animation(40));
-        this.punch = addAnimation(new Animation(28));
-    }
-
-    protected void registerExtraGoals() {
-        super.registerExtraGoals();
-        this.goalSelector.addGoal(0, new PlayAnimationGoal(this, this.punch,
-                o -> hasAttackTarget() && this.mainAnimationHandler.isPlayingNull() && this.meleeTimer.hasEnded() && distanceToSqr(getTarget()) <= 10.0F,
-                dannyEntity -> this.meleeTimer.reset()));
-        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, this.shot,
-                o -> hasAttackTarget() && this.mainAnimationHandler.isPlayingNull() && this.rangedTimer.hasEnded() && hasLineOfSight(getTarget()) && distanceToSqr(getTarget()) > 10,
-                dannyEntity -> this.rangedTimer.reset()));
+    public AnimationGetter getAnimations() {
+        return ANIMATIONS;
     }
 
     public static AttributeSupplier.Builder Attributes() {
@@ -47,17 +38,27 @@ public class EnderBeastArcherEntity extends EnderBeastEntity {
                 .add(Attributes.FOLLOW_RANGE, 50.0D);
     }
 
+    protected void registerExtraGoals() {
+        super.registerExtraGoals();
+        this.goalSelector.addGoal(0, new PlayAnimationGoal(this, PUNCH,
+                o -> hasAttackTarget() && this.mainHandler.isPlayingNull() && this.meleeTimer.hasEnded() && distanceToSqr(getTarget()) <= 10.0F,
+                dannyEntity -> this.meleeTimer.reset()));
+        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, SHOT,
+                o -> hasAttackTarget() && this.mainHandler.isPlayingNull() && this.rangedTimer.hasEnded() && hasLineOfSight(getTarget()) && distanceToSqr(getTarget()) > 10,
+                dannyEntity -> this.rangedTimer.reset()));
+    }
+
     @Override
     public void tick() {
         super.tick();
-        if (this.mainAnimationHandler.isPlaying(this.shot)) {
+        if (this.mainHandler.isPlaying(SHOT)) {
             if (this.onGround) {
                 setDeltaMovement(0.0F, 0.0F, 0.0F);
             } else {
                 setDeltaMovement(0.0F, -0.8F, 0.0F);
             }
 
-            if (this.mainAnimationHandler.getTick() == 27) {
+            if (this.mainHandler.getTick() == 27) {
                 EnderArrowEntity enderArrowEntity = DEEntities.ENDER_ARROW.get().create(this.level);
 
                 enderArrowEntity.setPos(getX(), getEyeY() - 0.4, getZ());
@@ -73,11 +74,11 @@ public class EnderBeastArcherEntity extends EnderBeastEntity {
 
 
             this.getNavigation().stop();
-        } else if (this.mainAnimationHandler.isPlaying(this.punch)) {
-        	if (this.mainAnimationHandler.getTick() == 8) playSound(DESounds.ES_SWOOSH.get(), 1.0F, 0.7F + this.random.nextFloat() * 0.4F);
+        } else if (this.mainHandler.isPlaying(PUNCH)) {
+        	if (this.mainHandler.getTick() == 8) playSound(DESounds.ES_SWOOSH.get(), 1.0F, 0.7F + this.random.nextFloat() * 0.4F);
 
             if (hasAttackTarget()) {
-                if (this.mainAnimationHandler.getTick() == 9) {
+                if (this.mainHandler.getTick() == 9) {
                     if (distanceTo(getTarget()) <= 16) {
                         Vec3 vec = DEMath.fromPitchYaw(0, getYRot());
 

@@ -1,7 +1,8 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.living;
 
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkModule;
 import net.bottomtextdanny.braincell.mod.world.builtin_entities.ModuledMob;
 import net.bottomtextdanny.braincell.mod.world.entity_utilities.EntityHurtAnimation;
@@ -32,8 +33,8 @@ import net.minecraftforge.common.ForgeMod;
 import javax.annotation.Nullable;
 
 public class PurpolioEntity extends ModuledMob implements EntityHurtAnimation {
-	public final AnimationHandler<PurpolioEntity> hurtModule = addAnimationHandler(new AnimationHandler<>(this));
-    public final Animation hurtAnimation = addAnimation(new Animation(15));
+    public static final SimpleAnimation HURT = new SimpleAnimation(15);
+    public final AnimationHandler<PurpolioEntity> hurtModule = addAnimationHandler(new AnimationHandler<>(this));
 
     public PurpolioEntity(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
@@ -56,6 +57,11 @@ public class PurpolioEntity extends ModuledMob implements EntityHurtAnimation {
     protected void commonInit() {
         super.commonInit();
         this.loopedWalkModule = new LoopedWalkModule(this);
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return HURT;
     }
 
     protected void registerExtraGoals() {
@@ -113,6 +119,6 @@ public class PurpolioEntity extends ModuledMob implements EntityHurtAnimation {
 	
 	@Override
 	public void playHurtAnimation(float damage, DamageSource source) {
-        this.hurtModule.play(this.hurtAnimation);
+        this.hurtModule.play(HURT);
 	}
 }

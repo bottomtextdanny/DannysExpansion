@@ -27,7 +27,6 @@ public final class ReachHelper {
     }
 
     public static float reachSqr(PathfinderMob opinionated, Entity target) {
-
         return (float) Math.max(opinionated.distanceTo(target) - target.getBbWidth() / 2.0, 0.0);
     }
 }

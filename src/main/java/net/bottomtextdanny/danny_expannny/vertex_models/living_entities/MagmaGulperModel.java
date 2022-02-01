@@ -109,8 +109,8 @@ public class MagmaGulperModel extends BCEntityModel<MagmaGulperEntity> {
         limbSwingReactor.apply();
         limbSwingReactor.staticKeyframe(Float.MAX_VALUE);
 
-        if (entity.attackAnimation.isWoke()) {
-            EntityModelAnimator attackAnimator = new EntityModelAnimator(this, entity.attackModule.e_dynamic());
+        if (entity.attackHandler.isPlaying(MagmaGulperEntity.RAM)) {
+            EntityModelAnimator attackAnimator = new EntityModelAnimator(this, entity.attackHandler.dynamicProgress());
 	
 	        attackAnimator.setupKeyframe(10);
             attackAnimator.rotate(this.body, headPitch + 10.0F, 0.0F, 0.0F);
@@ -121,8 +121,8 @@ public class MagmaGulperModel extends BCEntityModel<MagmaGulperEntity> {
             attackAnimator.emptyKeyframe(10, Easing.LINEAR);
         }
 
-        if (entity.beatAnimation.isWoke()) {
-            EntityModelAnimator ambientAnimator = new EntityModelAnimator(this, entity.beatModule.linearProgress());
+        if (entity.beatHandler.isPlaying(MagmaGulperEntity.BEAT)) {
+            EntityModelAnimator ambientAnimator = new EntityModelAnimator(this, entity.beatHandler.linearProgress());
 
             ambientAnimator.setupKeyframe(10);
             ambientAnimator.scale(this.jaw, 0.45F, 0.45F, 0.45F);
@@ -133,8 +133,8 @@ public class MagmaGulperModel extends BCEntityModel<MagmaGulperEntity> {
             ambientAnimator.emptyKeyframe(6, Easing.LINEAR);
         }
 
-        if (entity.mainAnimationHandler.isPlaying(entity.flap)) {
-            EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.linearProgress());
+        if (entity.mainHandler.isPlaying(MagmaGulperEntity.FLAP)) {
+            EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.linearProgress());
             
             animator.setupKeyframe(3);
             animator.rotate(this.rightWing, 0.0F, 0.0F, 30.0F);

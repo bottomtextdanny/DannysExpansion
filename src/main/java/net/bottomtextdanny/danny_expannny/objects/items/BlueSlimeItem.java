@@ -1,7 +1,7 @@
 package net.bottomtextdanny.danny_expannny.objects.items;
 
 import net.bottomtextdanny.danny_expannny.object_tables.DEEntities;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.BlueSlimeEntity;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.BlueSlimeEntity;
 import net.bottomtextdanny.dannys_expansion.core.Util.qol.ItemUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -74,7 +74,7 @@ public class BlueSlimeItem extends Item {
 
         blueSlimeEntity.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
         context.getLevel().addFreshEntity(blueSlimeEntity);
-        blueSlimeEntity.mainAnimationHandler.play(blueSlimeEntity.fromItem);
+        blueSlimeEntity.mainHandler.play(BlueSlimeEntity.FROM_ITEM);
         return super.useOn(context);
     }
 }

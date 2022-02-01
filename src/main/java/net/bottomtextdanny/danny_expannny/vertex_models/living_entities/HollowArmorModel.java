@@ -165,10 +165,10 @@ public class HollowArmorModel extends BCEntityModel<HollowArmor> {
 
     @Override
     public void handleKeyframedAnimations(HollowArmor entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
-        EntityModelAnimator animator = new EntityModelAnimator(this, (float) entity.mainAnimationHandler.getTick() + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, (float) entity.mainHandler.getTick() + getPartialTick());
         float walkMult = 1.0F;
         
-        if(entity.mainAnimationHandler.isPlaying(entity.getBluntAnimation())) {
+        if(entity.mainHandler.isPlaying(HollowArmor.BLUNT)) {
             animator.setupKeyframe(8.0F);
             animator.move(this.hip, 0.0F, 0.0F, 1.0F);
             animator.rotate(this.hip, 0.0F, 35.0F, 0.0F);
@@ -238,7 +238,7 @@ public class HollowArmorModel extends BCEntityModel<HollowArmor> {
             animator.emptyKeyframe(6.0F, Easing.LINEAR);
         }
 
-        else if(entity.mainAnimationHandler.isPlaying(entity.getSlashAnimation())) {
+        else if(entity.mainHandler.isPlaying(HollowArmor.SLASH)) {
 
             animator.setupKeyframe(8.0F);
             animator.move(this.model, 0.7F, 0.3F, 2.0F);
@@ -292,9 +292,9 @@ public class HollowArmorModel extends BCEntityModel<HollowArmor> {
             animator.emptyKeyframe(7.0F, Easing.LINEAR);
         }
 
-        else if(entity.mainAnimationHandler.isPlaying(entity.getSwingAnimation())) {
+        else if(entity.mainHandler.isPlaying(HollowArmor.SLASH)) {
 
-            walkMult = animator.disable(8.0F, 4.0F, 3.0F, (float) entity.mainAnimationHandler.getTick() + getPartialTick());
+            walkMult = animator.disable(8.0F, 4.0F, 3.0F, (float) entity.mainHandler.getTick() + getPartialTick());
 
             animator.setupKeyframe(1.5F);
             animator.move(this.model, 0.05F, 0.2F, 1.15F);
@@ -380,9 +380,9 @@ public class HollowArmorModel extends BCEntityModel<HollowArmor> {
             animator.emptyKeyframe(6.0F, Easing.LINEAR);
         }
 
-        else if(entity.mainAnimationHandler.isPlaying(entity.getImpaleAnimation())) {
+        else if(entity.mainHandler.isPlaying(HollowArmor.IMPALE)) {
 
-            walkMult = animator.disable(7.0F, 14.0F, 5.0F, (float) entity.mainAnimationHandler.getTick() + getPartialTick());
+            walkMult = animator.disable(7.0F, 14.0F, 5.0F, (float) entity.mainHandler.getTick() + getPartialTick());
 
             animator.setupKeyframe(7.0F);
             animator.move(this.model, -0.1F, 0.9F, 3.4F);
@@ -474,7 +474,7 @@ public class HollowArmorModel extends BCEntityModel<HollowArmor> {
             animator.emptyKeyframe(4.0F, Easing.LINEAR);
         }
 
-        else if(entity.mainAnimationHandler.isPlaying(entity.getDoubleSwingAnimation())) {
+        else if(entity.mainHandler.isPlaying(HollowArmor.DOUBLE_SWING)) {
 
             animator.setupKeyframe(6.0F);
             animator.move(this.model, -0.5F, 1.0F, 3.5F);
@@ -555,9 +555,9 @@ public class HollowArmorModel extends BCEntityModel<HollowArmor> {
             animator.emptyKeyframe(5.0F, Easing.LINEAR);
         }
 
-        else if(entity.mainAnimationHandler.isPlaying(entity.getDashAnimation())) {
+        else if(entity.mainHandler.isPlaying(HollowArmor.DASH)) {
 
-            walkMult = animator.disable(3.0F, 34.0F, 3.0F, (float) entity.mainAnimationHandler.getTick() + getPartialTick());
+            walkMult = animator.disable(3.0F, 34.0F, 3.0F, (float) entity.mainHandler.getTick() + getPartialTick());
 
             animator.setupKeyframe(20.0F);
             animator.rotate(this.model, 0.0F, -27.5F, 0.0F);
@@ -712,13 +712,13 @@ public class HollowArmorModel extends BCEntityModel<HollowArmor> {
             deathAnimator.apply();
         }
 
-        else if (entity.mainAnimationHandler.isPlaying(entity.getHealAnimation())) {
-            EntityModelAnimator animator1 = new EntityModelAnimator(this, (float) entity.mainAnimationHandler.getTick() + getPartialTick());
-            EntityModelAnimator posFixer = new EntityModelAnimator(this, (float) entity.mainAnimationHandler.getTick() + getPartialTick());
+        else if (entity.mainHandler.isPlaying(HollowArmor.HEAL)) {
+            EntityModelAnimator animator1 = new EntityModelAnimator(this, (float) entity.mainHandler.getTick() + getPartialTick());
+            EntityModelAnimator posFixer = new EntityModelAnimator(this, (float) entity.mainHandler.getTick() + getPartialTick());
             float headRotX = headPitch;
             float headRotY = headYaw;
 
-            walkMult = animator.disable(3.0F, 19.0F, 4.0F, (float) entity.mainAnimationHandler.getTick() + getPartialTick());
+            walkMult = animator.disable(3.0F, 19.0F, 4.0F, (float) entity.mainHandler.getTick() + getPartialTick());
 
             animator.setupKeyframe(6.0F);
             animator.rotate(this.model, 0.0F, -52.5F, 0.0F);

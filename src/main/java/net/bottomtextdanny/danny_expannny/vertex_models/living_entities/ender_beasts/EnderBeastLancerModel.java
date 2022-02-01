@@ -135,8 +135,9 @@ public class EnderBeastLancerModel extends BCEntityModel<EnderBeastLancerEntity>
         super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
 	    headYaw = DEMath.moduloFromBase(-180.0F, headYaw, 360.0F);
 	    headYaw = Mth.clamp(headYaw, -90.0F, 90.0F);
+
         if (!entity.jawModule.isPlayingNull()) {
-        	float jawTime = (float)entity.jawModule.get().getDuration() / 2.0F;
+        	float jawTime = (float)entity.jawModule.getAnimation().getDuration() / 2.0F;
             EntityModelAnimator ambientAnimator = new EntityModelAnimator(this, entity.jawModule.linearProgress());
 
             ambientAnimator.setupKeyframe(jawTime);
@@ -144,17 +145,15 @@ public class EnderBeastLancerModel extends BCEntityModel<EnderBeastLancerEntity>
             ambientAnimator.apply();
 
             ambientAnimator.emptyKeyframe(jawTime, Easing.LINEAR);
-        } else {
-        
         }
 
-        if (entity.mainAnimationHandler.isPlaying(entity.impale)) {
-            EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
-            EntityModelAnimator animator1 = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
-            EntityModelAnimator posFixer = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+        if (entity.mainHandler.isPlaying(EnderBeastLancerEntity.IMPALE)) {
+            EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
+            EntityModelAnimator animator1 = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
+            EntityModelAnimator posFixer = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
             float headRotY = headYaw;
             
-            animator.disableAtomic(this.walkMult, 4, 12, 4, entity.mainAnimationHandler.getTick() + getPartialTick());
+            animator.disableAtomic(this.walkMult, 4, 12, 4, entity.mainHandler.getTick() + getPartialTick());
 
             animator.setupKeyframe(8.0F);
             animator.rotate(this.model, 0.0F, 17.5F, 0.0F);
@@ -246,9 +245,9 @@ public class EnderBeastLancerModel extends BCEntityModel<EnderBeastLancerEntity>
             posFixer.emptyKeyframe(4, Easing.LINEAR);
         }
 
-        if (entity.mainAnimationHandler.isPlaying(entity.swing)) {
-            EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
-            EntityModelAnimator posFixer = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+        if (entity.mainHandler.isPlaying(EnderBeastLancerEntity.SWING)) {
+            EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
+            EntityModelAnimator posFixer = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 
             animator.setupKeyframe(7);
             animator.rotate(this.model, 0.0F, 15.0F, 0.0F);

@@ -19,7 +19,7 @@ import net.bottomtextdanny.danny_expannny.capabilities.player.MiniAttribute;
 import net.bottomtextdanny.danny_expannny.capabilities.player.PlayerAccessoryModule;
 import net.bottomtextdanny.danny_expannny.capabilities.player.PlayerHelper;
 import net.bottomtextdanny.dannys_expansion.core.data.DEDamageSources;
-import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.ClientManager;
+import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.EntityClientMessenger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.sounds.SoundEvent;
@@ -46,7 +46,7 @@ import net.minecraftforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
-public abstract class AbstractBulletEntity extends DEProjectile implements BCDataManagerProvider, ClientManager {
+public abstract class AbstractBulletEntity extends DEProjectile implements BCDataManagerProvider, EntityClientMessenger {
     public static final int HIT_CLIENT_CALLOUT_FLAG = 0, UPDATE_TICK_CALLOUT_FLAG = 1;
     public static final EntityDataReference<IntScheduler.Simple> LIFE_REF =
             BCDataManager.attribute(AbstractBulletEntity.class,

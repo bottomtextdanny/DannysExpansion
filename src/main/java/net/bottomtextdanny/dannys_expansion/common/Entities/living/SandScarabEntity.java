@@ -1,9 +1,8 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.living;
 
 import net.bottomtextdanny.braincell.mod.base.misc.timer.IntScheduler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.IAnimation;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.NullAnimation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkModule;
 import net.bottomtextdanny.danny_expannny.object_tables.DEParticles;
 import net.bottomtextdanny.danny_expannny.object_tables.DESounds;
@@ -31,8 +30,8 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class SandScarabEntity extends BasicSummonEntity {
-    public Animation leap = addAnimation(new Animation(20));
-    public Animation death = addAnimation(new Animation(15));
+    public static final SimpleAnimation LEAP = new SimpleAnimation(20);
+    public static final SimpleAnimation DEATH = new SimpleAnimation(15);
 
     public SandScarabEntity(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
@@ -85,7 +84,7 @@ public class SandScarabEntity extends BasicSummonEntity {
     public void tick() {
         super.tick();
 
-        if (this.mainAnimationHandler.isPlaying(this.leap)) {
+        if (this.mainHandler.isPlaying(LEAP)) {
 
             if (hasAttackTarget()) {
 
@@ -130,8 +129,8 @@ public class SandScarabEntity extends BasicSummonEntity {
 
     @Nullable
     @Override
-    public IAnimation getDeathAnimation() {
-        return this.death;
+    public Animation<?> getDeathAnimation() {
+        return DEATH;
     }
     
     class LeapAttackGoal extends Goal {
@@ -143,7 +142,7 @@ public class SandScarabEntity extends BasicSummonEntity {
         public void start() {
             super.start();
 
-            SandScarabEntity.this.mainAnimationHandler.play(SandScarabEntity.this.leap);
+            SandScarabEntity.this.mainHandler.play(LEAP);
 
             Vec3 vec0 = DEMath.fromPitchYaw(0, SandScarabEntity.this.yHeadRot);
             push(vec0.x, 0.35F, vec0.z);
@@ -161,19 +160,19 @@ public class SandScarabEntity extends BasicSummonEntity {
                     doHurtTarget(getTarget());
                     boolean hurted = true;
 
-                    SandScarabEntity.this.mainAnimationHandler.play(NullAnimation.UNI);
+                    SandScarabEntity.this.mainHandler.deactivate();
                 }
             }
         }
 
         @Override
         public boolean canContinueToUse() {
-            return SandScarabEntity.this.mainAnimationHandler.isPlaying(SandScarabEntity.this.leap);
+            return SandScarabEntity.this.mainHandler.isPlaying(LEAP);
         }
 
         @Override
         public boolean canUse() {
-            return hasAttackTarget() && SandScarabEntity.this.mainAnimationHandler.isPlayingNull() && SandScarabEntity.this.meleeTimer.hasEnded() && distanceTo(getTarget()) <=  3.0;
+            return hasAttackTarget() && SandScarabEntity.this.mainHandler.isPlayingNull() && SandScarabEntity.this.meleeTimer.hasEnded() && distanceTo(getTarget()) <=  3.0;
         }
     }
 }

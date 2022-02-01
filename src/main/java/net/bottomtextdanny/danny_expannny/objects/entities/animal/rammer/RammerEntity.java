@@ -1,7 +1,8 @@
 package net.bottomtextdanny.danny_expannny.objects.entities.animal.rammer;
 
 import net.bottomtextdanny.braincell.mod.base.misc.timer.IntScheduler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
 import net.bottomtextdanny.braincell.mod.entity.serialization.EntityData;
 import net.bottomtextdanny.braincell.mod.entity.serialization.EntityDataReference;
@@ -95,13 +96,13 @@ public class RammerEntity extends ModuledMob {
                             () -> false,
                             "in_love")
             );
+    public static final SimpleAnimation RAM = new SimpleAnimation(16);
     public final EntityData<IntScheduler.Simple> stuffed_timer;
     public final EntityData<Float> size;
     public final EntityData<Integer> transforming_ticks;
     public final EntityData<Integer> love_ticks;
     public final EntityData<Boolean> is_transforming;
     public final EntityData<Boolean> is_in_love;
-    public Animation ram;
     private boolean updatedSize;
 
     public RammerEntity(EntityType<? extends RammerEntity> type, Level worldIn) {
@@ -116,26 +117,30 @@ public class RammerEntity extends ModuledMob {
         this.setCanPickUpLoot(true);
     }
 
-    protected void registerExtraGoals() {
-        this.ram = addAnimation(new Animation(16));
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(0, new RammerEntity.RammerBreedGoal());
-        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, this.ram, o -> hasAttackTarget() && this.mainAnimationHandler.isPlayingNull() && reachTo(getTarget()) < 1.5F));
-        this.goalSelector.addGoal(2, new FollowTargetGoal(this, 1.2d));
-        this.goalSelector.addGoal(3, new RammerEntity.RammerPickAppleGoal());
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0F, TEMPTATION_ITEMS, false));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1d));
-        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-    }
-
     public static AttributeSupplier.Builder Attributes() {
         return PathfinderMob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 40.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.8D)
                 .add(Attributes.MOVEMENT_SPEED, 0.26D)
                 .add(Attributes.ATTACK_DAMAGE, 6.0D);
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return RAM;
+    }
+
+    protected void registerExtraGoals() {
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+        this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(0, new RammerEntity.RammerBreedGoal());
+        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, RAM, o -> hasAttackTarget() && this.mainHandler.isPlayingNull() && reachTo(getTarget()) < 1.5F));
+        this.goalSelector.addGoal(2, new FollowTargetGoal(this, 1.2d));
+        this.goalSelector.addGoal(3, new RammerEntity.RammerPickAppleGoal());
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0F, TEMPTATION_ITEMS, false));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1d));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
     }
 	
 	@Override
@@ -193,7 +198,7 @@ public class RammerEntity extends ModuledMob {
             if (hasAttackTarget()) {
                 getLookControl().setLookAt(getTarget(), 30.0F, 30.0F);
 
-                if (this.mainAnimationHandler.isPlaying(this.ram) && this.mainAnimationHandler.getTick() == 5 && reachTo(getTarget()) < 2) {
+                if (this.mainHandler.isPlaying(RAM) && this.mainHandler.getTick() == 5 && reachTo(getTarget()) < 2) {
                     this.sleepPathSchedule.sleepForNow();
                     Vec3 vec0 = Vec3.directionFromRotation(getRotationVector());
                     doHurtTarget(getTarget());

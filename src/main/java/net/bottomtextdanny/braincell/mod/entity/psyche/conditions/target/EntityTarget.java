@@ -1,8 +1,5 @@
 package net.bottomtextdanny.braincell.mod.entity.psyche.conditions.target;
 
-import net.bottomtextdanny.braincell.mod.base.misc.timer.IntScheduler;
-import net.bottomtextdanny.braincell.mod.entity.psyche.data.ActionInputKey;
-import net.bottomtextdanny.braincell.mod.world.entity_utilities.PsycheEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 
@@ -16,23 +13,22 @@ public class EntityTarget<T extends LivingEntity> implements BiPredicate<Pathfin
     private final boolean hasToBeOnSight;
     private final boolean forCombat;
     @Nullable
-    private final BiPredicate<PathfinderMob, T> extraPredicate;
+    private final BiPredicate<PathfinderMob, T> prePredicate;
 
     private EntityTarget(TargetRange targetRange, @Nullable TargetRange targetRangeForInvisible, boolean beOnSight, boolean forCombat, @Nullable BiPredicate<PathfinderMob, T> extraPredicate) {
         this.targetRange = targetRange;
         this.targetRangeForInvisible = targetRangeForInvisible;
         this.hasToBeOnSight = beOnSight;
         this.forCombat = forCombat;
-        this.extraPredicate = extraPredicate;
+        this.prePredicate = extraPredicate;
     }
 
     public boolean test(PathfinderMob selector, T posibleTarget) {
-        PsycheEntity psycheEntity = (PsycheEntity) selector;
         if (selector == null || selector == posibleTarget) {
             return false;
         } else if (!posibleTarget.canBeSeenByAnyone()) {
             return false;
-        } else if (this.extraPredicate != null && !this.extraPredicate.test(selector, posibleTarget)) {
+        } else if (this.prePredicate != null && !this.prePredicate.test(selector, posibleTarget)) {
             return false;
         } else {
             if (this.forCombat && (!selector.canAttack(posibleTarget) || !selector.canAttackType(posibleTarget.getType()) || selector.isAlliedTo(posibleTarget))) {
@@ -50,9 +46,7 @@ public class EntityTarget<T extends LivingEntity> implements BiPredicate<Pathfin
             if (!this.hasToBeOnSight) {
                 return true;
             } else {
-
-                    return selector.getSensing().hasLineOfSight(posibleTarget);
-
+                return selector.getSensing().hasLineOfSight(posibleTarget);
             }
         }
     }
@@ -64,14 +58,22 @@ public class EntityTarget<T extends LivingEntity> implements BiPredicate<Pathfin
         private TargetRange targetRangeForInvisible;
         private boolean hasToBeOnSight;
         private boolean forCombat;
-        private BiPredicate<PathfinderMob, T> extraPredicate;
+        private BiPredicate<PathfinderMob, T> prePredicate;
 
         private Builder(TargetRange targetRange) {
             this.targetRange = targetRange;
         }
 
+        private Builder(TargetRange targetRange, Class<T> clazz) {
+            this.targetRange = targetRange;
+        }
+
         public static <T extends LivingEntity> Builder<T> start(TargetRange targetRange) {
-            return new Builder<>(targetRange);
+            return new Builder<T>(targetRange);
+        }
+
+        public static <T extends LivingEntity> Builder<T> start(TargetRange targetRange, Class<T> clazz) {
+            return new Builder<T>(targetRange, clazz);
         }
 
         public Builder<T> targetRangeForInvisible(TargetRange targetRangeForInvisible) {
@@ -89,13 +91,13 @@ public class EntityTarget<T extends LivingEntity> implements BiPredicate<Pathfin
             return this;
         }
 
-        public Builder<T> setPostPredicate(BiPredicate<PathfinderMob, T> extraPredicate) {
-            this.extraPredicate = extraPredicate;
+        public Builder<T> prePredicate(BiPredicate<PathfinderMob, T> extraPredicate) {
+            this.prePredicate = extraPredicate;
             return this;
         }
 
         public EntityTarget<T> build() {
-            return new EntityTarget<>(this.targetRange, this.targetRangeForInvisible, this.hasToBeOnSight, this.forCombat, this.extraPredicate);
+            return new EntityTarget<>(this.targetRange, this.targetRangeForInvisible, this.hasToBeOnSight, this.forCombat, this.prePredicate);
         }
     }
 }

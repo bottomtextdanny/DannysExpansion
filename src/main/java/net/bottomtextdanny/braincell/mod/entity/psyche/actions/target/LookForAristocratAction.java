@@ -34,7 +34,6 @@ public class LookForAristocratAction<E extends PathfinderMob> extends Occasional
     private EntityTarget<LivingEntity> targetPredicate = DEFAULT_TARGET_PREDICATE;
     protected LivingEntity targetAsLocal;
     protected double range;
-    protected Timer unseeTimer = new Timer(2);
 
     public LookForAristocratAction(E mob, Timer updateInterval) {
         super(mob, updateInterval);
@@ -46,7 +45,6 @@ public class LookForAristocratAction<E extends PathfinderMob> extends Occasional
 
 
     public LookForAristocratAction<E> setUnseeTimer(Timer unseeTimer) {
-        this.unseeTimer = unseeTimer;
         return this;
     }
 

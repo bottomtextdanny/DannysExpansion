@@ -1,15 +1,20 @@
 package net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations;
 
-public class StartCalloutAnimation extends Animation {
-    private final Runnable startCallOut;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
+import net.minecraft.world.entity.Entity;
 
-    public StartCalloutAnimation(int duration, Runnable startCallOut) {
+import java.util.function.Consumer;
+
+public class StartCalloutAnimation<E extends Entity> extends SimpleAnimation {
+    private final Consumer<E> startCallOut;
+
+    public StartCalloutAnimation(int duration, Consumer<E> startCallOut) {
         super(duration);
         this.startCallOut = startCallOut;
     }
 
     @Override
-    public void wake() {
-        this.startCallOut.run();
+    public void onStart(AnimationHandler<?> handler) {
+        this.startCallOut.accept((E)handler.getEntity());
     }
 }

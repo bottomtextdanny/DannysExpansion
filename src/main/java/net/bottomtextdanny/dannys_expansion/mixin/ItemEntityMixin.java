@@ -40,4 +40,8 @@ public abstract class ItemEntityMixin extends Entity implements IItemEntityExt {
 	public void de_setShowingModel(int item) {
 		this.getEntityData().set(DATA_SHOWING_ITEM, item);
 	}
+
+	public void de_setShowingModel(Enum<?> item) {
+		this.getEntityData().set(DATA_SHOWING_ITEM, item.ordinal());
+	}
 }

@@ -1,8 +1,8 @@
 package net.bottomtextdanny.danny_expannny.vertex_models.living_entities.slimes;
 
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.desertic_slime.DeserticSlimeEntity;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.desertic_slime.DeserticSlime;
 
-public class MummySlimeModel extends DannySlimeModel<DeserticSlimeEntity> {
+public class MummySlimeModel extends DannySlimeModel<DeserticSlime> {
 	
 	public MummySlimeModel() {
 		super(12.0F, 9.0F);

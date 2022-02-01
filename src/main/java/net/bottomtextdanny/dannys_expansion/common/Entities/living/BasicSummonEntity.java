@@ -89,7 +89,7 @@ public abstract class BasicSummonEntity extends ModuledMob implements SummonEnti
                         this.life_ticks.set(this.life_ticks.get() + 1);
                     } else {
 
-                        if (this.mainAnimationHandler.isPlayingNull()) {
+                        if (this.mainHandler.isPlayingNull()) {
                             hurt(DamageSource.MAGIC, getMaxHealth());
 
                         }
@@ -98,7 +98,7 @@ public abstract class BasicSummonEntity extends ModuledMob implements SummonEnti
 
                     if (getSummoner() == null || !getSummoner().isAlive()) {
 
-                        if (this.mainAnimationHandler.isPlayingNull()) {
+                        if (this.mainHandler.isPlayingNull()) {
                             hurt(DamageSource.MAGIC, getMaxHealth());
 
                         }
@@ -116,7 +116,7 @@ public abstract class BasicSummonEntity extends ModuledMob implements SummonEnti
 
                             if (this.useless_timer.get().hasEnded()) {
 
-                                if (this.mainAnimationHandler.isPlayingNull()) {
+                                if (this.mainHandler.isPlayingNull()) {
                                     hurt(DamageSource.MAGIC, getMaxHealth());
                                 }
                             }

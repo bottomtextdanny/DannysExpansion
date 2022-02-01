@@ -8,7 +8,7 @@ import net.bottomtextdanny.braincell.mod.entity.serialization.RawEntityDataRefer
 import net.bottomtextdanny.braincell.mod.serialization.serializers.builtin.BuiltinSerializers;
 import net.bottomtextdanny.braincell.mod.serialization.serializers.braincell.BCSerializers;
 import net.bottomtextdanny.braincell.mod.world.builtin_entities.ModuledMob;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.AbstractSlimeEntity;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.AbstractSlime;
 import net.bottomtextdanny.braincell.underlying.misc.ObjectFetcher;
 import net.bottomtextdanny.danny_expannny.objects.entities.SummonEntity;
 import net.minecraft.core.particles.ParticleOptions;
@@ -22,7 +22,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
-public abstract class SlimeSummonEntity extends AbstractSlimeEntity implements SummonEntity {
+public abstract class SlimeSummonEntity extends AbstractSlime implements SummonEntity {
     public static final int DEFAULT_MAX_LIFE_TICKS = 100;
     public static final int DEFAULT_USELESS_TIME_BOUND = 100;
     public static final EntityDataReference<IntScheduler.Simple> USELESS_TIMER_REF =
@@ -90,7 +90,7 @@ public abstract class SlimeSummonEntity extends AbstractSlimeEntity implements S
                         this.life_ticks.set(this.life_ticks.get() + 1);
                     } else {
 
-                        if (this.mainAnimationHandler.isPlayingNull()) {
+                        if (this.mainHandler.isPlayingNull()) {
                             hurt(DamageSource.MAGIC, getMaxHealth());
 
                         }
@@ -99,7 +99,7 @@ public abstract class SlimeSummonEntity extends AbstractSlimeEntity implements S
 
                     if (getSummoner() == null || !getSummoner().isAlive()) {
 
-                        if (this.mainAnimationHandler.isPlayingNull()) {
+                        if (this.mainHandler.isPlayingNull()) {
                             hurt(DamageSource.MAGIC, getMaxHealth());
 
                         }
@@ -117,7 +117,7 @@ public abstract class SlimeSummonEntity extends AbstractSlimeEntity implements S
 
                             if (this.useless_timer.get().hasEnded()) {
 
-                                if (this.mainAnimationHandler.isPlayingNull()) {
+                                if (this.mainHandler.isPlayingNull()) {
                                     hurt(DamageSource.MAGIC, getMaxHealth());
                                 }
                             }

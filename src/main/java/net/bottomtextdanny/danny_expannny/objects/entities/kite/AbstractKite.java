@@ -2,10 +2,11 @@ package net.bottomtextdanny.danny_expannny.objects.entities.kite;
 
 import net.bottomtextdanny.braincell.mod.entity.modules.additional_motion.ExtraMotionModule;
 import net.bottomtextdanny.braincell.mod.entity.modules.additional_motion.ExtraMotionProvider;
+import net.bottomtextdanny.danny_expannny.capabilities.world.LevelWindModule;
 import net.bottomtextdanny.dannys_expansion.core.Util.ExternalMotion;
 import net.bottomtextdanny.danny_expannny.capabilities.CapabilityHelper;
 import net.bottomtextdanny.danny_expannny.capabilities.world.LevelCapability;
-import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.ClientManager;
+import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.EntityClientMessenger;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.MoverType;
@@ -13,13 +14,13 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.entity.PartEntity;
 import net.minecraftforge.network.NetworkHooks;
 
-public class AbstractKite extends PartEntity<KiteKnotEntity> implements ClientManager, ExtraMotionProvider {
-    private boolean valid;
+public class AbstractKite extends PartEntity<KiteKnotEntity> implements EntityClientMessenger, ExtraMotionProvider {
     private ExtraMotionModule extraMotionModule;
     private ExternalMotion forwardMotion;
     private ExternalMotion retrayMotion;
     private ExternalMotion stopMotion;
     private Vec3 clientExtraMotion;
+    private boolean valid;
 
     public AbstractKite(KiteKnotEntity parent) {
         super(parent);
@@ -54,16 +55,16 @@ public class AbstractKite extends PartEntity<KiteKnotEntity> implements ClientMa
     @Override
     public void tick() {
         super.tick();
-        LevelCapability worldCapability = CapabilityHelper.get(this.level, LevelCapability.CAPABILITY);
-//
+        LevelWindModule windModule = CapabilityHelper.get(this.level, LevelCapability.CAPABILITY).getWindModule();
+
 //        if (!level.isClientSide() && !validExistence) {
 //            remove(RemovalReason.DISCARDED);
 //        }
 //
-//               float customTicksExisted =  tickCount + tickOffset;
-//        float kiteAngle = Mth.wrapDegrees(worldCap.getWindDirection() + angleOffset);
+//        float customTicksExisted =  tickCount;
+//        float kiteAngle = Mth.wrapDegrees(windModule.getWindDirection());
 //
-//        float difference = DEMath.getDistance(getX(), getY(), getZ(), xo, yo, zo);
+//        float difference = (float) DEOp.LOGIC_DIST3D_UTIL.start(this).get(xo, yo, zo);
 //
 //        prevRenderDifference = renderDifference;
 //        renderDifference += (difference - renderDifference) / 15;

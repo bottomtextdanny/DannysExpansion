@@ -3,7 +3,8 @@ package net.bottomtextdanny.dannys_expansion.common.Entities.living.floating;
 import net.bottomtextdanny.braincell.mod.entity.modules.additional_motion.ExtraMotionModule;
 import net.bottomtextdanny.braincell.mod.entity.modules.additional_motion.ExtraMotionProvider;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.CuttedAnimation;
 import net.bottomtextdanny.braincell.mod.serialization.WorldPacketData;
 import net.bottomtextdanny.braincell.mod.serialization.serializers.builtin.BuiltinSerializers;
@@ -48,11 +49,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 
 public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMotionProvider {
-	public final AnimationHandler<MagmaGulperEntity> beatModule = addAnimationHandler(new AnimationHandler<>(this));
-	public final AnimationHandler<MagmaGulperEntity> attackModule = addAnimationHandler(new AnimationHandler<>(this));
-	public final Animation flap = addAnimation(new Animation(20));
-    public final CuttedAnimation attackAnimation = addAnimation(new CuttedAnimation(21, 11));
-    public final Animation beatAnimation = addAnimation(new Animation(17));
+    public static final CuttedAnimation RAM = new CuttedAnimation(21, 11);
+    public static final SimpleAnimation FLAP = new SimpleAnimation(20);
+    public static final SimpleAnimation BEAT = new SimpleAnimation(17);
+    public static final AnimationManager ANIMATIONS = new AnimationManager(RAM, FLAP, BEAT);
+	public final AnimationHandler<MagmaGulperEntity> beatHandler = addAnimationHandler(new AnimationHandler<>(this));
+	public final AnimationHandler<MagmaGulperEntity> attackHandler = addAnimationHandler(new AnimationHandler<>(this));
     public MagmaGulperPhase phase;
     public AttackPhase attackPhase = AttackPhase.WAIT;
     public ExternalMotion retrayMotion;
@@ -96,6 +98,11 @@ public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMot
     }
 
     @Override
+    public AnimationManager getAnimations() {
+        return ANIMATIONS;
+    }
+
+    @Override
     public ExtraMotionModule extraMotionModule() {
         return this.motionUtilModule;
     }
@@ -129,10 +136,10 @@ public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMot
             this.renderYawRot = (float)Mth.lerp(0.2, this.renderYawRot, Mth.degreesDifference(this.yHeadRotO, this.yHeadRot));
         } else {
         	
-            if (this.mainAnimationHandler.isPlaying(this.flap)) {
-                if (this.mainAnimationHandler.getTick() == 1) {
+            if (this.mainHandler.isPlaying(FLAP)) {
+                if (this.mainHandler.getTick() == 1) {
                     playSound(DESounds.ES_MAGMA_GULPER_FLAP.get(), 1.5F, 0.5F);
-                } else if (this.mainAnimationHandler.getTick() == 3) {
+                } else if (this.mainHandler.getTick() == 3) {
                     addAccMotion(0.0F, 0.45F + 0.04F * this.glidingVelocityMult, 0.0F);
                     this.glidingVelocityMult = 1.0F;
                 }
@@ -140,8 +147,8 @@ public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMot
 
             this.avoidCollisionTimer.tryUp();
 
-            if (!hasAttackTarget() && this.attackAnimation.isWoke()) {
-                this.attackAnimation.setPass(true);
+            if (!hasAttackTarget() && this.attackHandler.isPlaying(RAM)) {
+                RAM.setPass(this.attackHandler, true);
                 sendClientMsg(1);
             }
 
@@ -152,7 +159,7 @@ public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMot
                     this.beatTimer.reset();
                     playSound(DESounds.ES_MAGMA_GULPER_EXPULSE.get(), 1.0F, 1.0F);
 
-                    this.beatModule.play(this.beatAnimation);
+                    this.beatHandler.play(BEAT);
 
                     sendClientMsg(2);
                 }
@@ -213,7 +220,7 @@ public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMot
         if (hasAttackTarget()) {
             if (this.attackPhase == AttackPhase.WAIT || this.attackPhase == AttackPhase.MOMENTUM) {
                 gravity =- 0.22F;
-                if (this.mainAnimationHandler.isPlaying(this.flap) && this.mainAnimationHandler.getTick() == 3) {
+                if (this.mainHandler.isPlaying(FLAP) && this.mainHandler.getTick() == 3) {
                     addAccMotion(0.0F, 0.28F, 0.0F);
                 }
             }
@@ -250,8 +257,10 @@ public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMot
         if (flag == 0) {
             ((MGLookController)getLookControl()).setTargetYaw(fetcher.get(0, Float.class), 5.0F);
         } else if (flag == 1) {
-            if (this.attackAnimation.isWoke())
-                this.attackAnimation.setPass(true);
+            if (this.attackHandler.isPlaying(RAM)) {
+                RAM.setPass(this.attackHandler, true);
+            }
+
         } else if (flag == 2) {
             int factor1 = this.random.nextInt(3) + 2;
             Vec3 horizontalDir = DEMath.fromPitchYaw(0, this.yHeadRot).multiply(1.2, 0, 1.2);
@@ -313,8 +322,8 @@ public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMot
                 blockpos = blockpos.below();
             } while(blockpos.getY() >= Mth.floor(d0) - 1);
 
-            if (blockpos.getY() + d0 > this.magmaGulper.blockPosition().getY() -2 && MagmaGulperEntity.this.mainAnimationHandler.isPlayingNull() || !hasAttackTarget() && MagmaGulperEntity.this.random.nextInt(280) == 1 && this.magmaGulper.phase == MagmaGulperPhase.ACTIVE && MagmaGulperEntity.this.attackPhase != AttackPhase.ATTACK) {
-                MagmaGulperEntity.this.mainAnimationHandler.play(MagmaGulperEntity.this.flap);
+            if (blockpos.getY() + d0 > this.magmaGulper.blockPosition().getY() -2 && MagmaGulperEntity.this.mainHandler.isPlayingNull() || !hasAttackTarget() && MagmaGulperEntity.this.random.nextInt(280) == 1 && this.magmaGulper.phase == MagmaGulperPhase.ACTIVE && MagmaGulperEntity.this.attackPhase != AttackPhase.ATTACK) {
+                MagmaGulperEntity.this.mainHandler.play(FLAP);
             }
             
             if (this.magmaGulper.getTarget() == null) {
@@ -340,8 +349,8 @@ public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMot
                 }
 
                 if (MagmaGulperEntity.this.timeCollidedHorizontally > 30 && MagmaGulperEntity.this.phase == MagmaGulperEntity.MagmaGulperPhase.ACTIVE) {
-                    if (MagmaGulperEntity.this.mainAnimationHandler.isPlayingNull()) {
-                        MagmaGulperEntity.this.mainAnimationHandler.play(MagmaGulperEntity.this.flap);
+                    if (MagmaGulperEntity.this.mainHandler.isPlayingNull()) {
+                        MagmaGulperEntity.this.mainHandler.play(FLAP);
                         MagmaGulperEntity.this.extraFlaps++;
                     }
                 }
@@ -350,8 +359,8 @@ public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMot
     }
     
     public void passAttack() {
-	    if (this.attackAnimation.isWoke()) {
-            this.attackAnimation.setPass(true);
+	    if (this.attackHandler.isPlaying(RAM)) {
+            RAM.setPass(this.attackHandler, true);
 		    sendClientMsg(1);
 	    }
     }
@@ -381,8 +390,8 @@ public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMot
 
             if (MagmaGulperEntity.this.attackPhase == AttackPhase.WAIT) {
 
-                if (blockPosition().getY() < getTarget().blockPosition().getY() + 2 && MagmaGulperEntity.this.mainAnimationHandler.isPlayingNull()) {
-                    MagmaGulperEntity.this.mainAnimationHandler.play(MagmaGulperEntity.this.flap);
+                if (blockPosition().getY() < getTarget().blockPosition().getY() + 2 && MagmaGulperEntity.this.mainHandler.isPlayingNull()) {
+                    MagmaGulperEntity.this.mainHandler.play(FLAP);
                 }
 
                 float hDist = DEMath.getHorizontalDistance(MagmaGulperEntity.this, getTarget());
@@ -400,7 +409,7 @@ public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMot
                 if (this.waitTimer.hasEnded()) {
                     this.waitTimer.reset();
                     MagmaGulperEntity.this.attackPhase = AttackPhase.ATTACK;
-                    MagmaGulperEntity.this.attackModule.play(MagmaGulperEntity.this.attackAnimation);
+                    MagmaGulperEntity.this.attackHandler.play(RAM);
                 }
 
                 this.waitTimer.tryUp();
@@ -421,8 +430,8 @@ public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMot
                     }
                 }
 
-                if (blockPosition().getY() < getTarget().blockPosition().getY() - 1 && MagmaGulperEntity.this.mainAnimationHandler.isPlayingNull()) {
-                    MagmaGulperEntity.this.mainAnimationHandler.play(MagmaGulperEntity.this.flap);
+                if (blockPosition().getY() < getTarget().blockPosition().getY() - 1 && MagmaGulperEntity.this.mainHandler.isPlayingNull()) {
+                    MagmaGulperEntity.this.mainHandler.play(FLAP);
                 }
 
                 if (tracedBlock.getBlockSupportShape(MagmaGulperEntity.this.level.getBlockState(MagmaGulperEntity.this.rayTraceResult.getBlockPos()), MagmaGulperEntity.this.level, MagmaGulperEntity.this.rayTraceResult.getBlockPos()) != Shapes.empty() ) {
@@ -471,8 +480,7 @@ public class MagmaGulperEntity extends FloatingEntity implements Enemy, ExtraMot
 
                 this.momentumTimer.tryUp();
             }
-
-                   }
+        }
 
         @Override
         public boolean canUse() {

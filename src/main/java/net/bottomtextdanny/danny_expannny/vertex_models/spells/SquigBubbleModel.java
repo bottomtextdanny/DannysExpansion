@@ -48,7 +48,7 @@ public class SquigBubbleModel extends BCEntityModel<SquigBubbleEntity> {
 		
 		lifeAnimator.emptyKeyframe(23.0F, Easing.BOUNCE_OUT);
 		
-		if (entity.mainHandler.isPlaying(entity.explodeAnimation)) {
+		if (entity.mainHandler.isPlaying(SquigBubbleEntity.POP)) {
 			EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.linearProgress());
 			animator.setupKeyframe(2.0F);
 			animator.scale(this.rotator, -0.3F, -0.3F, -0.3F);
@@ -58,7 +58,7 @@ public class SquigBubbleModel extends BCEntityModel<SquigBubbleEntity> {
 			animator.apply(Easing.EASE_IN_CUBIC);
 		}
 		
-		if (entity.hurtModule.isPlaying(entity.hurtAnimation)) {
+		if (entity.hurtModule.isPlaying(SquigBubbleEntity.HURT)) {
 			EntityModelAnimator animator = new EntityModelAnimator(this, entity.hurtModule.linearProgress());
 			animator.setupKeyframe(2.0F);
 			animator.scale(this.rotator, -0.3F, -0.3F, -0.3F);

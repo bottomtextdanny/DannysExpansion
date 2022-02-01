@@ -28,14 +28,14 @@ public class ConnectionHooks {
     }
 
     private static void trackPlayerHook(ServerPlayer player, PlayerEvent.StartTracking event) {
-        PlayerAccessoryModule accessoryModule = CapabilityHelper.get(player, PlayerCapability.CAPABILITY).accessoryModule();
+        PlayerAccessoryModule accessoryModule = CapabilityHelper.get(player, PlayerCapability.TOKEN).accessoryModule();
         new MSGSendPlayerAccessories(player.getId(), accessoryModule.getAccessories().getStackContents(), accessoryModule.getCoreAccessoryList()).sendTo(PacketDistributor.PLAYER.with(() -> (ServerPlayer) event.getPlayer()));
     }
 
     public static void playerLogInHook(PlayerEvent.PlayerLoggedInEvent event){
         if (!event.getPlayer().level.isClientSide() && event.getPlayer().isAlive()) {
             Player player = event.getPlayer();
-            PlayerAccessoryModule accessoryModule = CapabilityHelper.get(player, PlayerCapability.CAPABILITY).accessoryModule();
+            PlayerAccessoryModule accessoryModule = CapabilityHelper.get(player, PlayerCapability.TOKEN).accessoryModule();
             new MSGSendPlayerAccessories(player.getId(), accessoryModule.getAccessories().getStackContents(), accessoryModule.getCoreAccessoryList()).sendTo(PacketDistributor.PLAYER.with(() -> (ServerPlayer) event.getPlayer()));
         }
     }

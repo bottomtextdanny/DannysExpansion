@@ -4,7 +4,7 @@ import net.minecraft.world.entity.Entity;
 
 public class AnimatableModule extends BaseAnimatableModule<AnimatableProvider> {
 
-    public AnimatableModule(Entity entity) {
-        super(entity);
+    public AnimatableModule(Entity entity, AnimationGetter manager) {
+        super(entity, manager);
     }
 }

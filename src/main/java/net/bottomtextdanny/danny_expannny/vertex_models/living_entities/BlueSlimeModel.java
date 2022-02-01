@@ -6,7 +6,7 @@ import net.bottomtextdanny.braincell.mod.client_animation.EntityModelAnimator;
 import net.bottomtextdanny.braincell.mod.minecraft_front_rendering.vertex.BCEntityModel;
 import net.bottomtextdanny.braincell.mod.minecraft_front_rendering.vertex.BCVoxel;
 import net.bottomtextdanny.danny_expannny.ClientInstance;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.BlueSlimeEntity;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.BlueSlimeEntity;
 import net.bottomtextdanny.dannys_expansion.core.Util.DEMath;
 import net.bottomtextdanny.dannys_expansion.core.Util.animation.Easing;
 import net.minecraft.client.CameraType;
@@ -68,7 +68,7 @@ public class BlueSlimeModel extends BCEntityModel<BlueSlimeEntity> {
         float dif = entity.getProgress01() - entity.getPrevProgress01();
         float prog = entity.getPrevProgress01() + dif * getPartialTick();
 
-        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
         EntityModelAnimator mountProgAnimator = new EntityModelAnimator(this, prog);
 
         if (entity.getProgress01() > 0) {
@@ -79,14 +79,14 @@ public class BlueSlimeModel extends BCEntityModel<BlueSlimeEntity> {
             mountProgAnimator.staticKeyframe(1);
         }
 
-        if (entity.mainAnimationHandler.isPlaying(entity.jump)) {
+        if (entity.mainHandler.isPlaying(BlueSlimeEntity.JUMP)) {
             animator.setupKeyframe(3);
             animator.scale(this.model, -0.25F, 0.4F, -0.25F);
             animator.apply();
 
             animator.emptyKeyframe(10, Easing.LINEAR);
 
-        } else if (entity.mainAnimationHandler.isPlaying(entity.backToItem)) {
+        } else if (entity.mainHandler.isPlaying(BlueSlimeEntity.TO_ITEM)) {
             animator.setupKeyframe(4);
             animator.scale(this.model, -0.15F, -0.15F, -0.15F);
             animator.apply(Easing.EASE_OUT_BACK);
@@ -107,7 +107,7 @@ public class BlueSlimeModel extends BCEntityModel<BlueSlimeEntity> {
             animator.scale(this.model, -0.75F, -0.75F, -0.75F);
             animator.apply(Easing.EASE_OUT_BACK);
 
-        } else if (entity.mainAnimationHandler.isPlaying(entity.fromItem)) {
+        } else if (entity.mainHandler.isPlaying(BlueSlimeEntity.FROM_ITEM)) {
             animator.setupKeyframe(0);
             animator.scale(this.model, -0.75F, -0.75F, -0.75F);
             animator.apply(Easing.EASE_OUT_BACK);

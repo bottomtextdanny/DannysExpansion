@@ -1,13 +1,10 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.ai.goals;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.NullAnimation;
 import net.bottomtextdanny.braincell.mod.world.builtin_entities.ModuledMob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.target.TargetGoal;
 import net.minecraft.world.level.pathfinder.Path;
-
-import java.util.List;
 
 public class FollowTargetGoal extends TargetGoal {
     protected final PathfinderMob mob;
@@ -17,14 +14,6 @@ public class FollowTargetGoal extends TargetGoal {
     private Path path;
     private int delayCounter;
     private int delayFactor = 5;
-
-    public FollowTargetGoal(ModuledMob creatureEntity, double moveSpeed, float stopAt, List<NullAnimation> animations) {
-        super(creatureEntity, true);
-        this.mob = creatureEntity;
-        this.moveSpeed = moveSpeed;
-        this.stopAt = stopAt;
-
-    }
 
     public FollowTargetGoal(ModuledMob creatureEntity, double moveSpeed, float stopAt, int delay) {
         super(creatureEntity, true);

@@ -3,8 +3,10 @@ package net.bottomtextdanny.dannys_expansion.common.Entities.living;
 import net.bottomtextdanny.braincell.mod.base.util.Connection;
 import net.bottomtextdanny.braincell.mod.entity.modules.additional_motion.ExtraMotionModule;
 import net.bottomtextdanny.braincell.mod.entity.modules.additional_motion.ExtraMotionProvider;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
 import net.bottomtextdanny.braincell.mod.entity.serialization.EntityData;
 import net.bottomtextdanny.braincell.mod.entity.serialization.EntityDataReference;
@@ -65,11 +67,12 @@ public class TumefendEntity extends ModuledMob implements IFlapper, ExtraMotionP
                             () -> BlockPos.ZERO,
                             "home")
             );
+    public static final SimpleAnimation PUMP = new SimpleAnimation(30);
+    public static final SimpleAnimation ATTACK = new SimpleAnimation(14);
+    public static final AnimationManager ANIMATIONS = new AnimationManager(PUMP, ATTACK);
     public final EntityData<BlockPos> home;
     private final PathNavigation flapNavigator;
     public AnimationHandler<TumefendEntity> attackModule;
-    public Animation goUp;
-    public Animation attack;
     private AIState aiState = AIState.WANDERING;
     private Vec3 lightPosition = Vec3.ZERO;
     private ExternalMotion upMotion;
@@ -99,8 +102,11 @@ public class TumefendEntity extends ModuledMob implements IFlapper, ExtraMotionP
         this.motionUtilModule = new ExtraMotionModule(this);
         this.upMotion = addCustomMotion(new ExternalMotion(0.75F));
         this.attackModule = addAnimationHandler(new AnimationHandler<>(this));
-        this.goUp = addAnimation(new Animation(30));
-        this.attack = addAnimation(new Animation(14));
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return ANIMATIONS;
     }
 
     @Override
@@ -115,7 +121,7 @@ public class TumefendEntity extends ModuledMob implements IFlapper, ExtraMotionP
 
     protected void registerExtraGoals() {
 
-        this.goalSelector.addGoal(0, new ActionGoal(this, o -> ifCollisionMeleeParamsAnd(target -> reachTo(target) < 1.0F && this.attackModule.inactive()), o -> this.attackModule.play(this.attack)));
+        this.goalSelector.addGoal(0, new ActionGoal(this, o -> ifCollisionMeleeParamsAnd(target -> reachTo(target) < 1.0F && this.attackModule.isPlayingNull()), o -> this.attackModule.play(ATTACK)));
         this.goalSelector.addGoal(1, new FollowTargetGoal(this, 1.8d, 0, 12){
             @Override
             public void tick() {
@@ -185,17 +191,17 @@ public class TumefendEntity extends ModuledMob implements IFlapper, ExtraMotionP
             this.renderMovement = Mth.lerp(0.2, this.renderMovement, Math.min(DEMath.getDistance(this, this.xOld, this.yOld, this.zOld) * 6, 1));
         } else {
         	
-            if (this.mainAnimationHandler.isPlaying(this.goUp)) {
-            	if (this.mainAnimationHandler.getTick() == 5) {
+            if (this.mainHandler.isPlaying(PUMP)) {
+            	if (this.mainHandler.getTick() == 5) {
 	                playSound(DESounds.ES_TUMEFEND_HOP.get(), 0.7F, 1.0F);
                     this.upMotion.setMotion(0, this.flapStrength, 0);
 
-                } else if (this.mainAnimationHandler.getTick() == 8) {
+                } else if (this.mainHandler.getTick() == 8) {
                     sendClientMsg(1);
                 }
             }
 
-            if (this.attack.isWoke() && this.attackModule.getTick() == 4) {
+            if (this.mainHandler.isPlaying(ATTACK) && this.attackModule.getTick() == 4) {
                 doHurtTarget(getTarget());
             }
         }
@@ -223,7 +229,7 @@ public class TumefendEntity extends ModuledMob implements IFlapper, ExtraMotionP
     @Override
     public void flap(float strenght) {
         this.flapStrength = strenght;
-        this.mainAnimationHandler.play(this.goUp);
+        this.mainHandler.play(PUMP);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -262,7 +268,7 @@ public class TumefendEntity extends ModuledMob implements IFlapper, ExtraMotionP
 
     @Override
     public boolean canFlap() {
-        return this.mainAnimationHandler.isPlayingNull();
+        return this.mainHandler.isPlayingNull();
     }
     
     //***SETTINGS END***//

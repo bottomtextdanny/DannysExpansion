@@ -3,11 +3,12 @@ package net.bottomtextdanny.danny_expannny.object_tables;
 import net.bottomtextdanny.braincell.mod.not_enforced_registry_tools.essential_features.BCRegistry;
 import net.bottomtextdanny.danny_expannny.DannysExpansion;
 import net.bottomtextdanny.danny_expannny.object_tables.items.DEItemCategory;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.*;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.*;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.mundane_slime.MundaneSlime;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.varado.Varado;
 import net.bottomtextdanny.danny_expannny.rendering.entity.EmptyRenderer;
 import net.bottomtextdanny.danny_expannny.rendering.entity.EnderDragonRewardRenderer;
 import net.bottomtextdanny.danny_expannny.rendering.entity.TestDummyRenderer;
-import net.bottomtextdanny.braincell.mod.minecraft_front_rendering.BCBoatRenderer;
 import net.bottomtextdanny.danny_expannny.rendering.kite.KiteKnotRenderer;
 import net.bottomtextdanny.danny_expannny.rendering.kite.KiteRenderer;
 import net.bottomtextdanny.danny_expannny.rendering.kite.SpecialKiteRenderer;
@@ -26,7 +27,6 @@ import net.bottomtextdanny.danny_expannny.rendering.entity.projectile.VomitRende
 import net.bottomtextdanny.danny_expannny.rendering.entity.projectile.arrow.IceArrowRenderer;
 import net.bottomtextdanny.danny_expannny.rendering.entity.spell.bullet.AquaticBulletRenderer;
 import net.bottomtextdanny.danny_expannny.rendering.entity.spell.bullet.BulletRenderer;
-import net.bottomtextdanny.braincell.mod.world.builtin_entities.BCBoat;
 import net.bottomtextdanny.danny_expannny.objects.entities.EnderDragonRewardEntity;
 import net.bottomtextdanny.danny_expannny.objects.entities.TestDummyEntity;
 import net.bottomtextdanny.danny_expannny.objects.entities.projectile.bullet.AquaticBulletEntity;
@@ -48,8 +48,7 @@ import net.bottomtextdanny.danny_expannny.objects.entities.mob.hollow_armor.Holl
 import net.bottomtextdanny.danny_expannny.objects.entities.mob.ice_elemental.IceElemental;
 import net.bottomtextdanny.dannys_expansion.common.Entities.living.klifour.KlifourEntity;
 import net.bottomtextdanny.danny_expannny.objects.entities.mob.monstrous_scorpion.MonstrousScorpion;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.desertic_slime.DeserticSlimeEntity;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.mundane_slime.MundaneSlimeEntity;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.desertic_slime.DeserticSlime;
 import net.bottomtextdanny.danny_expannny.objects.entities.mob.squig.SquigEntity;
 import net.bottomtextdanny.dannys_expansion.common.Entities.projectile.IceSpike;
 import net.bottomtextdanny.dannys_expansion.common.Entities.projectile.SporeEntity;
@@ -147,11 +146,11 @@ public final class DEEntities {
                     .kite(() ->new SpecialKiteItem(50, (byte)1))
                     .build();
 
-    public static final EntityWrap<EntityType<DeserticSlimeEntity>> DESERTIC_SLIME =
-            start("desertic_slime", DeserticSlimeEntity::new)
+    public static final EntityWrap<EntityType<DeserticSlime>> DESERTIC_SLIME =
+            start("desertic_slime", DeserticSlime::new)
                     .classification(MobCategory.MONSTER)
                     .dimensions(0.75F, 0.5625F)
-                    .attributes(DeserticSlimeEntity::Attributes)
+                    .attributes(DeserticSlime::Attributes)
                     .spawn(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SpawnParameters::canSpawnInSurface)
                     .renderer(() -> DeserticSlimeRenderer::new)
                     .egg(eggBuilder(0xe3da9a, 0x785b47))
@@ -215,11 +214,11 @@ public final class DEEntities {
                     .kite(() ->new SpecialKiteItem(50, (byte)1))
                     .build();
 
-    public static final EntityWrap<EntityType<FrozenSlimeEntity>> FROZEN_SLIME =
-            start("frozen_slime", FrozenSlimeEntity::new)
+    public static final EntityWrap<EntityType<FrozenSlime>> FROZEN_SLIME =
+            start("frozen_slime", FrozenSlime::new)
                     .classification(MobCategory.MONSTER)
                     .dimensions(0.75F, 0.5625F)
-                    .attributes(FrozenSlimeEntity::Attributes)
+                    .attributes(FrozenSlime::Attributes)
                     .spawn(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SpawnParameters::canSpawnInSurface)
                     .renderer(() -> FrozenSlimeRenderer::new)
                     .egg(eggBuilder(3448291, 3270901))
@@ -269,11 +268,11 @@ public final class DEEntities {
                     .kite(() ->new SpecialKiteItem(50, (byte)1).bright())
                     .build();
 
-    public static final EntityWrap<EntityType<JungleSlimeEntity>> JUNGLE_SLIME =
-            start("jungle_slime", JungleSlimeEntity::new)
+    public static final EntityWrap<EntityType<JungleSlime>> JUNGLE_SLIME =
+            start("jungle_slime", JungleSlime::new)
                     .classification(MobCategory.MONSTER)
                     .dimensions(0.9375F, 0.875F)
-                    .attributes(JungleSlimeEntity::Attributes)
+                    .attributes(JungleSlime::Attributes)
                     .spawn(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SpawnParameters::canSpawnInJungle)
                     .renderer(() -> JungleSlimeRenderer::new)
                     .egg(eggBuilder(7852355, 1675583))
@@ -301,12 +300,12 @@ public final class DEEntities {
                     .kite(() ->new SpecialKiteItem(50, (byte)1).bright())
                     .build();
 
-    public static final EntityWrap<EntityType<MagmaSlimeEntity>> MAGMA_SLIME =
-            start("magma_slime", MagmaSlimeEntity::new)
+    public static final EntityWrap<EntityType<MagmaSlime>> MAGMA_SLIME =
+            start("magma_slime", MagmaSlime::new)
                     .classification(MobCategory.MONSTER)
                     .dimensions(1.0F, 0.875F)
-                    .attributes(MagmaSlimeEntity::Attributes)
-                    .spawn(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, MagmaSlimeEntity::canSpawn)
+                    .attributes(MagmaSlime::Attributes)
+                    .spawn(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, MagmaSlime::canSpawn)
                     .renderer(() -> MagmaSlimeRenderer::new)
                     .egg(eggBuilder(16744448, 6562816))
                     .kite(() ->new SpecialKiteItem(50, (byte)1).bright())
@@ -323,11 +322,11 @@ public final class DEEntities {
                     .kite(() ->new SpecialKiteItem(50, (byte)1).bright())
                     .build();
 
-    public static final EntityWrap<EntityType<MundaneSlimeEntity>> MUNDANE_SLIME =
-            start("mundane_slime", MundaneSlimeEntity::new)
+    public static final EntityWrap<EntityType<MundaneSlime>> MUNDANE_SLIME =
+            start("mundane_slime", MundaneSlime::new)
                     .classification(MobCategory.MONSTER)
                     .dimensions(0.625F, 0.5F)
-                    .attributes(MundaneSlimeEntity::Attributes)
+                    .attributes(MundaneSlime::Attributes)
                     .spawn(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SpawnParameters::canSpawnInSurface)
                     .renderer(() -> MundaneSlimeRenderer::new)
                     .egg(eggBuilder(3240222, 3246892))
@@ -392,11 +391,11 @@ public final class DEEntities {
                     .renderer(() -> SnaithRenderer::new)
                     .build();
 
-    public static final EntityWrap<EntityType<SporeSlimeEntity>> SPORE_SLIME =
-            start("spore_slime", SporeSlimeEntity::new)
+    public static final EntityWrap<EntityType<SporeSlime>> SPORE_SLIME =
+            start("spore_slime", SporeSlime::new)
                     .classification(MobCategory.MONSTER)
                     .dimensions(2.0F, 2.0F)
-                    .attributes(SporeSlimeEntity::Attributes)
+                    .attributes(SporeSlime::Attributes)
                     .renderer(() -> SporeSlimeRenderer::new)
                     .build();
 
@@ -439,6 +438,16 @@ public final class DEEntities {
                     .spawn(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SpawnParameters::canSpawnInIsland)
                     .renderer(() -> TumefendRenderer::new)
                     .egg(eggBuilder(0x8d62b1, 0x9c61ed))
+                    .build();
+
+    public static final EntityWrap<EntityType<Varado>> VARADO =
+            start("varado", Varado::new)
+                    .classification(MobCategory.MONSTER)
+                    .dimensions(0.8F, 1.8F)
+                    .attributes(Varado::Attributes)
+                    .spawn(SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SpawnParameters::canSpawnInSurface)
+                    .renderer(() -> VaradoRenderer::new)
+                    .egg(eggBuilder(0x95c4c7, 0xdacfa3))
                     .build();
 
     //**LIVING-MISC------------------------------------------------------------------------//

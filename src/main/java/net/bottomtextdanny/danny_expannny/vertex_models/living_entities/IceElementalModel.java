@@ -91,8 +91,8 @@ public class IceElementalModel extends BCEntityModel<IceElemental> {
 
     @Override
     public void handleKeyframedAnimations(IceElemental entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
-        if (entity.mainAnimationHandler.isPlaying(entity.getIceSpikeAnimation())) {
-            EntityModelAnimator attackAnimator = new EntityModelAnimator(this, entity.mainAnimationHandler.linearProgress());
+        if (entity.mainHandler.isPlaying(IceElemental.ICE_SPIKE_ANIMATION)) {
+            EntityModelAnimator attackAnimator = new EntityModelAnimator(this, entity.mainHandler.linearProgress());
 
             float wingRot = 45.0F * entity.spikeAnimationRotationMultiplier;
             attackAnimator.setupKeyframe(10.0F);

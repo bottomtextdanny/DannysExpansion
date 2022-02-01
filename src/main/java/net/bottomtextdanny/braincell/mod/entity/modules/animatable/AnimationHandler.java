@@ -1,9 +1,7 @@
 package net.bottomtextdanny.braincell.mod.entity.modules.animatable;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.NullAnimation;
 import net.bottomtextdanny.braincell.mod.packet_front.server_to_client.MSGEntityAnimation;
-import net.bottomtextdanny.dannys_expansion.core.Util.qol.DEUtil;
-import net.bottomtextdanny.dannys_expansion.core.Util.qol.MutableLatch;
+import net.bottomtextdanny.braincell.mod.structure.BCStaticData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -11,76 +9,82 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.PacketDistributor;
 
 public class AnimationHandler<E extends Entity> {
-	protected MutableLatch<Integer> indexLookable = MutableLatch.empty();
-	protected IAnimation animation = NullAnimation.UNI;
+	private int index;
+	protected final E entity;
+	protected AnimationData animationMetadata = AnimationData.NULL;
+	protected Animation<?> animation = Animation.NULL;
 	protected int prevTick;
 	protected int tick;
-	protected E entity;
-	
+
 	public AnimationHandler(E entity) {
 		this.entity = entity;
 	}
 	
-	public IAnimation get() {
-		return this.animation;
-	}
-	
-	public void play(IAnimation animation) {
+	public void play(Animation<?> animation) {
 		if (!this.entity.level.isClientSide()) {
-			new MSGEntityAnimation(this.entity.getId(), this.indexLookable.get(), animation.getIndex())
+			new MSGEntityAnimation(this.entity.getId(), this.index, animation.getIndex())
 				.sendTo(PacketDistributor.ALL.with(() -> null));
 		}
-
         this.tick = 0;
-		this.animation.resetInstanceValues();
-		this.animation.setWoke(false);
+		this.animation.onEnd(this);
 		this.animation = animation;
-		this.animation.setWoke(true);
+		this.animationMetadata = animation.dataForPlay().get();
+		this.animation.onStart(this);
 	}
-	
-	public boolean isPlaying(IAnimation animation) {
-		return this.animation == animation;
-	}
-	
-	public boolean isPlayingNull() {
-		return this.animation.isNull();
-	}
-	
-	public boolean inactive() {
-		return this.animation == NullAnimation.UNI;
-	}
-	
-	public void setIndex(int index) {
-        this.indexLookable.setLocked(index);
-	}
-	
-	public int getIndex() {
-		return this.indexLookable.get();
-	}
-	
+
 	public void update(int tick) {
 		this.prevTick = this.tick;
 		this.tick = tick;
+	}
+
+	public void deactivate() {
+		this.tick = 0;
+		this.animation.onEnd(this);
+		this.animation = Animation.NULL;
+	}
+
+	public void setIndex(int index, BCAnimationToken token) {
+		if (token == null) {
+			throw new IllegalArgumentException("Invalid token.");
+		}
+        this.index = index;
+	}
+
+	public Animation<?> getAnimation() {
+		return this.animation;
+	}
+
+	public AnimationData getData() {
+		return this.animationMetadata;
+	}
+
+	public int getIndex() {
+		return this.index;
 	}
 	
 	public int getTick() {
 		return this.tick;
 	}
-	
-	public void trySleep() {
-        this.tick = 0;
-		this.animation.resetInstanceValues();
-		this.animation.setWoke(false);
-		this.animation = NullAnimation.UNI;
+
+	public E getEntity() {
+		return entity;
 	}
-	
+
+	public boolean isPlaying(Animation<?> animation) {
+		return this.animation == animation;
+	}
+
+	public boolean isPlayingNull() {
+		return this.animation == Animation.NULL;
+	}
+
 	@OnlyIn(Dist.CLIENT)
 	public float linearProgress() {
-		return this.tick + DEUtil.PARTIAL_TICK;
+		return this.tick + BCStaticData.partialTick();
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	public float e_dynamic() {
-		return Mth.lerp(DEUtil.PARTIAL_TICK, this.prevTick, this.tick);
+	public float dynamicProgress() {
+		return Mth.lerp(BCStaticData.partialTick(), this.prevTick, this.tick);
 	}
 }

@@ -11,7 +11,7 @@ import net.bottomtextdanny.braincell.underlying.misc.ObjectFetcher;
 import net.bottomtextdanny.danny_expannny.capabilities.CapabilityHelper;
 import net.bottomtextdanny.danny_expannny.capabilities.world.LevelCapability;
 import net.bottomtextdanny.danny_expannny.capabilities.world.LevelWindModule;
-import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.ClientManager;
+import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.EntityClientMessenger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -26,7 +26,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
 
-public class KiteEntity extends Entity implements ClientManager {
+public class KiteEntity extends Entity implements EntityClientMessenger {
     public ItemStack itemstack;
     public String cachedDesign = "none";
     public boolean cachedIsDyableDesign;

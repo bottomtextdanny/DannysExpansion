@@ -1,6 +1,7 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.spell;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.danny_expannny.object_tables.DEEntities;
 import net.bottomtextdanny.danny_expannny.object_tables.DEParticles;
 import net.bottomtextdanny.danny_expannny.object_tables.DESounds;
@@ -18,13 +19,18 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class SandScarabEggEntity extends SpellEntity {
-	public final Animation breakAnimation = addAnimation(new Animation(5));
+	public static final SimpleAnimation BREAK = new SimpleAnimation(5);
     public float prevMotionToRot;
     public float motionToRot;
 
     public SandScarabEggEntity(EntityType<? extends SpellEntity> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
         setLifeTime(120);
+    }
+
+    @Override
+    protected AnimationGetter getAnimations() {
+        return BREAK;
     }
 
     @Override
@@ -40,7 +46,7 @@ public class SandScarabEggEntity extends SpellEntity {
             this.motionToRot += difference;
         }
 
-        if (this.breakAnimation.isWoke()) {
+        if (this.mainHandler.isPlaying(BREAK)) {
             if (this.mainHandler.getTick() == 3) {
                 playSound(DESounds.ES_SAND_SCARAB_EGG_BREAK.get(), 1.0F, 1.0F);
             } else if (this.mainHandler.getTick() == 5) {
@@ -85,8 +91,8 @@ public class SandScarabEggEntity extends SpellEntity {
     protected void onBlockHit(BlockHitResult p_230299_1_) {
         super.onBlockHit(p_230299_1_);
         if (!this.level.isClientSide()) {
-            if (!this.breakAnimation.isWoke()) {
-                this.mainHandler.play(this.breakAnimation);
+            if (!this.mainHandler.isPlaying(BREAK)) {
+                this.mainHandler.play(BREAK);
             }
         }
     }
@@ -96,12 +102,12 @@ public class SandScarabEggEntity extends SpellEntity {
         super.onEntityHit(p_213868_1_);
 
         if (!this.level.isClientSide()) {
-            if (!this.breakAnimation.isWoke()) {
+            if (!this.mainHandler.isPlaying(BREAK)) {
                 if (p_213868_1_.getEntity() instanceof LivingEntity) {
                     castersDamage((LivingEntity)p_213868_1_.getEntity(),2);
                 }
 
-                this.mainHandler.play(this.breakAnimation);
+                this.mainHandler.play(BREAK);
             }
         }
     }

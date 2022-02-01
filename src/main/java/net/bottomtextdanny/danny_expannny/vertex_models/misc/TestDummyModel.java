@@ -59,7 +59,7 @@ public class TestDummyModel extends BCEntityModel<TestDummyEntity> {
     public void handleKeyframedAnimations(TestDummyEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
         super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
 
-        if (entity.mainAnimationModule.isPlaying(entity.hurtAnimation)) {
+        if (entity.mainAnimationModule.isPlaying(TestDummyEntity.HURT)) {
             EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationModule.linearProgress());
             Vec3 fromHit = DEMath.fromPitchYaw(0, Mth.degreesDifference(entity.hitYaw, entity.getYRot()) - 90.0F);
 

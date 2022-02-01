@@ -23,7 +23,7 @@ public class Evaluations {
 				eval.stopEvaluation();
 			} else {
 				float[] aFloat = {eval.get()};
-				CapabilityHelper.get(eval.getEvaluated(), PlayerCapability.CAPABILITY).accessoryModule().getOrCreateAccessoryAttributeModifiers(ModifierType.MOVEMENT_SPEED_MLT).forEach(accessory -> aFloat[0] += accessory.getFinalSpeedMultiplier());
+				CapabilityHelper.get(eval.getEvaluated(), PlayerCapability.TOKEN).accessoryModule().getOrCreateAccessoryAttributeModifiers(ModifierType.MOVEMENT_SPEED_MLT).forEach(accessory -> aFloat[0] += accessory.getFinalSpeedMultiplier());
 
 				eval.set(aFloat[0]);
 			}

@@ -40,26 +40,23 @@ public class DannyGenerator extends GenUtils implements GeneratorUtils {
 	public static final TagBuffer WOODEN_PRESSURE_PLATES = new TagBuffer(MC_ID, "items&blocks", "wooden_pressure_plates");
 	public static final TagBuffer TRAPDOORS = new TagBuffer(MC_ID, "items&blocks", "trapdoors");
 	public static final TagBuffer WOODEN_TRAPDOORS = new TagBuffer(MC_ID, "items&blocks", "wooden_trapdoors");
-
 	public static final TagBuffer STANDING_SIGNS = new TagBuffer(MC_ID, "blocks", "standing_signs");
 	public static final TagBuffer WALL_SIGNS = new TagBuffer(MC_ID, "blocks", "wall_signs");
 	public static final TagBuffer SIGNS = new TagBuffer(MC_ID, "items", "signs");
-
 	public static final TagBuffer GUARDED_BY_PIGLINS = new TagBuffer(MC_ID, "blocks", "guarded_by_piglins");
 	public static final TagBuffer DRAGON_IMMUNE = new TagBuffer(MC_ID, "blocks", "dragon_immune");
-
 	public static final TagBuffer BOATS = new TagBuffer(MC_ID, "items", "boats");
 
 	public static final TagBuffer FORGE_FENCES = new TagBuffer("forge", "items&blocks", "fences");
 	public static final TagBuffer FORGE_WOODEN_FENCES = new TagBuffer("forge", "items&blocks/fences", "wooden");
 	public static final TagBuffer FORGE_FENCE_GATES = new TagBuffer("forge", "items&blocks", "fence_gates");
 	public static final TagBuffer FORGE_WOODEN_FENCE_GATES = new TagBuffer("forge", "items&blocks/fence_gates", "wooden");
-
 	public static final TagBuffer FORGE_CHESTS = new TagBuffer("forge", "items&blocks", "chests");
 	public static final TagBuffer FORGE_WOODEN_CHESTS = new TagBuffer("forge", "items&blocks/chests", "wooden");
 	public static final TagBuffer FORGE_TRAPPED_CHESTS = new TagBuffer("forge", "items&blocks/chests", "trapped");
-
 	public static final TagBuffer FORGE_MUSHROOMS = new TagBuffer("forge", "items", "mushrooms");
+
+	public static final TagBuffer NEEDS_ENDER_TOOL = new TagBuffer("dannys_expansion", "blocks", "needs_ender_tool");
 
 	public static final TagBuffer ENDERGETIC_ENDER_FIRE_BASES = new TagBuffer("endergetic", "blocks", "ender_fire_base_blocks");
 

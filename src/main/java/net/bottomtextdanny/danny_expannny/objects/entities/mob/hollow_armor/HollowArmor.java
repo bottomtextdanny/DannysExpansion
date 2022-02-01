@@ -4,7 +4,9 @@ import net.bottomtextdanny.braincell.mod.base.misc.timer.IntScheduler;
 import net.bottomtextdanny.braincell.mod.base.util.Connection;
 import net.bottomtextdanny.braincell.mod.entity.modules.additional_motion.ExtraMotionModule;
 import net.bottomtextdanny.braincell.mod.entity.modules.additional_motion.ExtraMotionProvider;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.danny_expannny.objects.entities.modules.phase_affected_provider.PhaseAffectedModule;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
 import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkModule;
@@ -86,20 +88,22 @@ public class HollowArmor extends SmartyMob implements MotionUtilProvider, ExtraM
                             () -> false,
                             "healing_used")
             );
+    public static final SimpleAnimation BLUNT = new SimpleAnimation(17);
+    public static final SimpleAnimation SLASH = new SimpleAnimation(21);
+    public static final SimpleAnimation SWING = new SimpleAnimation(20);
+    public static final SimpleAnimation DOUBLE_SWING = new SimpleAnimation(21);
+    public static final SimpleAnimation IMPALE = new SimpleAnimation(26);
+    public static final SimpleAnimation HEAL = new SimpleAnimation(28);
+    public static final SimpleAnimation DASH = new SimpleAnimation(40);
+    public static final SimpleAnimation DEATH = new SimpleAnimation(24);
+    public static final AnimationManager ANIMATIONS =
+            new AnimationManager(BLUNT, SLASH, SWING, DOUBLE_SWING, IMPALE, HEAL, DASH, DEATH);
     private ExtraMotionModule extraMotionModule;
     public final EntityData<IntScheduler.Variable> lethal_attack_timer;
     public final EntityData<IntScheduler.Variable> attack_timer;
     public final EntityData<IntScheduler.Simple> dash_timer;
     public final EntityData<Boolean> healing_used;
     private ExternalMotion dashMotion;
-    private Animation bluntAnimation;
-    private Animation slashAnimation;
-    private Animation swingAnimation;
-    private Animation doubleSwingAnimation;
-    private Animation impaleAnimation;
-    private Animation healAnimation;
-    private Animation dashAnimation;
-    private Animation deathAnimation;
     private float movementReduction;
 
     public HollowArmor(EntityType<? extends PathfinderMob> type, Level worldIn) {
@@ -127,15 +131,12 @@ public class HollowArmor extends SmartyMob implements MotionUtilProvider, ExtraM
         this.extraMotionModule = new ExtraMotionModule(this);
         this.phaseAffectedModule = new PhaseAffectedModule(this);
         this.loopedWalkModule = new LoopedWalkModule(this);
-        this.bluntAnimation = addAnimation(new Animation(17));
-        this.slashAnimation = addAnimation(new Animation(21));
-        this.swingAnimation = addAnimation(new Animation(20));
-        this.doubleSwingAnimation = addAnimation(new Animation(21));
-        this.impaleAnimation = addAnimation(new Animation(26));
-        this.healAnimation = addAnimation(new Animation(28));
-        this.dashAnimation = addAnimation(new Animation(40));
-        this.deathAnimation = addAnimation(new Animation(24));
         this.dashMotion = addCustomMotion(new ExternalMotion(0.2F));
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return ANIMATIONS;
     }
 
     @Override
@@ -225,8 +226,12 @@ public class HollowArmor extends SmartyMob implements MotionUtilProvider, ExtraM
 
     @Nullable
     @Override
-    public Animation getDeathAnimation() {
-        return this.deathAnimation;
+    public SimpleAnimation getDeathAnimation() {
+        return DEATH;
+    }
+
+    public ExternalMotion getDashMotion() {
+        return dashMotion;
     }
 
     @Override
@@ -237,38 +242,6 @@ public class HollowArmor extends SmartyMob implements MotionUtilProvider, ExtraM
     @Override
     public float movementReduction() {
         return this.movementReduction;
-    }
-
-    public ExternalMotion getDashMotion() {
-        return this.dashMotion;
-    }
-
-    public Animation getBluntAnimation() {
-        return this.bluntAnimation;
-    }
-
-    public Animation getSlashAnimation() {
-        return this.slashAnimation;
-    }
-
-    public Animation getSwingAnimation() {
-        return this.swingAnimation;
-    }
-
-    public Animation getDoubleSwingAnimation() {
-        return this.doubleSwingAnimation;
-    }
-
-    public Animation getImpaleAnimation() {
-        return this.impaleAnimation;
-    }
-
-    public Animation getDashAnimation() {
-        return this.dashAnimation;
-    }
-
-    public Animation getHealAnimation() {
-        return this.healAnimation;
     }
 
     @Override

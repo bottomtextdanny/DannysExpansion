@@ -35,7 +35,7 @@ public class EnderDragonRewardModel extends BCEntityModel<EnderDragonRewardEntit
 	public void handleKeyframedAnimations(EnderDragonRewardEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
 		super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
 		
-		if (entity.rotationLoopHandler.isPlaying(entity.rotate)) {
+		if (entity.rotationLoopHandler.isPlaying(EnderDragonRewardEntity.ROTATE)) {
 			EntityModelAnimator animator = new EntityModelAnimator(this, entity.rotationLoopHandler.linearProgress());
 			
 			animator.setupKeyframe(200.0F);
@@ -43,7 +43,7 @@ public class EnderDragonRewardModel extends BCEntityModel<EnderDragonRewardEntit
 			animator.apply();
 		}
 		
-		if (entity.mainAnimationHandler.isPlaying(entity.spawn)) {
+		if (entity.mainAnimationHandler.isPlaying(EnderDragonRewardEntity.SPAWN)) {
 			EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.linearProgress());
 			
 			animator.setupKeyframe(0.0F);
@@ -51,7 +51,7 @@ public class EnderDragonRewardModel extends BCEntityModel<EnderDragonRewardEntit
 			animator.apply();
 			
 			animator.emptyKeyframe(15.0F, Easing.EASE_IN_BACK);
-		} else if (entity.mainAnimationHandler.isPlaying(entity.giveItems)) {
+		} else if (entity.mainAnimationHandler.isPlaying(EnderDragonRewardEntity.GIVE_ITEMS)) {
 			EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.linearProgress());
 			
 			animator.staticKeyframe(20.0F);

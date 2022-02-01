@@ -100,10 +100,9 @@ public class TumefendModel extends BCEntityModel<TumefendEntity> {
     public void handleKeyframedAnimations(TumefendEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
         super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
 
-        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick()  + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick()  + getPartialTick());
 
-        if(entity.mainAnimationHandler.isPlaying(entity.goUp)) {
-
+        if(entity.mainHandler.isPlaying(TumefendEntity.PUMP)) {
             animator.setupKeyframe(5);
             animator.scale(this.head, 0.6F, -0.4F, 0.6F);
             animator.rotate(this.frontTent, 30.0F, 0F, 0F);
@@ -123,7 +122,7 @@ public class TumefendModel extends BCEntityModel<TumefendEntity> {
             animator.emptyKeyframe(10, Easing.EASE_IN_OUT_BACK);
         }
 
-        if (entity.attack.isWoke()) {
+        if (entity.mainHandler.isPlaying(TumefendEntity.ATTACK)) {
             EntityModelAnimator ambAnimator = new EntityModelAnimator(this, entity.attackModule.getTick() + getPartialTick());
 
             ambAnimator.setupKeyframe(4);

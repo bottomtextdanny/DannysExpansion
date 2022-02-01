@@ -263,22 +263,22 @@ public class EnderBeastArcherModel extends BCEntityModel<EnderBeastArcherEntity>
     public void handleKeyframedAnimations(EnderBeastArcherEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
         super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
 
-
-        if (entity.jawAnimation10.isWoke()) {
+        if (!entity.jawModule.isPlayingNull()) {
+            float jawTime = (float)entity.jawModule.getAnimation().getDuration() / 2.0F;
             EntityModelAnimator ambientAnimator = new EntityModelAnimator(this, entity.jawModule.linearProgress());
 
-            ambientAnimator.setupKeyframe(5.0F);
+            ambientAnimator.setupKeyframe(jawTime);
             ambientAnimator.rotate(this.jaw, 10.0F, 0.0F, 0.0F);
             ambientAnimator.apply();
 
-            ambientAnimator.emptyKeyframe(5.0F, Easing.LINEAR);
+            ambientAnimator.emptyKeyframe(jawTime, Easing.LINEAR);
         }
 
-        if (entity.mainAnimationHandler.isPlaying(entity.shot)) {
-            EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
-            EntityModelAnimator bowAnimator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+        if (entity.mainHandler.isPlaying(EnderBeastArcherEntity.SHOT)) {
+            EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
+            EntityModelAnimator bowAnimator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 
-            animator.disableAtomic(this.walkMult, 5, 28, 5, entity.mainAnimationHandler.getTick() + getPartialTick());
+            animator.disableAtomic(this.walkMult, 5, 28, 5, entity.mainHandler.getTick() + getPartialTick());
 
             animator.setupKeyframe(10);
             animator.rotate(this.chest, -17.5F, -7.5F, -7.5F);
@@ -364,13 +364,13 @@ public class EnderBeastArcherModel extends BCEntityModel<EnderBeastArcherEntity>
 
             animator.emptyKeyframe(5, Easing.LINEAR);
 
-            if (entity.mainAnimationHandler.getTick() >= 10 && entity.mainAnimationHandler.getTick() < 28) {
+            if (entity.mainHandler.getTick() >= 10 && entity.mainHandler.getTick() < 28) {
                 this.handArrow.visible = true;
             }
         }
 
-        if (entity.mainAnimationHandler.isPlaying(entity.punch)) {
-            EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+        if (entity.mainHandler.isPlaying(EnderBeastArcherEntity.PUNCH)) {
+            EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
             float headRotX = headPitch;
             float clampedHeadRotX = Mth.clamp(headPitch, -90, 50);
 

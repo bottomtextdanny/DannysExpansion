@@ -4,8 +4,10 @@ import net.bottomtextdanny.braincell.mod.base.misc.timer.IntScheduler;
 import net.bottomtextdanny.braincell.mod.base.util.Connection;
 import net.bottomtextdanny.braincell.mod.entity.modules.additional_motion.ExtraMotionModule;
 import net.bottomtextdanny.braincell.mod.entity.modules.additional_motion.ExtraMotionProvider;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
 import net.bottomtextdanny.braincell.mod.entity.modules.variable.*;
 import net.bottomtextdanny.braincell.mod.entity.serialization.EntityData;
@@ -81,13 +83,16 @@ public class SquigEntity extends ModuledMob implements EntityHurtAnimation, Extr
 							() -> 0.0F,
 							"squig_yaw")
 			);
+	public static final SimpleAnimation HURT = new SimpleAnimation(12);
+	public static final SimpleAnimation MOVE = new SimpleAnimation(20);
+	public static final AnimationManager ANIMATIONS = new AnimationManager(HURT, MOVE);
 	private final MGLookController mgLookController = new LocLookController(this);
 	public final EntityData<IntScheduler.Variable> impulseTimer;
 	public final EntityData<Float> squigYaw;
 	private ExtraMotionModule motionUtilModule;
 	public AnimationHandler<SquigEntity> hurtModule;
-	public Animation hurtAnimation;
-	public Animation goAnimation;
+	public SimpleAnimation hurtAnimation;
+	public SimpleAnimation goAnimation;
 	public float renderSquigYaw, prevRenderSquigYaw;
 	public float prevYRotOff, yRotOff, yRotOffPointer;
 	private boolean attackSwitch;
@@ -117,9 +122,12 @@ public class SquigEntity extends ModuledMob implements EntityHurtAnimation, Extr
 		this.variableModule = new IndexedVariableModule(this, FORMS);
 		this.motionUtilModule = new ExtraMotionModule(this);
         this.goMotion = addCustomMotion(new ExternalMotion(0.96F));
-		this.hurtAnimation = addAnimation(new Animation(12));
-		this.goAnimation = addAnimation(new Animation(20));
 		this.hurtModule = addAnimationHandler(new AnimationHandler<>(this));
+	}
+
+	@Override
+	public AnimationGetter getAnimations() {
+		return super.getAnimations();
 	}
 
 	@Override
@@ -167,19 +175,19 @@ public class SquigEntity extends ModuledMob implements EntityHurtAnimation, Extr
 			);
 		}
 		
-		if (isEffectiveAi() && this.mainAnimationHandler.isPlayingNull() && this.impulseTimer.get().hasEnded()) {
+		if (isEffectiveAi() && this.mainHandler.isPlayingNull() && this.impulseTimer.get().hasEnded()) {
 			
 			Vec3 ray = position().add(DEMath.fromPitchYaw(getXRot(), this.squigYaw.get()).scale(1.5F));
 			
 			if (canBlockBeSeen(new BlockPos(ray))) {
-                this.mainAnimationHandler.play(this.goAnimation);
+                this.mainHandler.play(this.goAnimation);
                 this.impulseTimer.get().reset();
 			}
 		}
 		
-		if (this.mainAnimationHandler.isPlaying(this.goAnimation)) {
+		if (this.mainHandler.isPlaying(this.goAnimation)) {
 			Connection.doClientSide(() -> onClientJump());
-			if (this.mainAnimationHandler.getTick() == 9) {
+			if (this.mainHandler.getTick() == 9) {
 				Vec3 look = DEMath.fromPitchYaw(getXRot(), this.squigYaw.get()).scale(0.32);
 				
 				playSound(DESounds.ES_SQUIG_JUMP.get(), 1.5F, 1.0F + (float) this.random.nextInt(3) * 0.1F);
@@ -210,7 +218,7 @@ public class SquigEntity extends ModuledMob implements EntityHurtAnimation, Extr
 					}
 				}
 				
-			} else if (this.mainAnimationHandler.getTick() == 11) {
+			} else if (this.mainHandler.getTick() == 11) {
                 this.yRotOffPointer += 260.0F + (float) this.random.nextInt(150);
 			}
 		}
@@ -221,7 +229,7 @@ public class SquigEntity extends ModuledMob implements EntityHurtAnimation, Extr
 	
 	@OnlyIn(Dist.CLIENT)
 	public void onClientJump() {
-		if (this.mainAnimationHandler.getTick() == 9) {
+		if (this.mainHandler.getTick() == 9) {
 			Vec3 pos = position();
 			Vec3 lookVec = Vec3.directionFromRotation(getXRot(), this.renderSquigYaw).scale(-1.5);
 			Vec3 ringPos = position().add(lookVec).add(0.0, 0.31, 0.0);

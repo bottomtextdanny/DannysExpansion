@@ -1,7 +1,9 @@
 package net.bottomtextdanny.danny_expannny.objects.entities.mob.ghouls;
 
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkModule;
 import net.bottomtextdanny.braincell.mod.entity.modules.variable.*;
 import net.bottomtextdanny.braincell.mod.world.builtin_entities.ModuledMob;
@@ -43,10 +45,11 @@ public class GhoulEntity extends ModuledMob implements Enemy {
                     .add(SWAMP_FORM)
                     .create();
 	public AnimationHandler<GhoulEntity> livingModule;
-    public Animation vomit;
-    public Animation grab;
-    public Animation respirationAnimation;
-    public Animation livingAnimation;
+    public static final SimpleAnimation VOMIT = new SimpleAnimation(24);
+    public static final SimpleAnimation GRAB = new SimpleAnimation(26);
+    public static final SimpleAnimation BREATH = new SimpleAnimation(22);
+    public static final SimpleAnimation WTF = new SimpleAnimation(16);
+    public static final AnimationManager ANIMATIONS = new AnimationManager(VOMIT, GRAB, BREATH, WTF);
     public Timer respirationTimer;
 	
     public GhoulEntity(EntityType<? extends GhoulEntity> type, Level worldIn) {
@@ -62,19 +65,20 @@ public class GhoulEntity extends ModuledMob implements Enemy {
         this.variableModule = new IndexedVariableModule(this, FORMS);
         this.loopedWalkModule = new LoopedWalkModule(this);
         this.livingModule = addAnimationHandler(new AnimationHandler<>(this));
-        this.vomit = addAnimation(new Animation(24));
-        this.grab = addAnimation(new Animation(26));
-        this.respirationAnimation = addAnimation(new Animation(22));
-        this.livingAnimation = addAnimation(new Animation(16));
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return ANIMATIONS;
     }
 
     protected void registerExtraGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(0, new PlayAnimationGoal(this, this.grab,
-                o -> hasAttackTarget() && this.mainAnimationHandler.isPlayingNull() && this.meleeTimer.hasEnded() && reachTo(getTarget()) < 1.0F,
+        this.goalSelector.addGoal(0, new PlayAnimationGoal(this, GRAB,
+                o -> hasAttackTarget() && this.mainHandler.isPlayingNull() && this.meleeTimer.hasEnded() && reachTo(getTarget()) < 1.0F,
                 dannyEntity -> this.meleeTimer.reset()));
-        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, this.vomit,
-                o -> false && hasAttackTarget() && this.mainAnimationHandler.isPlayingNull() && this.rangedTimer.hasEnded() && hasLineOfSight(getTarget()),
+        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, VOMIT,
+                o -> false && hasAttackTarget() && this.mainHandler.isPlayingNull() && this.rangedTimer.hasEnded() && hasLineOfSight(getTarget()),
                 dannyEntity -> this.rangedTimer.reset()));
         this.goalSelector.addGoal(2, new FollowTargetGoal(this, 1.2d));
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1d));
@@ -104,22 +108,22 @@ public class GhoulEntity extends ModuledMob implements Enemy {
     public void tick() {
         super.tick();
 
-        if (this.mainAnimationHandler.isPlaying(this.grab)) {
-            if (this.mainAnimationHandler.getTick() == 10) {
+        if (this.mainHandler.isPlaying(GRAB)) {
+            if (this.mainHandler.getTick() == 10) {
                 playSound(DESounds.ES_SWOOSH.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.2F);
                 playSound(DESounds.ES_GHOUL_PUNCH.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.2F);
             }
-            if (this.mainAnimationHandler.getTick() == 14 && hasAttackTarget() && reachTo(getTarget()) < 2.0F) attackWithMultiplier(getTarget(), 1.0F);
+            if (this.mainHandler.getTick() == 14 && hasAttackTarget() && reachTo(getTarget()) < 2.0F) attackWithMultiplier(getTarget(), 1.0F);
         }
-        else if (this.mainAnimationHandler.isPlaying(this.vomit)) {
+        else if (this.mainHandler.isPlaying(VOMIT)) {
             getNavigation().stop();
 
-            if (this.mainAnimationHandler.getTick() == 1) playSound(DESounds.ES_GHOUL_VOMIT.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.2F);
+            if (this.mainHandler.getTick() == 1) playSound(DESounds.ES_GHOUL_VOMIT.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.2F);
 
             if (hasAttackTarget()) {
                 getLookControl().setLookAt(getTarget(), 30.0F, 30.0F);
 
-                if (this.mainAnimationHandler.getTick() == 12 && isEffectiveAi()) {
+                if (this.mainHandler.getTick() == 12 && isEffectiveAi()) {
                     VomitEntity vomit = new VomitEntity(DEEntities.VOMIT.get(), this.level);
                     vomit.setOwner(this);
                     vomit.setPos(getX(), getY() + 1.65, getZ());
@@ -130,8 +134,8 @@ public class GhoulEntity extends ModuledMob implements Enemy {
         }
 
         if (!this.level.isClientSide()) {
-            if (this.livingModule.inactive() && this.respirationTimer.hasEnded()) {
-                this.livingModule.play(this.respirationAnimation);
+            if (this.livingModule.isPlayingNull() && this.respirationTimer.hasEnded()) {
+                this.livingModule.play(BREATH);
                 playSound(DESounds.ES_GHOUL_RESPIRATION.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.2F);
                 this.respirationTimer.reset();
             }
@@ -166,12 +170,11 @@ public class GhoulEntity extends ModuledMob implements Enemy {
     @Override
     public void playLivingSound() {
         super.playLivingSound();
-        this.livingModule.play(this.livingAnimation);
+        this.livingModule.play(WTF);
     }
 	
 	@Override
 	public Form<GhoulEntity> chooseVariant() {
-    	
     	if (this.level.getBiome(blockPosition()).getBiomeCategory() == Biome.BiomeCategory.SWAMP) {
 		    if (this.random.nextInt(3) != 2) {
 		    	return SWAMP_FORM;

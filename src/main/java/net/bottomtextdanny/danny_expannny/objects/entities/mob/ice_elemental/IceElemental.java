@@ -4,7 +4,8 @@ import net.bottomtextdanny.braincell.mod.base.misc.timer.IntScheduler;
 import net.bottomtextdanny.braincell.mod.base.util.Connection;
 import net.bottomtextdanny.braincell.mod.entity.modules.additional_motion.ExtraMotionModule;
 import net.bottomtextdanny.braincell.mod.entity.modules.additional_motion.ExtraMotionProvider;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.StartCalloutAnimation;
 import net.bottomtextdanny.danny_expannny.objects.entities.modules.critical_effect_provider.FrozenCriticalProvider;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
@@ -52,10 +53,12 @@ public class IceElemental extends SmartyMob implements Enemy, ExtraMotionProvide
                             () -> IntScheduler.ranged(ATTACK_DELAY_MIN, ATTACK_DELAY_MAX),
                             "attack_delay")
             );
+    public static final StartCalloutAnimation<IceElemental> ICE_SPIKE_ANIMATION =
+            new StartCalloutAnimation<>(20, (entity) -> entity.spikeAnimationRotationMultiplier = entity.random.nextBoolean() ? 1.0F : -1.0F);
+    public static final AnimationManager ANIMATIONS = new AnimationManager(ICE_SPIKE_ANIMATION);
     private final FluentFlyingControl wanderMoveControl;
     private final FluentFlyingControl combatMoveControl;
     private ExtraMotionModule extraMotionModule;
-    private StartCalloutAnimation iceSpikeAnimation;
     public final EntityData<IntScheduler.Variable> attackDelay;
     public float spikeAnimationRotationMultiplier;
     private boolean combatMode;
@@ -69,7 +72,6 @@ public class IceElemental extends SmartyMob implements Enemy, ExtraMotionProvide
         this.attackDelay = bcDataManager().addNonSyncedData(EntityData.of(ATTACKS_DELAY_REF));
         this.setPathfindingMalus(BlockPathTypes.LAVA, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1.0F);
-       // this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
     }
 
     public static AttributeSupplier.Builder Attributes() {
@@ -85,7 +87,6 @@ public class IceElemental extends SmartyMob implements Enemy, ExtraMotionProvide
     @Override
     protected void commonInit() {
         this.extraMotionModule = new ExtraMotionModule(this);
-        this.iceSpikeAnimation = addAnimation(new StartCalloutAnimation(20, () -> this.spikeAnimationRotationMultiplier = this.random.nextBoolean() ? 1.0F : -1.0F));
     }
 
     @Override
@@ -105,6 +106,11 @@ public class IceElemental extends SmartyMob implements Enemy, ExtraMotionProvide
     @Override
     public MoveControl getMoveControl() {
         return this.getTarget() != null && getTarget().isAlive() ? this.combatMoveControl : this.wanderMoveControl;
+    }
+
+    @Override
+    public AnimationManager getAnimations() {
+        return ANIMATIONS;
     }
 
     @Override
@@ -137,10 +143,6 @@ public class IceElemental extends SmartyMob implements Enemy, ExtraMotionProvide
             this.moveControl = this.combatMode ? this.combatMoveControl : this.wanderMoveControl;
         }
         super.aiStep();
-    }
-
-    public Animation getIceSpikeAnimation() {
-        return this.iceSpikeAnimation;
     }
 
     public boolean isCombatMode() {

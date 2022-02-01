@@ -1,7 +1,8 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.living;
 
 import com.google.common.collect.Lists;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkModule;
 import net.bottomtextdanny.braincell.mod.world.builtin_entities.ModuledMob;
 import net.bottomtextdanny.danny_expannny.object_tables.DEEntities;
@@ -33,7 +34,7 @@ import net.minecraftforge.common.ForgeMod;
 import java.util.ArrayList;
 
 public class DecayBroaderEntity extends ModuledMob {
-    public Animation throwProjectile = addAnimation(new Animation(40));
+    public static final SimpleAnimation THROW_PROJECTILE = new SimpleAnimation(40);
 	public ArrayList<FoamieEntity> foamieLoaded = Lists.newArrayListWithCapacity(5);
 
     public DecayBroaderEntity(EntityType<? extends PathfinderMob> type, Level worldIn) {
@@ -56,6 +57,11 @@ public class DecayBroaderEntity extends ModuledMob {
     protected void commonInit() {
         super.commonInit();
         this.loopedWalkModule = new LoopedWalkModule(this);
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return THROW_PROJECTILE;
     }
 
     protected void registerExtraGoals() {
@@ -88,15 +94,15 @@ public class DecayBroaderEntity extends ModuledMob {
         super.tick();
 
         if (!this.level.isClientSide() && shouldUpdateFoamies() && this.tickCount % 700 == 0) {
-            this.mainAnimationHandler.play(this.throwProjectile);
+            this.mainHandler.play(THROW_PROJECTILE);
         }
 
-        if (this.mainAnimationHandler.isPlaying(this.throwProjectile)) {
+        if (this.mainHandler.isPlaying(THROW_PROJECTILE)) {
             this.sleepPathSchedule.sleepForNow();
 
-            if (this.mainAnimationHandler.getTick() == 6) {
+            if (this.mainHandler.getTick() == 6) {
 	            playSound(DESounds.ES_DECAY_BROADER_EXPULSE.get(), 1.0F, 1.0F);
-            } else if (this.mainAnimationHandler.getTick() == 7) {
+            } else if (this.mainHandler.getTick() == 7) {
                 FoamshroomProjectileEntity projectile = DEEntities.FOAMSHROOM_PROJECTILE.get().create(this.level);
                 int projectileYaw = this.random.nextInt(360);
 	            int projectilePitch = -70 - this.random.nextInt(10);

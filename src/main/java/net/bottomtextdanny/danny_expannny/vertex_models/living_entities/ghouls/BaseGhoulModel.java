@@ -59,12 +59,12 @@ public abstract class BaseGhoulModel extends BCEntityModel<GhoulEntity> {
     @Override
     public void handleKeyframedAnimations(GhoulEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
         super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
-        EntityModelAnimator animator = new EntityModelAnimator(this, (float) entity.mainAnimationHandler.getTick() + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, (float) entity.mainHandler.getTick() + getPartialTick());
 	    
-	    if (!entity.livingModule.inactive()) {
+	    if (!entity.livingModule.isPlayingNull()) {
 		    EntityModelAnimator livingAnimator = new EntityModelAnimator(this, (float) entity.livingModule.getTick() + getPartialTick());
 		
-		    if (entity.respirationAnimation.isWoke()) {
+		    if (entity.livingModule.isPlaying(GhoulEntity.BREATH)) {
 			
 			    livingAnimator.setupKeyframe(7.0F);
 			    livingAnimator.rotate(this.head, -30.0F, 0.0F, 0.0F);
@@ -79,7 +79,7 @@ public abstract class BaseGhoulModel extends BCEntityModel<GhoulEntity> {
 			    livingAnimator.apply(Easing.EASE_OUT_SQUARE);
 			
 			    livingAnimator.emptyKeyframe(5.0F, Easing.LINEAR);
-		    } else if (entity.livingAnimation.isWoke()) {
+		    } else if (entity.livingModule.isPlaying(GhoulEntity.WTF)) {
 			    livingAnimator.setupKeyframe(5.0F);
 			    livingAnimator.rotate(this.head, 0.0F, -70.0F, 0.0F);
 			    livingAnimator.apply(Easing.EASE_OUT_SQUARE);
@@ -100,7 +100,7 @@ public abstract class BaseGhoulModel extends BCEntityModel<GhoulEntity> {
 		    }
 	    }
 	    
-        if (entity.mainAnimationHandler.isPlaying(entity.vomit)) {
+        if (entity.mainHandler.isPlaying(GhoulEntity.VOMIT)) {
 
             animator.setupKeyframe(10.0F);
             animator.move(this.body, 0.0F, 0.3F, -1.0F);
@@ -127,7 +127,7 @@ public abstract class BaseGhoulModel extends BCEntityModel<GhoulEntity> {
             animator.emptyKeyframe(10.0F, Easing.EASE_OUT_SQUARE);
         }
 
-        if (entity.mainAnimationHandler.isPlaying(entity.grab)) {
+        if (entity.mainHandler.isPlaying(GhoulEntity.GRAB)) {
 
             animator.setupKeyframe(10.0F);
             animator.rotate(this.body, 0.0F, 25.0F, 0.0F);

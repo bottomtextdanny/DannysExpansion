@@ -1,6 +1,7 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.living;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.world.builtin_entities.ModuledMob;
 import net.bottomtextdanny.danny_expannny.object_tables.DEEntities;
 import net.bottomtextdanny.danny_expannny.object_tables.DEParticles;
@@ -25,7 +26,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.Random;
 
 public class SporerEntity extends ModuledMob implements ISummoner {
-    public final Animation boing = addAnimation(new Animation(30));
+    public static final SimpleAnimation BOING = new SimpleAnimation(30);
     public Timer sporeTimer;
 
     public SporerEntity(EntityType<? extends SporerEntity> type, Level worldIn) {
@@ -33,14 +34,19 @@ public class SporerEntity extends ModuledMob implements ISummoner {
         this.sporeTimer = new Timer(150, baseBound -> baseBound + Mth.floor(this.random.nextGaussian() * 0.2 * baseBound));
     }
 
-    protected void registerExtraGoals() {
-        this.goalSelector.addGoal(1, new SporerEntity.BoingGoal());
-    }
-
     public static AttributeSupplier.Builder Attributes() {
         return createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 60.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.9D);
+    }
+
+    protected void registerExtraGoals() {
+        this.goalSelector.addGoal(1, new SporerEntity.BoingGoal());
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return BOING;
     }
 
     @Override
@@ -52,10 +58,10 @@ public class SporerEntity extends ModuledMob implements ISummoner {
     public void tick() {
         super.tick();
         this.sporeTimer.tryUp();
-        if (this.mainAnimationHandler.isPlaying(this.boing)) {
-            if (this.mainAnimationHandler.getTick() >= 6) {
+        if (this.mainHandler.isPlaying(BOING)) {
+            if (this.mainHandler.getTick() >= 6) {
                 EntityUtil.particleAt(this.level, ParticleTypes.MYCELIUM, 1, this.getX(), this.getY() - 1.0D, this.getZ(),0.0D, 0.0D, 0.0D, 0.0F);
-                if (this.mainAnimationHandler.getTick() == 6) {
+                if (this.mainHandler.getTick() == 6) {
                     this.playSound(DESounds.ES_SPORER_SQUISH.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.2F);
                 }
             }
@@ -83,23 +89,23 @@ public class SporerEntity extends ModuledMob implements ISummoner {
         @Override
         public void start() {
             super.start();
-            SporerEntity.this.mainAnimationHandler.play(SporerEntity.this.boing);
+            SporerEntity.this.mainHandler.play(BOING);
         }
 
         @Override
         public void tick() {
             super.tick();
-            if (SporerEntity.this.mainAnimationHandler.getTick() >= 0 && SporerEntity.this.mainAnimationHandler.getTick() < 6) {
-                float prog = (float) SporerEntity.this.mainAnimationHandler.getTick() / 6;
+            if (SporerEntity.this.mainHandler.getTick() >= 0 && SporerEntity.this.mainHandler.getTick() < 6) {
+                float prog = (float) SporerEntity.this.mainHandler.getTick() / 6;
                 setDeltaMovement(0, -0.1 * prog, 0);
             }
-            if (SporerEntity.this.mainAnimationHandler.getTick() >= 6 && SporerEntity.this.mainAnimationHandler.getTick() < 10) {
-                float prog = (float)(SporerEntity.this.mainAnimationHandler.getTick() - 6) / 4;
+            if (SporerEntity.this.mainHandler.getTick() >= 6 && SporerEntity.this.mainHandler.getTick() < 10) {
+                float prog = (float)(SporerEntity.this.mainHandler.getTick() - 6) / 4;
                 float invProg = (float) (1.0 - prog);
                 Random rand = new Random();
                 setDeltaMovement(0, 0.7 * invProg, 0);
 
-                if (SporerEntity.this.mainAnimationHandler.getTick() == 6) {
+                if (SporerEntity.this.mainHandler.getTick() == 6) {
                     SporeEntity sporeEntity = new SporeEntity(DEEntities.SPORE.get(), SporerEntity.this.level);
                     sporeEntity.setOwner(SporerEntity.this);
                     sporeEntity.setPos(getX(), getY() + 0.5, getZ());
@@ -111,12 +117,12 @@ public class SporerEntity extends ModuledMob implements ISummoner {
 
         @Override
         public boolean canContinueToUse() {
-            return SporerEntity.this.mainAnimationHandler.isPlaying(SporerEntity.this.boing);
+            return SporerEntity.this.mainHandler.isPlaying(BOING);
         }
 
         @Override
         public boolean canUse() {
-            return SporerEntity.this.mainAnimationHandler.isPlayingNull() && (airBelow(SporerEntity.this.level, new BlockPos(getX(), getY(), getZ())) < 5 || SporerEntity.this.verticalCollision);
+            return SporerEntity.this.mainHandler.isPlayingNull() && (airBelow(SporerEntity.this.level, new BlockPos(getX(), getY(), getZ())) < 5 || SporerEntity.this.verticalCollision);
         }
 
         protected int airBelow(BlockGetter worldIn, BlockPos pos) {

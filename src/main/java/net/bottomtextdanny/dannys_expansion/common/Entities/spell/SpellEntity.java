@@ -2,6 +2,7 @@ package net.bottomtextdanny.dannys_expansion.common.Entities.spell;
 
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimatableModule;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimatableProvider;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManagerProvider;
@@ -12,7 +13,7 @@ import net.bottomtextdanny.braincell.mod.serialization.WorldPacketData;
 import net.bottomtextdanny.braincell.mod.serialization.serializers.builtin.BuiltinSerializers;
 import net.bottomtextdanny.dannys_expansion.core.Util.ExternalMotion;
 import net.bottomtextdanny.braincell.underlying.misc.ObjectFetcher;
-import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.ClientManager;
+import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.EntityClientMessenger;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.damagesource.DamageSource;
@@ -30,7 +31,7 @@ import net.minecraftforge.network.NetworkHooks;
 import javax.annotation.Nullable;
 
 @Deprecated
-public abstract class SpellEntity extends Entity implements AnimatableProvider, ClientManager, BCDataManagerProvider {
+public abstract class SpellEntity extends Entity implements AnimatableProvider, EntityClientMessenger, BCDataManagerProvider {
     public static final int CLIENT_BASE_FLAG_START = 256;
     public static final int TICK_INFO_SYNC_CALL = CLIENT_BASE_FLAG_START;
     public static final EntityDataReference<Entity> CASTER_REF =
@@ -61,9 +62,13 @@ public abstract class SpellEntity extends Entity implements AnimatableProvider, 
         this.deDataManager = new BCDataManager(this);
         this.caster = bcDataManager().addSyncedData(EntityData.of(CASTER_REF));
         this.actualTick = bcDataManager().addSyncedData(EntityData.of(ACTUAL_TICK_REF));
-        this.animatableModule = new AnimatableModule(this);
+        this.animatableModule = new AnimatableModule(this, getAnimations());
         this.mainHandler = addAnimationHandler(new AnimationHandler<>(this));
         this.externalMotion = new ExternalMotion(0.0F);
+    }
+
+    protected AnimationGetter getAnimations() {
+        return null;
     }
 
     @Override

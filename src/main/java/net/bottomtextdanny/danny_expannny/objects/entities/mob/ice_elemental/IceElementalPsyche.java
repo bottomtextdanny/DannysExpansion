@@ -1,7 +1,7 @@
 package net.bottomtextdanny.danny_expannny.objects.entities.mob.ice_elemental;
 
 import net.bottomtextdanny.braincell.mod.base.misc.timer.IntScheduler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.psyche.Psyche;
 import net.bottomtextdanny.braincell.mod.entity.psyche.actions.*;
 import net.bottomtextdanny.braincell.mod.entity.psyche.actions.target.LookForAristocratAction;
@@ -37,8 +37,9 @@ public class IceElementalPsyche extends Psyche<IceElemental> {
     private IceSpikeAttackAction iceSpikeAttackAction;
     public IceElementalPsyche(IceElemental mob) {
         super(mob);
-        initializeActionMap(COMBAT_MODULE, AVOID_MODULE, IDLE_MODULE, ATTACK_MODULE);
+        allocateModules(4);
     }
+
 
     @Override
     protected void populateInputs(UnbuiltActionInputs inputs) {
@@ -88,11 +89,11 @@ public class IceElementalPsyche extends Psyche<IceElemental> {
         tryAddRunningAction(CHECKS_MODULE, new FloatAction(getMob(), 0.0F));
     }
 
-    public static class IceSpikeAttackAction extends AnimationAction<IceElemental, Animation> {
+    public static class IceSpikeAttackAction extends AnimationAction<IceElemental, SimpleAnimation> {
         private boolean stop;
 
         public IceSpikeAttackAction(IceElemental mob) {
-            super(mob, mob.getIceSpikeAnimation(), mob.mainAnimationHandler);
+            super(mob, IceElemental.ICE_SPIKE_ANIMATION, mob.mainHandler);
         }
 
         @Override

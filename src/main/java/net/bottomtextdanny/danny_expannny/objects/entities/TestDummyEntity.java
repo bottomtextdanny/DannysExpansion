@@ -4,7 +4,7 @@ import com.google.common.collect.Maps;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimatableModule;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimatableProvider;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.serialization.WorldPacketData;
 import net.bottomtextdanny.braincell.mod.serialization.serializers.builtin.BuiltinSerializers;
 import net.bottomtextdanny.danny_expannny.object_tables.items.DEBuildingItems;
@@ -12,7 +12,7 @@ import net.bottomtextdanny.danny_expannny.object_tables.DESounds;
 import net.bottomtextdanny.dannys_expansion.core.Util.DEMath;
 import net.bottomtextdanny.dannys_expansion.core.Util.Timer;
 import net.bottomtextdanny.braincell.underlying.misc.ObjectFetcher;
-import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.ClientManager;
+import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.EntityClientMessenger;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -37,11 +37,11 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class TestDummyEntity extends LivingEntity implements AnimatableProvider, ClientManager {
+public class TestDummyEntity extends LivingEntity implements AnimatableProvider, EntityClientMessenger {
     public static final int DAMAGE_UPDATE_CALL = 0, ANIMATION_CALL = 1;
     public final AnimatableModule animatableModule;
 	public final AnimationHandler<TestDummyEntity> mainAnimationModule;
-	public final Animation hurtAnimation;
+    public static final SimpleAnimation HURT = new SimpleAnimation(10);
     private final Map<AtomicInteger, Float> damageMap = Maps.newHashMap();
     private final Timer clearDamageMapTimer = new Timer(60);
     private float displayDamage;
@@ -49,9 +49,8 @@ public class TestDummyEntity extends LivingEntity implements AnimatableProvider,
 
     public TestDummyEntity(EntityType<? extends LivingEntity> type, Level worldIn) {
         super(type, worldIn);
-        this.animatableModule = new AnimatableModule(this);
+        this.animatableModule = new AnimatableModule(this, HURT);
         this.mainAnimationModule = addAnimationHandler(new AnimationHandler<>(this));
-        this.hurtAnimation = addAnimation(new Animation(10));
     }
 
     public static AttributeSupplier.Builder Attributes() {
@@ -171,7 +170,7 @@ public class TestDummyEntity extends LivingEntity implements AnimatableProvider,
             updateDisplayDamage();
         } else if (flag == ANIMATION_CALL) {
             this.hitYaw = fetcher.get(0, Float.class);
-            this.mainAnimationModule.play(this.hurtAnimation);
+            this.mainAnimationModule.play(HURT);
         }
     }
 

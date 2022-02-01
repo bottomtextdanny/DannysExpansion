@@ -12,7 +12,7 @@ import net.bottomtextdanny.danny_expannny.object_tables.DEBlocks;
 import net.bottomtextdanny.danny_expannny.object_tables.items.DEBuildingItems;
 import net.bottomtextdanny.braincell.underlying.misc.ObjectFetcher;
 import net.bottomtextdanny.braincell.mod.world.builtin_items.BCBoatItem;
-import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.ClientManager;
+import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.EntityClientMessenger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.network.protocol.Packet;
@@ -37,7 +37,7 @@ import net.minecraftforge.network.PacketDistributor;
 
 import java.util.function.Supplier;
 
-public class BCBoat extends Boat implements BCDataManagerProvider, ClientManager {
+public class BCBoat extends Boat implements BCDataManagerProvider, EntityClientMessenger {
 	public static final int UPDATE_TEXTURE_CALL = 0;
 	public static final EntityDataReference<Item> DATA_REF = BCDataManager.attribute(BCBoat.class,
 			RawEntityDataReference.of(

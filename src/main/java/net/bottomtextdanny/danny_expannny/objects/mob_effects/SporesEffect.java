@@ -1,7 +1,7 @@
 package net.bottomtextdanny.danny_expannny.objects.mob_effects;
 
 import net.bottomtextdanny.dannys_expansion.common.Entities.living.SporerEntity;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.SporeSlimeEntity;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.SporeSlime;
 import net.bottomtextdanny.dannys_expansion.core.data.DEDamageSources;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -21,7 +21,7 @@ public class SporesEffect extends MobEffect {
 
         if (this.hurtDelay > 0) {
             --this.hurtDelay;
-        } else if (!(entityLivingBaseIn instanceof SporerEntity) && !(entityLivingBaseIn instanceof SporeSlimeEntity)) {
+        } else if (!(entityLivingBaseIn instanceof SporerEntity) && !(entityLivingBaseIn instanceof SporeSlime)) {
             entityLivingBaseIn.hurt(DEDamageSources.SPORES, 0.7F * (amplifier + 1));
             entityLivingBaseIn.invulnerableTime = 1;
             this.hurtDelay = 30;

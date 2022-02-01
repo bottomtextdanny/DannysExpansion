@@ -6,13 +6,14 @@ import net.bottomtextdanny.braincell.mod.world.entity_utilities.PsycheEntity;
 import net.minecraft.world.entity.PathfinderMob;
 
 import javax.annotation.Nullable;
-import java.util.LinkedList;
+import java.util.*;
 
 public abstract class Action<E extends PathfinderMob> {
-    private final LinkedList<Integer> modules = Lists.newLinkedList();
-    private int principalModule;
+    protected static final SplittableRandom UNSAFE_RANDOM = new SplittableRandom();
+    protected static final Random RANDOM = new Random();
+    private final List<Integer> modules;
     @Nullable
-    private LinkedList<Integer> blockOtherModules;
+    private List<Integer> blockOtherModules;
     protected E mob;
     private final Psyche<E> psyche;
     protected int ticksPassed;
@@ -24,10 +25,10 @@ public abstract class Action<E extends PathfinderMob> {
         super();
         this.mob = mob;
         this.psyche = (Psyche<E>) ((PsycheEntity)mob).getPsyche();
+        this.modules = Lists.newArrayList();
     }
 
     public boolean active() {
-
         if (this.lastUpdatedActiveState != this.mob.tickCount) {
             this.lastUpdatedActiveState = this.mob.tickCount;
             this.active = activeParameters();
@@ -44,7 +45,6 @@ public abstract class Action<E extends PathfinderMob> {
     }
 
     public boolean tryStart(int module) {
-        this.principalModule = module;
         if (canStart()) {
             this.running = true;
             start();
@@ -55,7 +55,7 @@ public abstract class Action<E extends PathfinderMob> {
 
     protected void start() {}
 
-    public void coreUpdate() {
+    public final void coreUpdate() {
         if (active()) {
             this.ticksPassed++;
             if (this.blockOtherModules != null) this.blockOtherModules.forEach(module -> this.psyche.blockModule(module));
@@ -74,8 +74,8 @@ public abstract class Action<E extends PathfinderMob> {
     }
 
     public void onEnd() {
+        this.ticksPassed = 0;
         this.running = false;
-        this.principalModule = -1;
     }
 
     public boolean cancelNext() {return false;}
@@ -86,7 +86,7 @@ public abstract class Action<E extends PathfinderMob> {
 
     public void addBlockedModule(int module) {
         if (this.blockOtherModules == null) {
-            this.blockOtherModules = Lists.newLinkedList();
+            this.blockOtherModules = Lists.newArrayList();
         }
         this.blockOtherModules.add(module);
     }

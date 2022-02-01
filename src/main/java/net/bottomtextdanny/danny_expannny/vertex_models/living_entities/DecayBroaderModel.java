@@ -116,9 +116,9 @@ public class DecayBroaderModel extends BCEntityModel<DecayBroaderEntity> {
 
     @Override
     public void handleKeyframedAnimations(DecayBroaderEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
-        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 
-        if (entity.mainAnimationHandler.isPlaying(entity.throwProjectile)) {
+        if (entity.mainHandler.isPlaying(DecayBroaderEntity.THROW_PROJECTILE)) {
 
             animator.setupKeyframe(7F);
             animator.move(this.body, 0F, 2.0F, 0F);

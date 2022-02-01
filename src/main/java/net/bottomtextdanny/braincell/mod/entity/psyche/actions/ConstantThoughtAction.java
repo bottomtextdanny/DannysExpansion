@@ -27,9 +27,4 @@ public class ConstantThoughtAction<E extends PathfinderMob> extends Action<E> {
     public final boolean shouldKeepGoing() {
         return active();
     }
-
-    @Override
-    public final void onEnd() {
-        super.onEnd();
-    }
 }

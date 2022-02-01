@@ -2,8 +2,9 @@ package net.bottomtextdanny.danny_expannny.objects.entities.mob.ender_beast;
 
 import net.bottomtextdanny.braincell.mod.base.util.Connection;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.IAnimation;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkModule;
 import net.bottomtextdanny.braincell.mod.world.builtin_entities.ModuledMob;
 import net.bottomtextdanny.braincell.mod.world.builtin_sound_instances.EntityMovingSound;
@@ -40,13 +41,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class EnderBeastEntity extends ModuledMob implements Enemy {
+public abstract class EnderBeastEntity extends ModuledMob implements Enemy {
 	public static final int PLAY_STEP_SOUND_CALL = 0;
+	public static final SimpleAnimation SLIGHT_TALK = new SimpleAnimation(5);
+	public static final SimpleAnimation SMALL_TALK = new SimpleAnimation(10);
+	public static final SimpleAnimation TALK = new SimpleAnimation(15);
+	public static final SimpleAnimation SCREAM = new SimpleAnimation(20);
+	public static final AnimationManager BASE_ANIMATIONS = new AnimationManager(SLIGHT_TALK, SMALL_TALK, TALK, SCREAM);
 	public final AnimationHandler<EnderBeastEntity> jawModule = addAnimationHandler(new JawAnimationModule());
-	public final Animation jawAnimation15 = addAnimation(new Animation(15));
-	public final Animation jawAnimation20 = addAnimation(new Animation(20));
-	public final Animation jawAnimation10 = addAnimation(new Animation(10));
-	public final Animation jawAnimation5 = addAnimation(new Animation(5));
 	protected NBLookController mgLookController = new NBLookController(this);
     public final Timer hurtColorTimer;
     private int hurtUpdateChecker;
@@ -246,9 +248,9 @@ public class EnderBeastEntity extends ModuledMob implements Enemy {
 		    }
 		    
 		    if (soundevent == DESounds.ES_ENDER_BEAST_LARGE_GRUNT.get()) {
-                this.jawModule.play(this.jawAnimation15);
+                this.jawModule.play(TALK);
 		    } else {
-                this.jawModule.play(this.jawAnimation10);
+                this.jawModule.play(SMALL_TALK);
 		    }
 		
 		    this.playSound(soundevent, 1.0F, 0.8F + this.random.nextInt(4) * 0.1F);
@@ -265,7 +267,7 @@ public class EnderBeastEntity extends ModuledMob implements Enemy {
 	@Nullable
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        this.jawModule.play(this.jawAnimation5);
+        this.jawModule.play(SLIGHT_TALK);
 		return DESounds.ES_ENDER_BEAST_HURT.get();
 	}
 	
@@ -513,8 +515,8 @@ public class EnderBeastEntity extends ModuledMob implements Enemy {
 		}
 		
 		@Override
-		public void play(IAnimation animation) {
-			if (animation.getDuration() >= this.get().getDuration()) {
+		public void play(Animation animation) {
+			if (animation.getDuration() >= this.getAnimation().getDuration()) {
 				super.play(animation);
 			}
 		}

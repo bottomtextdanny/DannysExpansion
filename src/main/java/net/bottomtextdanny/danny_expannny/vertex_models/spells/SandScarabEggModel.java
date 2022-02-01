@@ -38,7 +38,7 @@ public class SandScarabEggModel extends BCEntityModel<SandScarabEggEntity> {
 
         animator.emptyKeyframe(5, Easing.EASE_OUT_CUBIC);
 
-        if (entity.breakAnimation.isWoke()) {
+        if (entity.mainHandler.isPlaying(SandScarabEggEntity.BREAK)) {
             EntityModelAnimator ambientAnimator = new EntityModelAnimator(this, entity.mainHandler.linearProgress());
 
             ambientAnimator.setupKeyframe(5);

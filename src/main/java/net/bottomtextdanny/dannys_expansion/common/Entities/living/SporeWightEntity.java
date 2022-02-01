@@ -1,7 +1,9 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.living;
 
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkModule;
 import net.bottomtextdanny.braincell.mod.world.builtin_entities.ModuledMob;
 import net.bottomtextdanny.danny_expannny.object_tables.DESounds;
@@ -28,9 +30,10 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 
 public class SporeWightEntity extends ModuledMob {
+    public static final SimpleAnimation ATTACK = new SimpleAnimation(20);
+    public static final SimpleAnimation TICK = new SimpleAnimation(10);
+    public static final AnimationManager ANIMATIONS = new AnimationManager(ATTACK, TICK);
 	public final AnimationHandler<SporeWightEntity> livingModule = addAnimationHandler(new AnimationHandler<>(this));
-    public Animation attack;
-    public Animation tickAnimation;
 
     public SporeWightEntity(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
@@ -51,12 +54,15 @@ public class SporeWightEntity extends ModuledMob {
     protected void commonInit() {
         super.commonInit();
         this.loopedWalkModule = new LoopedWalkModule(this);
-        this.attack = addAnimation(new Animation(20));
-        this.tickAnimation = addAnimation(new Animation(10));
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return ANIMATIONS;
     }
 
     protected void registerExtraGoals() {
-        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, this.attack, o -> ifAttackMeleeParamsAnd(target -> reachTo(target) < 1.6F)));
+        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, ATTACK, o -> ifAttackMeleeParamsAnd(target -> reachTo(target) < 1.6F)));
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(2, new FollowTargetGoal(this, 1.2d));
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1d));
@@ -76,8 +82,8 @@ public class SporeWightEntity extends ModuledMob {
         super.tick();
         if (!this.level.isClientSide()) {
             if (hasAttackTarget()) {
-                if (this.mainAnimationHandler.isPlaying(this.attack)) {
-                    if (this.mainAnimationHandler.getTick() == 9 && reachTo(getTarget()) < 2F) {
+                if (this.mainHandler.isPlaying(ATTACK)) {
+                    if (this.mainHandler.getTick() == 9 && reachTo(getTarget()) < 2F) {
                         doHurtTarget(getTarget());
                     }
                 }
@@ -89,7 +95,7 @@ public class SporeWightEntity extends ModuledMob {
 	@Override
 	public void doLivingSound() {
 		super.doLivingSound();
-        this.livingModule.play(this.tickAnimation);
+        this.livingModule.play(TICK);
 	}
 
     @Override

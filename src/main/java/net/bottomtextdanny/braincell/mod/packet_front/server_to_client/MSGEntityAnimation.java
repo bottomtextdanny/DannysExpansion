@@ -37,7 +37,7 @@ public final class MSGEntityAnimation extends BCEntityPacket<MSGEntityAnimation,
 		Connection.doClientSide(() -> {
 			Entity entity = getEntityAsReceptor(world);
 			if (entity instanceof BaseAnimatableProvider<?> provider && provider.operateAnimatableModule()) {
-				provider.animatableModule().animationHandlerList().get(this.handlerIndex).play(provider.animatableModule().animationList().get(this.animationIndex));
+				provider.animatableModule().animationHandlerList().get(this.handlerIndex).play(provider.animatableModule().animationManager().getAnimation(this.animationIndex));
 			}
 		});
 	}

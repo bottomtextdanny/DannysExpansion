@@ -1,5 +1,10 @@
 package net.bottomtextdanny.de_json_generator;
 
+import net.bottomtextdanny.braincell.underlying.misc.CompressedBooleanGroup;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 public class DeleteTrash {
 	private static int count;
 	public static final int CHUNK_X_SHIFT = 21;
@@ -14,39 +19,42 @@ public class DeleteTrash {
 //		Vec3 inter = DEMath.getVecLerp(0.5, start, end);
 //		double dist1 = (view.distanceToSqr(end) + view.distanceToSqr(start)) / 2.0F;
 //		double dist2 = view.distanceToSqr(inter);
-//
-//		print(24 >> 3);
-//		IntStream.range(0, 100_000_000).parallel().filter(p -> {
-//
-//					return p % 2 == 0;
-//				})
-//				.toArray();
-//		Thread.sleep(100L);
-//		IntStream.range(0, 100_000_000).filter(p -> {
-//
-//			return p % 2 == 0;
-//		}).toArray();
-//
-//
-//		long serial = 0L;
-//		long parallel = 0L;
-//
-//		for (int current = 0; current < 20; current++) {
-//			long t0 = System.nanoTime();
-//			int cock1 = IntStream.range(0, 100000000).map((cock) -> cock % 2 == 0 ? cock / 2 : cock * 2).sum();
-//			long t1 = System.nanoTime();
-//			int cock2 = IntStream.range(0, 100000000).parallel().map((cock) -> cock % 2 == 0 ? cock / 2 : cock * 2).sum();
-//			long t2 = System.nanoTime();
-//
-//			System.out.printf("serial: %.2fs, parallel %.2fs%n", (t1 - t0) * 1e-9, (t2 - t1) * 1e-9);
-//
-//			if (current > 10) {
-//				serial += (t1 - t0);
-//				parallel += (t2 - t1);
-//			}
-//		}
-//		System.out.printf("total>>serial: %.2fs, parallel %.2fs", serial * 1e-9, parallel * 1e-9);
-//		System.out.println();
+		CompressedBooleanGroup byteBooleanGroup = CompressedBooleanGroup.create(40000);
+
+		Object obj = new Object();
+		ArrayList<Object> array = new ArrayList<>();
+		LinkedList<Object> linked = new LinkedList<>();
+		long arraylist = 0L;
+		long linkedlist = 0L;
+
+		for (int current = 0; current < 20; current++) {
+			long t0 = System.nanoTime();
+
+			for (int i = 0; i < 40000; i++) {
+				array.add(obj);
+				array.add(obj);
+				array.remove(0);
+			}
+
+			long t1 = System.nanoTime();
+
+			for (int i = 0; i < 5000; i++) {
+				linked.add(obj);
+				linked.add(obj);
+				linked.remove(0);
+			}
+
+			long t2 = System.nanoTime();
+
+			System.out.printf("serial: %.2fs, parallel %.2fs%n", (t1 - t0) * 1e-9, (t2 - t1) * 1e-9);
+
+			if (current > 10) {
+				arraylist += (t1 - t0);
+				linkedlist += (t2 - t1);
+			}
+		}
+		System.out.printf("total>>serial: %.2fs, parallel %.2fs", arraylist * 1e-9, linkedlist * 1e-9);
+		System.out.println();
 
 		//print(computeChunkSectionSerial(1300000L, 1300000L, 12));
 	}

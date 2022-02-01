@@ -1,7 +1,9 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.living;
 
 import net.bottomtextdanny.braincell.mod.base.misc.timer.IntScheduler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkModule;
 import net.bottomtextdanny.danny_expannny.object_tables.DEParticles;
 import net.bottomtextdanny.danny_expannny.object_tables.DESounds;
@@ -27,10 +29,12 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
+import java.util.List;
 
 public class AridAbominationEntity extends BasicSummonEntity {
-    public Animation clap;
-    public final Animation hurtAnimation = addAnimation(new Animation(10));
+    public static final SimpleAnimation CLAP = new SimpleAnimation(18);
+    public static final SimpleAnimation HURT = new SimpleAnimation(10);
+    public static final AnimationManager ANIMATIONS = new AnimationManager(CLAP, HURT);
     public Vec3 rightHandPosition = Vec3.ZERO;
 
     public AridAbominationEntity(EntityType<? extends PathfinderMob> type, Level worldIn) {
@@ -51,12 +55,16 @@ public class AridAbominationEntity extends BasicSummonEntity {
     @Override
     protected void commonInit() {
         this.loopedWalkModule = new LoopedWalkModule(this);
-        this.clap = addAnimation(new Animation(18));
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return ANIMATIONS;
     }
 
     protected void registerExtraGoals() {
 
-        this.goalSelector.addGoal(1, new PlayShuffledAnimationsGoal(this, Arrays.asList(this.clap), o -> ifAttackMeleeParamsAnd(target -> reachTo(target) < 1.2F)));
+        this.goalSelector.addGoal(1, new PlayShuffledAnimationsGoal(this, List.of(CLAP), o -> ifAttackMeleeParamsAnd(target -> reachTo(target) < 1.2F)));
 
         this.goalSelector.addGoal(2, new FollowTargetGoal(this, 1.2d, 0));
         this.goalSelector.addGoal(3, new RandomStrollGoal(this, 1d));
@@ -84,23 +92,23 @@ public class AridAbominationEntity extends BasicSummonEntity {
     @Override
     public void tick() {
         super.tick();
-        if (this.mainAnimationHandler.isPlaying(this.clap)) {
+        if (this.mainHandler.isPlaying(CLAP)) {
 
             if (!this.level.isClientSide()) {
                 this.sleepPathSchedule.sleepForNow();
 
-                if (this.mainAnimationHandler.getTick() == 10) {
+                if (this.mainHandler.getTick() == 10) {
                     playSound(DESounds.ES_ARID_ABOMINATION_CLAP.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.1F);
 
 
-                } else if (this.mainAnimationHandler.getTick() == 11) {
+                } else if (this.mainHandler.getTick() == 11) {
                     if (hasAttackTarget() && reachTo(getTarget()) < 1.6F) {
                         doHurtTarget(getTarget());
                     }
                 }
 
             } else {
-                if (this.mainAnimationHandler.getTick() == 11) {
+                if (this.mainHandler.getTick() == 11) {
                     for (int i = 0; i < 6; i++) {
                         float speed = 0.5F + this.random.nextFloat() * 0.2F;
                         Vec3 vec0 = DEMath.fromPitchYaw((float) this.random.nextGaussian() * 45F, this.random.nextFloat() * 360).scale(speed);
@@ -119,7 +127,7 @@ public class AridAbominationEntity extends BasicSummonEntity {
     @Override
     public void animateHurt() {
         super.animateHurt();
-        this.mainAnimationHandler.play(this.hurtAnimation);
+        this.mainHandler.play(HURT);
     }
 
     @Nullable

@@ -41,7 +41,7 @@ public class FoamshroomProjectileModel extends BCEntityModel<FoamshroomProjectil
 
     @Override
     public void handleKeyframedAnimations(FoamshroomProjectileEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
-    	if (entity.mainHandler.isPlaying(entity.explode)) {
+    	if (entity.mainHandler.isPlaying(FoamshroomProjectileEntity.EXPLODE)) {
 		    EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.linearProgress());
 		    
 		    animator.setupKeyframe(11.0F);

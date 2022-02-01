@@ -1,7 +1,9 @@
 package net.bottomtextdanny.danny_expannny.objects.entities.mob.ghouls;
 
 import net.bottomtextdanny.braincell.mod.base.misc.timer.IntScheduler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
 import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkModule;
 import net.bottomtextdanny.braincell.mod.entity.psyche.Psyche;
@@ -49,11 +51,11 @@ public class PetrifiedGhoul extends SmartyMob implements Enemy {
                             () -> IntScheduler.ranged(ATTACK_DELAY_MIN, ATTACK_DELAY_MAX),
                             "attack_delay")
             );
-    private Animation sideAttackAnimation;
-    private Animation strongAttackAnimation;
+    public static final SimpleAnimation SIDE_ATTACK = new SimpleAnimation(23);
+    public static final SimpleAnimation STRONG_ATTACK = new SimpleAnimation(32);
+    public static final AnimationManager ANIMATIONS = new AnimationManager(SIDE_ATTACK, STRONG_ATTACK);
     public final EntityData<IntScheduler.Variable> attacksTillStrongAttack;
     public final EntityData<IntScheduler.Variable> attackDelay;
-
 
     public PetrifiedGhoul(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
@@ -77,8 +79,11 @@ public class PetrifiedGhoul extends SmartyMob implements Enemy {
     protected void commonInit() {
         super.commonInit();
         this.loopedWalkModule = new LoopedWalkModule(this);
-        this.sideAttackAnimation = addAnimation(new Animation(23));
-        this.strongAttackAnimation = addAnimation(new Animation(32));
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return ANIMATIONS;
     }
 
     @Override
@@ -93,14 +98,6 @@ public class PetrifiedGhoul extends SmartyMob implements Enemy {
 
     public SoundEvent getAttackSound() {
         return DESounds.ES_PETRIFIED_GHOUL_ATTACK.get();
-    }
-
-    public Animation getSideAttackAnimation() {
-        return this.sideAttackAnimation;
-    }
-
-    public Animation getStrongAttackAnimation() {
-        return this.strongAttackAnimation;
     }
 
     @Override

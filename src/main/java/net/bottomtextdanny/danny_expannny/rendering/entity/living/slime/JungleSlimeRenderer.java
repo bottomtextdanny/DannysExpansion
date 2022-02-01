@@ -2,14 +2,14 @@ package net.bottomtextdanny.danny_expannny.rendering.entity.living.slime;
 
 import net.bottomtextdanny.danny_expannny.DannysExpansion;
 import net.bottomtextdanny.danny_expannny.vertex_models.living_entities.slimes.DannySlimeModel;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.JungleSlimeEntity;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.JungleSlime;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nullable;
 
-public class JungleSlimeRenderer extends AbstractSlimeRenderer<JungleSlimeEntity> {
+public class JungleSlimeRenderer extends AbstractSlimeRenderer<JungleSlime> {
     public static final ResourceLocation TEXTURES = new ResourceLocation(DannysExpansion.ID, "textures/entity/slime/jungle_slime.png");
 
     public JungleSlimeRenderer(Object manager) {
@@ -22,11 +22,11 @@ public class JungleSlimeRenderer extends AbstractSlimeRenderer<JungleSlimeEntity
 
     @Nullable
     @Override
-    protected RenderType getRenderType(JungleSlimeEntity entity, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
+    protected RenderType getRenderType(JungleSlime entity, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
         return RenderType.entityTranslucent(TEXTURES);
     }
 
-    public ResourceLocation getTextureLocation(JungleSlimeEntity entity) {
+    public ResourceLocation getTextureLocation(JungleSlime entity) {
         return TEXTURES;
     }
 

@@ -171,9 +171,9 @@ public class HangingKlifourModel extends BCEntityModel<KlifourEntity> {
     public void handleKeyframedAnimations(KlifourEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
         super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
 
-        EntityModelAnimator animator0 = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+        EntityModelAnimator animator0 = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 
-        if (entity.mainAnimationHandler.isPlaying(entity.spit)) {
+        if (entity.mainHandler.isPlaying(KlifourEntity.SPIT)) {
 
             animator0.setupKeyframe(4);
             animator0.rotate(this.body, -40.0F, 0.0F, 0.0F);
@@ -203,7 +203,7 @@ public class HangingKlifourModel extends BCEntityModel<KlifourEntity> {
 
             animator0.emptyKeyframe(3.0F, Easing.LINEAR);
 
-        } else if (entity.mainAnimationHandler.isPlaying(entity.nausea)) {
+        } else if (entity.mainHandler.isPlaying(KlifourEntity.NAUSEA)) {
 
             animator0.setupKeyframe(12.0F);
             animator0.rotate(this.head, 0.0F, 0.0F, 50.0F);
@@ -223,7 +223,7 @@ public class HangingKlifourModel extends BCEntityModel<KlifourEntity> {
 
             animator0.emptyKeyframe(6.0F, Easing.LINEAR);
 
-        } else if (entity.mainAnimationHandler.isPlaying(entity.scrub)) {
+        } else if (entity.mainHandler.isPlaying(KlifourEntity.SCRUB)) {
 
             animator0.setupKeyframe(4.0F);
             animator0.rotate(this.body, 0.0F, 60.0F, 0.0F);
@@ -251,7 +251,7 @@ public class HangingKlifourModel extends BCEntityModel<KlifourEntity> {
 
             animator0.emptyKeyframe(2.0F, Easing.LINEAR);
 
-        } else if (entity.mainAnimationHandler.isPlaying(entity.hide)) {
+        } else if (entity.mainHandler.isPlaying(KlifourEntity.HIDE)) {
 
             animator0.setupKeyframe(7.0F);
             animator0.rotate(this.fisrtStem, 55.0F, 0.0F, 0.0F);
@@ -307,7 +307,7 @@ public class HangingKlifourModel extends BCEntityModel<KlifourEntity> {
 
             animator0.emptyKeyframe(0, Easing.LINEAR);
 
-        } else if (entity.mainAnimationHandler.isPlaying(entity.showUp)) {
+        } else if (entity.mainHandler.isPlaying(KlifourEntity.SHOW_UP)) {
 
             animator0.setupKeyframe(3.0F);
             animator0.rotate(this.fisrtStem, 85.0F, 0.0F, 0.0F);
@@ -362,7 +362,7 @@ public class HangingKlifourModel extends BCEntityModel<KlifourEntity> {
             animator0.apply();
 
             animator0.emptyKeyframe(15.0F, Easing.LINEAR);
-        }else if (entity.mainAnimationHandler.isPlaying(entity.death)) {
+        }else if (entity.mainHandler.isPlaying(KlifourEntity.DEATH)) {
 
             animator0.setupKeyframe(20.0F);
             animator0.rotate(this.head, 60.0F, 0.0F, 0.0F);

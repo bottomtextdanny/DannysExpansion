@@ -2,7 +2,7 @@ package net.bottomtextdanny.dannys_expansion.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.bottomtextdanny.dannys_expansion.core.Util.mixin.IItemEntityExt;
-import net.bottomtextdanny.dannys_expansion.core.base.item.IExtraModelProvider;
+import net.bottomtextdanny.dannys_expansion.core.base.item.ExtraModelProvider;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
@@ -25,7 +25,7 @@ public class ItemEntityRendererMixin {
         label: {
             if (this.de_currentEntity instanceof IItemEntityExt) {
                 int customModelKey = ((IItemEntityExt) this.de_currentEntity).de_getShowingModel();
-                if (customModelKey != -1 && stack.getItem() instanceof IExtraModelProvider provider) {
+                if (customModelKey != -1 && stack.getItem() instanceof ExtraModelProvider provider) {
                     BakedModel customModel = provider.fetchModel(instance, customModelKey);
 
                     if (customModel != null) {

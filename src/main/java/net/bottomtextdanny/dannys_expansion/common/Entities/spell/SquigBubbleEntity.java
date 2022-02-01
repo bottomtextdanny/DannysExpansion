@@ -1,8 +1,10 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.spell;
 
 import net.bottomtextdanny.braincell.mod.base.util.Connection;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
 import net.bottomtextdanny.braincell.mod.entity.serialization.EntityData;
 import net.bottomtextdanny.braincell.mod.entity.serialization.EntityDataReference;
@@ -50,11 +52,12 @@ public class SquigBubbleEntity extends SpellEntity {
 							() -> 0,
 							"hit_counter")
 			);
+	public static final SimpleAnimation POP = new SimpleAnimation(22);
+	public static final SimpleAnimation HURT = new SimpleAnimation(12);
+	public static final AnimationManager ANIMATIONS = new AnimationManager(POP, HURT);
 	private final EntityData<Float> bubbleDamage;
 	private final EntityData<Integer> hitCounter;
 	public final AnimationHandler<SquigBubbleEntity> hurtModule = addAnimationHandler(new AnimationHandler<>(this));
-	public final Animation explodeAnimation = addAnimation(new Animation(22));
-	public final Animation hurtAnimation = addAnimation(new Animation(12));
 	public final ExternalMotion hurtMotion;
 	private final Timer hitCooldownTimer;
 	private LivingEntity target;
@@ -68,6 +71,11 @@ public class SquigBubbleEntity extends SpellEntity {
 		this.hitCooldownTimer = new Timer(10);
 
         this.hurtMotion = new ExternalMotion(0.95F);
+	}
+
+	@Override
+	protected AnimationGetter getAnimations() {
+		return ANIMATIONS;
 	}
 
 	@Override
@@ -89,7 +97,7 @@ public class SquigBubbleEntity extends SpellEntity {
 			}
 		}
 		
-		if (targetFlag && !this.mainHandler.isPlaying(this.explodeAnimation)) {
+		if (targetFlag && !this.mainHandler.isPlaying(POP)) {
 			float speedMult = 1.0F;
 			
 			if (getLifeTick() < 35) {
@@ -111,7 +119,7 @@ public class SquigBubbleEntity extends SpellEntity {
 		if (!this.level.isClientSide()) {
             this.hitCooldownTimer.tryUp();
 			
-			if (this.mainHandler.isPlaying(this.explodeAnimation)) {
+			if (this.mainHandler.isPlaying(POP)) {
 				if (this.mainHandler.getTick() == 6) {
 					if (this.hitEntity != null && this.hitEntity.isAddedToWorld() && this.hitEntity.isAlive() && getCaster() != null) {
 						if (castersDamage(this.hitEntity, this.bubbleDamage.get() * this.level.getDifficulty().ordinal())) {
@@ -122,7 +130,7 @@ public class SquigBubbleEntity extends SpellEntity {
 					setDeath();
 				}
 			} else if (!targetFlag || getLifeTick() > this.maxLife - 10 || this.hitCounter.get() >= 1) {
-                this.mainHandler.play(this.explodeAnimation);
+                this.mainHandler.play(POP);
 			}
 		}
 	}
@@ -178,7 +186,7 @@ public class SquigBubbleEntity extends SpellEntity {
 				Entity entityIn = source.getEntity();
 				if (entityIn.isAddedToWorld() && entityIn.isAlive() && entityIn != getCaster()) {
                     this.hitCounter.set(this.hitCounter.get() + 1);
-                    this.hurtModule.play(this.hurtAnimation);
+                    this.hurtModule.play(HURT);
 					playSound(DESounds.ES_SQUIG_BUBBLE_HIT.get(), 0.7F, 1.0F + 0.1F * (float) this.random.nextInt(3));
 					
 					Vec3 invLook = DEMath.fromPitchYaw(-getXRot(), getYRot() + 180.0F).scale(1.1);
@@ -217,8 +225,8 @@ public class SquigBubbleEntity extends SpellEntity {
                 this.hitEntity = (LivingEntity) p_213868_1_.getEntity();
 			}
 			
-			if (!this.mainHandler.isPlaying(this.explodeAnimation)) {
-                this.mainHandler.play(this.explodeAnimation);
+			if (!this.mainHandler.isPlaying(POP)) {
+                this.mainHandler.play(POP);
 			}
 		}
 	}

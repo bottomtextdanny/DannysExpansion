@@ -72,7 +72,7 @@ public class MSGSendPlayerAccessories extends BCEntityPacket<MSGSendPlayerAccess
     @Override
     public void postDeserialization(NetworkEvent.Context ctx, Level world) {
         if (this.accessoryKeys != null) {
-            PlayerAccessoryModule accessoryModule = CapabilityHelper.get(this.cachedPlayer, PlayerCapability.CAPABILITY).accessoryModule();
+            PlayerAccessoryModule accessoryModule = CapabilityHelper.get(this.cachedPlayer, PlayerCapability.TOKEN).accessoryModule();
 
             for (int i = 0; i < PlayerAccessoryModule.CORE_ACCESSORIES_SIZE; i++) {
                 IAccessory accessory = this.accessoryKeys.get(i).create(this.cachedPlayer);

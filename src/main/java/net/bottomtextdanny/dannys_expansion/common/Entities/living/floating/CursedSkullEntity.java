@@ -1,6 +1,7 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.living.floating;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.danny_expannny.object_tables.DEEntities;
 import net.bottomtextdanny.danny_expannny.object_tables.DEParticles;
 import net.bottomtextdanny.dannys_expansion.common.Entities.living.RangedAvoidingEntity;
@@ -26,7 +27,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 
 public class CursedSkullEntity extends RangedAvoidingEntity implements Enemy {
-    public Animation spitFire;
+    public static final SimpleAnimation SPIT_FIRE = new SimpleAnimation(28);
 
     public CursedSkullEntity(EntityType<? extends CursedSkullEntity> type, Level worldIn) {
         super(type, worldIn);
@@ -36,8 +37,8 @@ public class CursedSkullEntity extends RangedAvoidingEntity implements Enemy {
     }
 
     @Override
-    protected void commonInit() {
-        this.spitFire = addAnimation(new Animation(28));
+    public AnimationGetter getAnimations() {
+        return SPIT_FIRE;
     }
 
     protected void registerExtraGoals() {
@@ -89,7 +90,7 @@ public class CursedSkullEntity extends RangedAvoidingEntity implements Enemy {
 
         public void start() {
             super.start();
-            CursedSkullEntity.this.mainAnimationHandler.play(CursedSkullEntity.this.spitFire);
+            CursedSkullEntity.this.mainHandler.play(SPIT_FIRE);
             CursedSkullEntity.this.rangedTimer.reset();
         }
 
@@ -98,7 +99,7 @@ public class CursedSkullEntity extends RangedAvoidingEntity implements Enemy {
             super.tick();
 
             if (hasAttackTarget()) {
-                if (CursedSkullEntity.this.mainAnimationHandler.getTick() == 16) {
+                if (CursedSkullEntity.this.mainHandler.getTick() == 16) {
                     CursedFireEntity cursedFireEntity = DEEntities.CURSED_FIRE.get().create(CursedSkullEntity.this.level);
 
                     if (cursedFireEntity != null) {
@@ -121,12 +122,12 @@ public class CursedSkullEntity extends RangedAvoidingEntity implements Enemy {
 
         @Override
         public boolean canContinueToUse() {
-            return CursedSkullEntity.this.mainAnimationHandler.isPlaying(CursedSkullEntity.this.spitFire);
+            return CursedSkullEntity.this.mainHandler.isPlaying(SPIT_FIRE);
         }
 
         @Override
         public boolean canUse() {
-            return hasAttackTarget() && CursedSkullEntity.this.mainAnimationHandler.isPlayingNull() && CursedSkullEntity.this.rangedTimer.hasEnded() && hasLineOfSight(getTarget());
+            return hasAttackTarget() && CursedSkullEntity.this.mainHandler.isPlayingNull() && CursedSkullEntity.this.rangedTimer.hasEnded() && hasLineOfSight(getTarget());
         }
     }
 }

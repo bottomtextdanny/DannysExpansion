@@ -1,6 +1,8 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.living;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkModule;
 import net.bottomtextdanny.braincell.mod.world.builtin_entities.ModuledMob;
 import net.bottomtextdanny.danny_expannny.object_tables.DESounds;
@@ -26,9 +28,10 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 
 public class FrozenGhoulEntity extends ModuledMob {
-    public Animation melee0;
-    public Animation melee1;
-    public Animation melee2;
+    public static final SimpleAnimation MELEE0 = new SimpleAnimation(15);
+    public static final SimpleAnimation MELEE1 = new SimpleAnimation(20);
+    public static final SimpleAnimation MELEE2 = new SimpleAnimation(20);
+    public static final AnimationManager ANIMATIONS = new AnimationManager(MELEE0, MELEE1, MELEE2);
 
     public FrozenGhoulEntity(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
@@ -39,15 +42,17 @@ public class FrozenGhoulEntity extends ModuledMob {
     protected void commonInit() {
         super.commonInit();
         this.loopedWalkModule = new LoopedWalkModule(this);
-        this.melee0 = addAnimation(new Animation(15));
-        this.melee1 = addAnimation(new Animation(20));
-        this.melee2 = addAnimation(new Animation(20));
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return ANIMATIONS;
     }
 
     protected void registerExtraGoals() {
 
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new PlayShuffledAnimationsGoal(this, Arrays.asList(this.melee0, this.melee1, this.melee2), o -> ifAttackMeleeParamsAnd(target -> reachTo(target) < 1.0F)));
+        this.goalSelector.addGoal(1, new PlayShuffledAnimationsGoal(this, Arrays.asList(MELEE0, MELEE1, MELEE2), o -> ifAttackMeleeParamsAnd(target -> reachTo(target) < 1.0F)));
         this.goalSelector.addGoal(2, new FollowTargetGoal(this, 1.2d, 0));
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1d));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
@@ -76,50 +81,50 @@ public class FrozenGhoulEntity extends ModuledMob {
         super.tick();
 
         if (getTarget() != null) {
-            if (this.mainAnimationHandler.isPlaying(this.melee0)) {
+            if (this.mainHandler.isPlaying(MELEE0)) {
                 this.sleepPathSchedule.setSleep(1);
                 getLookControl().setLookAt(getTarget(), 30.0F, 30.0F);
                 this.navigation.stop();
                 setYRot(this.yHeadRot);
 
-                if (this.mainAnimationHandler.getTick() == 7) {
+                if (this.mainHandler.getTick() == 7) {
                     playSound(DESounds.ES_SWOOSH.get(), 0.8F, 0.9F + this.random.nextFloat() * 0.2F);
                     playSound(DESounds.ES_FROZEN_GHOUL_HEAVY_ATTACK.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.2F);
                 }
 
-                if (this.mainAnimationHandler.getTick() == 9) {
+                if (this.mainHandler.getTick() == 9) {
                     if (reachTo(getTarget()) <= 2.5F) {
                         doHurtTarget(getTarget());
                     }
                 }
-            } else if (this.mainAnimationHandler.isPlaying(this.melee1)) {
+            } else if (this.mainHandler.isPlaying(MELEE1)) {
                 this.sleepPathSchedule.setSleep(1);
                 getLookControl().setLookAt(getTarget(), 30.0F, 30.0F);
                 this.navigation.stop();
                 setYRot(this.yHeadRot);
 
-                if (this.mainAnimationHandler.getTick() == 9) {
+                if (this.mainHandler.getTick() == 9) {
                     playSound(DESounds.ES_SWOOSH.get(), 0.4F, 1.0F + this.random.nextFloat() * 0.2F);
                     playSound(DESounds.ES_FROZEN_GHOUL_LIGHT_ATTACK.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.2F);
                 }
 
-                if (this.mainAnimationHandler.getTick() == 10) {
+                if (this.mainHandler.getTick() == 10) {
                     if (reachTo(getTarget()) <= 3.5F) {
                         doHurtTarget(getTarget());
                     }
                 }
-            } else if (this.mainAnimationHandler.isPlaying(this.melee2)) {
+            } else if (this.mainHandler.isPlaying(MELEE2)) {
                 this.sleepPathSchedule.setSleep(1);
                 getLookControl().setLookAt(getTarget(), 30.0F, 30.0F);
                 this.navigation.stop();
                 setYRot(this.yHeadRot);
 
-                if (this.mainAnimationHandler.getTick() == 5) {
+                if (this.mainHandler.getTick() == 5) {
                     playSound(DESounds.ES_SWOOSH.get(), 1.2F, 0.8F + this.random.nextFloat() * 0.2F);
                     playSound(DESounds.ES_FROZEN_GHOUL_LIGHT_ATTACK.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.2F);
                 }
 
-                if (this.mainAnimationHandler.getTick() == 7) {
+                if (this.mainHandler.getTick() == 7) {
                     if (reachTo(getTarget()) <= 3.5F) {
                         doHurtTarget(getTarget());
                     }

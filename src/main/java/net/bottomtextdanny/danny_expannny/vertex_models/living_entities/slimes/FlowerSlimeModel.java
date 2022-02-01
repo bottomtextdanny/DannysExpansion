@@ -1,9 +1,9 @@
 package net.bottomtextdanny.danny_expannny.vertex_models.living_entities.slimes;
 
 import net.bottomtextdanny.braincell.mod.minecraft_front_rendering.vertex.BCVoxel;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.mundane_slime.MundaneSlimeEntity;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.mundane_slime.MundaneSlime;
 
-public class FlowerSlimeModel extends DannySlimeModel<MundaneSlimeEntity> {
+public class FlowerSlimeModel extends DannySlimeModel<MundaneSlime> {
 	private final BCVoxel flower1;
 	private final BCVoxel flower2;
 	

@@ -10,7 +10,7 @@ import net.bottomtextdanny.braincell.mod.serialization.WorldPacketData;
 import net.bottomtextdanny.braincell.mod.serialization.serializers.SerializerMark;
 import net.bottomtextdanny.braincell.mod.serialization.serializers.util.H_WorldDataParser;
 import net.bottomtextdanny.braincell.underlying.misc.ObjectFetcher;
-import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.ClientManager;
+import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.EntityClientMessenger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
@@ -96,7 +96,7 @@ public final class MSGEntityClientManager extends BCEntityPacket<MSGEntityClient
     public void postDeserialization(NetworkEvent.Context ctx, Level world) {
         super.postDeserialization(ctx, world);
         Connection.doClientSide(() -> {
-            if (getEntityAsReceptor(world) instanceof ClientManager entity) {
+            if (getEntityAsReceptor(world) instanceof EntityClientMessenger entity) {
                 entity.clientCallOutHandler(this.flag, ObjectFetcher.of(this.clientObjects));
             }
         });

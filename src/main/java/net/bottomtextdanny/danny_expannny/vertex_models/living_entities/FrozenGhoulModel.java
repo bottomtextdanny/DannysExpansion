@@ -124,9 +124,9 @@ public class FrozenGhoulModel extends BCEntityModel<FrozenGhoulEntity> {
     @Override
     public void handleKeyframedAnimations(FrozenGhoulEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
         super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
-        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 
-        if (entity.mainAnimationHandler.isPlaying(entity.melee0)) {
+        if (entity.mainHandler.isPlaying(FrozenGhoulEntity.MELEE0)) {
             animator.disableAtomic(this.walkMult, 4, 6.5F, 4);
 
             animator.setupKeyframe(6);
@@ -173,7 +173,7 @@ public class FrozenGhoulModel extends BCEntityModel<FrozenGhoulEntity> {
 
             animator.emptyKeyframe(5, Easing.LINEAR);
             
-        } else if (entity.mainAnimationHandler.isPlaying(entity.melee1)) {
+        } else if (entity.mainHandler.isPlaying(FrozenGhoulEntity.MELEE1)) {
 
             animator.setupKeyframe(6);
             animator.rotate(this.hip, -5.0F, 17.5F, 0.0F);
@@ -248,7 +248,7 @@ public class FrozenGhoulModel extends BCEntityModel<FrozenGhoulEntity> {
             animator.apply();
 
             animator.emptyKeyframe(3, Easing.LINEAR);
-        } else if (entity.mainAnimationHandler.isPlaying(entity.melee2)) {
+        } else if (entity.mainHandler.isPlaying(FrozenGhoulEntity.MELEE2)) {
 
             animator.setupKeyframe(7);
             animator.rotate(this.hip, -7.5F, 10.0F, 0.0F);

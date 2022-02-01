@@ -2,7 +2,8 @@ package net.bottomtextdanny.braincell.mod.entity.psyche;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+import it.unimi.dsi.fastutil.booleans.BooleanArrayList;
+import it.unimi.dsi.fastutil.booleans.BooleanList;
 import net.bottomtextdanny.braincell.mod.entity.psyche.actions.Action;
 import net.bottomtextdanny.braincell.mod.entity.psyche.data.ActionInputs;
 import net.bottomtextdanny.braincell.mod.entity.psyche.data.UnbuiltActionInputs;
@@ -14,9 +15,9 @@ import java.util.*;
 public abstract class Psyche<E extends PathfinderMob> {
     public static final int CHECKS_MODULE = 0;
     private final ActionInputs inputs;
-    private final Map<Integer, LinkedList<Action<?>>> runningActionsByModule = Maps.newHashMap();
+    private final List<List<Action<?>>> runningActionsByModule = Lists.newArrayList();
     private final LinkedList<DeferredAction> addActionsOnNextTick = Lists.newLinkedList();
-    private final HashSet<Integer> deactivatedModules = Sets.newHashSet();
+    private final BooleanList deactivatedModules = new BooleanArrayList();
     private final LinkedList<Integer> deactivateModulesOnNextTick = Lists.newLinkedList();
     private int currentModuleUpdating;
     private final E mob;
@@ -27,7 +28,8 @@ public abstract class Psyche<E extends PathfinderMob> {
         super();
         this.mob = mob;
         this.level = mob.level;
-        this.runningActionsByModule.put(CHECKS_MODULE, Lists.newLinkedList());
+        this.runningActionsByModule.add(Lists.newLinkedList());
+        this.deactivatedModules.add(false);
         UnbuiltActionInputs rawInputs = new UnbuiltActionInputs();
         populateInputs(rawInputs);
         this.inputs = new ActionInputs(rawInputs);
@@ -60,7 +62,9 @@ public abstract class Psyche<E extends PathfinderMob> {
     }
 
     public void update() {
-        this.deactivatedModules.clear();
+        for (int i = 0; i < this.deactivatedModules.size(); i++) {
+            this.deactivatedModules.set(i, false);
+        }
 
         Iterator<Integer> deactivateModuleIterator = this.deactivateModulesOnNextTick.iterator();
         while (deactivateModuleIterator.hasNext()) {
@@ -72,29 +76,24 @@ public abstract class Psyche<E extends PathfinderMob> {
         addDeferredActions();
 
         this.isUpdating = true;
-        for (Map.Entry<Integer, LinkedList<Action<?>>> entry : this.runningActionsByModule.entrySet()) {
-            int module;
-            LinkedList<Action<?>> actionList;
 
-            try {
-                module = entry.getKey();
-                this.currentModuleUpdating = module;
-                actionList = entry.getValue();
-            } catch (IllegalStateException ise) {
-                throw new ConcurrentModificationException("tickingAI", ise);
-            }
-
-            Iterator<Action<?>> actionIterator = actionList.iterator();
+        List<List<Action<?>>> actionsByModule = this.runningActionsByModule;
+        for (int i = 0, actionsByModuleSize = actionsByModule.size(); i < actionsByModuleSize; i++) {
+            List<Action<?>> actions = actionsByModule.get(i);
+            this.currentModuleUpdating = i;
+            Iterator<Action<?>> actionIterator = actions.iterator();
 
             while (actionIterator.hasNext()) {
                 Action<?> next = actionIterator.next();
-                next.coreUpdate();
                 boolean shouldEnd = !next.shouldKeepGoing();
                 boolean stopOnNext = next.cancelNext();
                 if (shouldEnd) {
                     next.onEnd();
                     actionIterator.remove();
+                } else {
+                    next.coreUpdate();
                 }
+
                 if (stopOnNext) break;
             }
         }
@@ -119,21 +118,22 @@ public abstract class Psyche<E extends PathfinderMob> {
         if (module <= this.currentModuleUpdating) {
             this.deactivateModulesOnNextTick.add(module);
         } else {
-            this.deactivatedModules.add(module);
+            this.deactivatedModules.set(module, true);
         }
     }
 
     private void forceBlockModuleNow(int module) {
-        this.deactivatedModules.add(module);
+        this.deactivatedModules.set(module, true);
     }
 
     public boolean isModuleDeactivated(int module) {
-        return this.deactivatedModules.contains(module);
+        return this.deactivatedModules.getBoolean(module);
     }
 
-    protected void initializeActionMap(int... modules) {
-        for (int module : modules) {
-            this.runningActionsByModule.put(module, Lists.newLinkedList());
+    protected void allocateModules(int modules) {
+        for (int i = 0; i < modules; i++) {
+            this.runningActionsByModule.add(Lists.newLinkedList());
+            this.deactivatedModules.add(false);
         }
     }
 

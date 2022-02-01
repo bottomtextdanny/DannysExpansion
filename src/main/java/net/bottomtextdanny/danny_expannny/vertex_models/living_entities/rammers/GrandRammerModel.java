@@ -10,7 +10,8 @@ import net.bottomtextdanny.dannys_expansion.core.Util.DEMath;
 import net.bottomtextdanny.dannys_expansion.core.Util.animation.Easing;
 import net.minecraft.util.Mth;
 
-public class GrandRammerModel extends BCEntityModel<GrandRammerEntity> {
+public class
+GrandRammerModel extends BCEntityModel<GrandRammerEntity> {
     private final BCVoxel body;
     private final BCVoxel torso;
     private final BCVoxel head;
@@ -135,9 +136,9 @@ public class GrandRammerModel extends BCEntityModel<GrandRammerEntity> {
 
     @Override
     public void handleKeyframedAnimations(GrandRammerEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
-        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.linearProgress());
+        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.linearProgress());
 
-        if (entity.mainAnimationHandler.isPlaying(entity.ram)) {
+        if (entity.mainHandler.isPlaying(GrandRammerEntity.RAM)) {
 
             animator.setupKeyframe(6);
             animator.move(this.body, 0F, 0.4F, 6.9F);

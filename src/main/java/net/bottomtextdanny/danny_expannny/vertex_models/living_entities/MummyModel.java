@@ -151,7 +151,7 @@ public class MummyModel extends BCEntityModel<MummyEntity> {
         walkRotateX(this.leftLeg, 0.5F, 35.0F, 0.0F, -12.5F, limbSwing, limbSwingAmount, false);
         walkRotateX(this.leftCalf, 0.5F, -2.5F, 0.0F, 27.5F, limbSwing, limbSwingAmount, false);
 
-        if (entity.mainAnimationHandler.isPlaying(entity.summonAbomination)) {
+        if (entity.mainHandler.isPlaying(MummyEntity.SUMMON_ABOMINATION)) {
             entity.rightHandVec = this.rightHand.getAbsolutePosition(Vec3.ZERO, getPartialTick(), entity);
             entity.leftHandVec = this.leftHand.getAbsolutePosition(Vec3.ZERO, getPartialTick(), entity);
         }
@@ -159,9 +159,9 @@ public class MummyModel extends BCEntityModel<MummyEntity> {
 
     @Override
     public void handleKeyframedAnimations(MummyEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
-        EntityModelAnimator animator = new EntityModelAnimator(this, (float) entity.mainAnimationHandler.getTick() + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, (float) entity.mainHandler.getTick() + getPartialTick());
 
-        if(entity.mainAnimationHandler.isPlaying(entity.riseSpike)) {
+        if(entity.mainHandler.isPlaying(MummyEntity.RISE_SPIKE)) {
             animator.setupKeyframe(10.0F);
             animator.move(this.body, 0.0F, 0.0F, 0.65F);
             animator.rotate(this.body, 0.0F, 12.5F, 0.0F);
@@ -193,7 +193,7 @@ public class MummyModel extends BCEntityModel<MummyEntity> {
             animator.emptyKeyframe(6.0F, Easing.EASE_IN_SQUARE);
         }
 
-        else if(entity.mainAnimationHandler.isPlaying(entity.throwOrb)) {
+        else if(entity.mainHandler.isPlaying(MummyEntity.THROW_ORB)) {
 
             animator.setupKeyframe(13.0F);
             animator.rotate(this.hip, -7.5F, 0.0F, 0.0F);
@@ -218,7 +218,7 @@ public class MummyModel extends BCEntityModel<MummyEntity> {
             animator.emptyKeyframe(6.0F, Easing.EASE_IN_SQUARE);
         }
 
-        else if(entity.mainAnimationHandler.isPlaying(entity.throwEgg)) {
+        else if(entity.mainHandler.isPlaying(MummyEntity.THROW_EGG)) {
 
             animator.disableAtomic(this.headYawMod, 4.0F, 18.0F, 4.0F);
 
@@ -253,7 +253,7 @@ public class MummyModel extends BCEntityModel<MummyEntity> {
             animator.apply();
 
             animator.emptyKeyframe(8.0F, Easing.EASE_IN_SQUARE);
-        } else if (entity.mainAnimationHandler.isPlaying(entity.summonAbomination)) {
+        } else if (entity.mainHandler.isPlaying(MummyEntity.SUMMON_ABOMINATION)) {
 
             animator.setupKeyframe(8.0F);
             animator.rotate(this.hip, -5.0F, 0.0F, 0.0F);

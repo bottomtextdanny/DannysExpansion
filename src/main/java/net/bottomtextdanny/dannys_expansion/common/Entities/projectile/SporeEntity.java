@@ -3,7 +3,7 @@ package net.bottomtextdanny.dannys_expansion.common.Entities.projectile;
 import com.mojang.math.Vector3f;
 import net.bottomtextdanny.danny_expannny.object_tables.DEEntities;
 import net.bottomtextdanny.dannys_expansion.common.Entities.living.SporerEntity;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.SporeSlimeEntity;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.SporeSlime;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.sounds.SoundEvents;
@@ -47,7 +47,7 @@ public class SporeEntity extends AbstractArrow {
     protected void onHit(HitResult result) {
         super.onHit(result);
         if (new Random().nextFloat() <= 0.36) {
-            SporeSlimeEntity sporeSlimeEntity = new SporeSlimeEntity(DEEntities.SPORE_SLIME.get(), this.level);
+            SporeSlime sporeSlimeEntity = new SporeSlime(DEEntities.SPORE_SLIME.get(), this.level);
             sporeSlimeEntity.absMoveTo(getX(), getY(), getZ(), this.getYRot(), 0);
             sporeSlimeEntity.setTamed(true);
             if (this.getOwner() instanceof SporerEntity) {

@@ -4,14 +4,15 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
 public class LivingAnimatableModule extends BaseAnimatableModule<LivingAnimatableProvider> {
+    private static final BCAnimationToken TOKEN = new BCAnimationToken();
     private final LivingEntity living;
     private final AnimationHandler<?> localHandler;
     private boolean deathHasBegun;
 
-    public LivingAnimatableModule(LivingEntity entity) {
-        super(entity);
+    public LivingAnimatableModule(LivingEntity entity, AnimationGetter manager) {
+        super(entity, manager);
         this.localHandler = new AnimationHandler<>(entity);
-        this.localHandler.setIndex(0);
+        this.localHandler.setIndex(0, TOKEN);
         animationHandlerList().add(this.localHandler);
         this.living = entity;
     }

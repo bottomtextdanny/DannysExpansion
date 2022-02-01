@@ -89,7 +89,7 @@ public class PurpolioModel extends BCEntityModel<PurpolioEntity> {
 
     @Override
     public void handleKeyframedAnimations(PurpolioEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
-        if (entity.hurtAnimation.isWoke()) {
+        if (entity.hurtModule.isPlaying(PurpolioEntity.HURT)) {
             EntityModelAnimator animator = new EntityModelAnimator(this, entity.hurtModule.getTick() + net.bottomtextdanny.dannys_expansion.core.Util.qol.DEUtil.PARTIAL_TICK);
 
             animator.setupKeyframe(2);

@@ -1,8 +1,9 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.spell;
 
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.IAnimation;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.danny_expannny.object_tables.DEEntities;
 import net.bottomtextdanny.danny_expannny.object_tables.DESounds;
 import net.bottomtextdanny.dannys_expansion.common.Entities.living.FoamieEntity;
@@ -17,13 +18,18 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class FoamshroomProjectileEntity extends SpellEntity {
-	public final Animation explode = addAnimation(new Animation(10));
+	public static final SimpleAnimation EXPLODE = new SimpleAnimation(10);
     private float prevRenderRotPitch;
     private float renderRotPitch;
 
     public FoamshroomProjectileEntity(EntityType<? extends SpellEntity> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
         setLifeTime(400);
+    }
+
+    @Override
+    protected AnimationGetter getAnimations() {
+        return EXPLODE;
     }
 
     @Override
@@ -39,7 +45,7 @@ public class FoamshroomProjectileEntity extends SpellEntity {
             this.renderRotPitch = (float)Mth.lerp(0.2, this.renderRotPitch, getXRot());
         }
 	    
-	    if (!this.level.isClientSide && this.mainHandler.isPlaying(this.explode) && this.mainHandler.getTick() == 8) {
+	    if (!this.level.isClientSide && this.mainHandler.isPlaying(EXPLODE) && this.mainHandler.getTick() == 8) {
 		    FoamieEntity foamie = new FoamieEntity(DEEntities.FOAMIE.get(), this.level);
 		    Vec3 vec = position();
 		    playSound(DESounds.ES_FOAMSHROOM_POP.get(), 1.0F, 1.0F + 0.1F * this.random.nextInt(3));
@@ -51,8 +57,8 @@ public class FoamshroomProjectileEntity extends SpellEntity {
     }
 	
 	@Override
-	public void animationEndCallout(AnimationHandler<?> module, IAnimation animation) {
-		if (animation == this.explode) {
+	public void animationEndCallout(AnimationHandler<?> module, Animation animation) {
+		if (animation == EXPLODE) {
 			remove(RemovalReason.DISCARDED);
 		}
 	}
@@ -61,7 +67,7 @@ public class FoamshroomProjectileEntity extends SpellEntity {
     protected void onBlockHit(BlockHitResult result) {
         super.onBlockHit(result);
         if (this.mainHandler.isPlayingNull()) {
-            this.mainHandler.play(this.explode);
+            this.mainHandler.play(EXPLODE);
         }
         setDeltaMovement(0.0D, getDeltaMovement().y, 0.0D);
     }
@@ -70,7 +76,7 @@ public class FoamshroomProjectileEntity extends SpellEntity {
     protected void onEntityHit(EntityHitResult result) {
         super.onEntityHit(result);
 	    if (this.mainHandler.isPlayingNull()) {
-            this.mainHandler.play(this.explode);
+            this.mainHandler.play(EXPLODE);
 	    }
     }
 

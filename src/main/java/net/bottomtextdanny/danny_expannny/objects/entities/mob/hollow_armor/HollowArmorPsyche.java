@@ -1,6 +1,6 @@
 package net.bottomtextdanny.danny_expannny.objects.entities.mob.hollow_armor;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.psyche.Psyche;
 import net.bottomtextdanny.braincell.mod.entity.psyche.actions.*;
 import net.bottomtextdanny.braincell.mod.entity.psyche.data.ActionInputKey;
@@ -42,7 +42,7 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
 
     public HollowArmorPsyche(HollowArmor mob) {
         super(mob);
-        initializeActionMap(MAIN_MODULE, IDLE_ACTIONS_MODULE, ATTACK_ACTIONS_MODULE, HEAL_MODULE);
+        allocateModules(4);
     }
 
     @Override
@@ -80,12 +80,12 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
         ConstantThoughtAction<HollowArmor> globalCheck = ConstantThoughtAction.withUpdateCallback(getMob(), mobo -> {
             getMob().setMovementReduction(0.0F);
 
-            if (getMob().mainAnimationHandler.isPlayingNull() && !getMob().healing_used.get() && CombatHelper.getHealthNormalized(getMob()) < 0.5F) {
+            if (getMob().mainHandler.isPlayingNull() && !getMob().healing_used.get() && CombatHelper.getHealthNormalized(getMob()) < 0.5F) {
                 tryAddRunningAction(HEAL_MODULE, this.healAction);
             }
 
             if (mobo.getTarget() != null) {
-                if (getMob().mainAnimationHandler.isPlayingNull()) {
+                if (getMob().mainHandler.isPlayingNull()) {
                     float reach = ReachHelper.reachSqr(getMob(), getMob().getTarget());
                     if (reach < HollowArmor.ATTACK_RANGE) {
                         if (getMob().lethal_attack_timer.get().hasEnded()) {
@@ -129,22 +129,10 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
         tryAddRunningAction(CHECKS_MODULE, new LookForAristocratAction<>(getMob()).setUnseeTimer(new Timer(0)));
     }
 
-    public static class LocalFollowTargetAction extends FollowTargetAction<HollowArmor> {
-
-        public LocalFollowTargetAction(HollowArmor mob, ToDoubleFunction<LivingEntity> moveSpeed) {
-            super(mob, moveSpeed);
-        }
-
-        @Override
-        protected void start() {
-            super.start();
-        }
-    }
-
-    public static class BluntAttackAction extends AnimationAction<HollowArmor, Animation> {
+    public static class BluntAttackAction extends AnimationAction<HollowArmor, SimpleAnimation> {
 
         public BluntAttackAction(HollowArmor mob) {
-            super(mob, mob.getBluntAnimation(), mob.mainAnimationHandler);
+            super(mob, HollowArmor.BLUNT, mob.mainHandler);
         }
 
         @Override
@@ -153,7 +141,7 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
             this.mob.setMovementReduction(1.0F);
             addBlockedModule(MAIN_MODULE);
 
-            if (CombatHelper.validAttackTarget(this.mob)) {
+            if (CombatHelper.hasValidAttackTarget(this.mob)) {
                 LivingEntity target = this.mob.getTarget();
 
                 if (this.animationHandler.getTick() == 9 && ReachHelper.reachSqr(this.mob, target) < HollowArmor.ATTACK_RANGE * 1.5F) {
@@ -173,10 +161,10 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
         }
     }
 
-    public static class SlashAttackAction extends AnimationAction<HollowArmor, Animation> {
+    public static class SlashAttackAction extends AnimationAction<HollowArmor, SimpleAnimation> {
 
         public SlashAttackAction(HollowArmor mob) {
-            super(mob, mob.getSlashAnimation(), mob.mainAnimationHandler);
+            super(mob, HollowArmor.SLASH, mob.mainHandler);
         }
 
         @Override
@@ -184,7 +172,7 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
             Random random = this.mob.getRandom();
             this.mob.setMovementReduction(1.0F);
 
-            if (CombatHelper.validAttackTarget(this.mob)) {
+            if (CombatHelper.hasValidAttackTarget(this.mob)) {
                 LivingEntity target = this.mob.getTarget();
                 if (this.animationHandler.getTick() == 10 && ReachHelper.reachSqr(this.mob, target) < HollowArmor.ATTACK_RANGE * 1.5F) {
 
@@ -206,10 +194,10 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
         }
     }
 
-    public static class SwingAttackAction extends AnimationAction<HollowArmor, Animation> {
+    public static class SwingAttackAction extends AnimationAction<HollowArmor, SimpleAnimation> {
 
         public SwingAttackAction(HollowArmor mob) {
-            super(mob, mob.getSwingAnimation(), mob.mainAnimationHandler);
+            super(mob, HollowArmor.SWING, mob.mainHandler);
         }
 
         @Override
@@ -217,7 +205,7 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
             Random random = this.mob.getRandom();
             this.mob.setMovementReduction(1.0F);
 
-            if (CombatHelper.validAttackTarget(this.mob)) {
+            if (CombatHelper.hasValidAttackTarget(this.mob)) {
                 LivingEntity target = this.mob.getTarget();
                 if (this.animationHandler.getTick() == 8 && ReachHelper.reachSqr(this.mob, target) < HollowArmor.ATTACK_RANGE * 1.5F) {
                     CombatHelper.attackWithMultiplier(this.mob, target, 1.15F);
@@ -237,10 +225,10 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
         }
     }
 
-    public static class DoubleSwingAttackAction extends AnimationAction<HollowArmor, Animation> {
+    public static class DoubleSwingAttackAction extends AnimationAction<HollowArmor, SimpleAnimation> {
 
         public DoubleSwingAttackAction(HollowArmor mob) {
-            super(mob, mob.getDoubleSwingAnimation(), mob.mainAnimationHandler);
+            super(mob, HollowArmor.DOUBLE_SWING, mob.mainHandler);
         }
 
         @Override
@@ -248,7 +236,7 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
             Random random = this.mob.getRandom();
             this.mob.setMovementReduction(1.0F);
 
-            if (CombatHelper.validAttackTarget(this.mob)) {
+            if (CombatHelper.hasValidAttackTarget(this.mob)) {
                 LivingEntity target = this.mob.getTarget();
                 
                 if (ReachHelper.reachSqr(this.mob, target) < HollowArmor.ATTACK_RANGE * 1.5F) {
@@ -280,10 +268,10 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
         }
     }
 
-    public static class ImpaleAttackAction extends AnimationAction<HollowArmor, Animation> {
+    public static class ImpaleAttackAction extends AnimationAction<HollowArmor, SimpleAnimation> {
 
         public ImpaleAttackAction(HollowArmor mob) {
-            super(mob, mob.getImpaleAnimation(), mob.mainAnimationHandler);
+            super(mob, HollowArmor.IMPALE, mob.mainHandler);
         }
 
         @Override
@@ -291,7 +279,7 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
             Random random = this.mob.getRandom();
             this.mob.setMovementReduction(1.0F);
 
-            if (CombatHelper.validAttackTarget(this.mob)) {
+            if (CombatHelper.hasValidAttackTarget(this.mob)) {
                 LivingEntity target = this.mob.getTarget();
 
                 if (this.animationHandler.getTick() == 16 && ReachHelper.reachSqr(this.mob, target) < HollowArmor.ATTACK_RANGE * 1.8F) {
@@ -311,11 +299,11 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
         }
     }
 
-    public static class DashAction extends AnimationAction<HollowArmor, Animation> {
+    public static class DashAction extends AnimationAction<HollowArmor, SimpleAnimation> {
         private boolean didDamage;
 
         public DashAction(HollowArmor mob) {
-            super(mob, mob.getDashAnimation(), mob.mainAnimationHandler);
+            super(mob, HollowArmor.DASH, mob.mainHandler);
         }
 
         @Override
@@ -377,10 +365,10 @@ public class HollowArmorPsyche extends Psyche<HollowArmor> {
         }
     }
 
-    public static class HealAction extends AnimationAction<HollowArmor, Animation> {
+    public static class HealAction extends AnimationAction<HollowArmor, SimpleAnimation> {
 
         public HealAction(HollowArmor mob) {
-            super(mob, mob.getHealAnimation(), mob.mainAnimationHandler);
+            super(mob, HollowArmor.HEAL, mob.mainHandler);
         }
 
         @Override

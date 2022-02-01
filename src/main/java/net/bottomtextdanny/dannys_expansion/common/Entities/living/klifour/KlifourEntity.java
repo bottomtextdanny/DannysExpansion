@@ -1,9 +1,11 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.living.klifour;
 
 import net.bottomtextdanny.braincell.mod.base.misc.timer.IntScheduler;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.IAnimation;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
 import net.bottomtextdanny.braincell.mod.entity.serialization.EntityData;
 import net.bottomtextdanny.braincell.mod.entity.serialization.EntityDataReference;
@@ -90,17 +92,18 @@ public class KlifourEntity extends ModuledMob {
                             () -> false,
                             "hidden")
             );
+    public static final SimpleAnimation DEATH = new SimpleAnimation(20);
+    public static final SimpleAnimation NAUSEA = new SimpleAnimation(54);
+    public static final SimpleAnimation SHOW_UP = new SimpleAnimation(20);
+    public static final SimpleAnimation HIDE = new SimpleAnimation(15);
+    public static final SimpleAnimation SPIT = new SimpleAnimation(20);
+    public static final SimpleAnimation SCRUB = new SimpleAnimation(20);
+    public static final AnimationManager ANIMATIONS = new AnimationManager(DEATH, NAUSEA, SHOW_UP, HIDE, SPIT, SCRUB);
     private final EntityData<IntScheduler.Variable> hideTimer;
     private final EntityData<IntScheduler.Variable> unhideTimer;
     private final EntityData<BlockPos> attaching_location;
     private final EntityData<Direction> attaching_direction;
     private final EntityData<Boolean> hidden;
-    public Animation death;
-    public Animation nausea;
-    public Animation showUp;
-    public Animation hide;
-    public Animation spit;
-    public Animation scrub;
     public boolean isBadEffectAware;
     public int attackCount;
     public int blockUpdate;
@@ -116,14 +119,21 @@ public class KlifourEntity extends ModuledMob {
         this.meleeTimer = new Timer(70);
     }
 
-	
-	protected void registerExtraGoals() {
-        this.death = addAnimation(new Animation(20));
-        this.nausea = addAnimation(new Animation(54));
-        this.showUp = addAnimation(new Animation(20));
-        this.hide = addAnimation(new Animation(15));
-        this.spit = addAnimation(new Animation(20));
-        this.scrub = addAnimation(new Animation(20));
+    public static AttributeSupplier.Builder Attributes() {
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 25.0D)
+                .add(Attributes.FOLLOW_RANGE, 30.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.0D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.0D)
+                .add(Attributes.ATTACK_DAMAGE, 5.0D);
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return ANIMATIONS;
+    }
+
+    protected void registerExtraGoals() {
         this.goalSelector.addGoal(0, new KlifourEntity.NauseaGoal());
         this.goalSelector.addGoal(1, new KlifourEntity.ScrubGoal());
         this.goalSelector.addGoal(2, new KlifourEntity.SpitGoal());
@@ -138,16 +148,6 @@ public class KlifourEntity extends ModuledMob {
         this.targetSelector.addGoal(0, new HurtByTargetGoal(this).setAlertOthers());
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, true, e -> !PlayerHelper.hasAccessory((Player)e, KlifourTalismanAccessory.class)));
     }
-
-    public static AttributeSupplier.Builder Attributes() {
-        return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 25.0D)
-                .add(Attributes.FOLLOW_RANGE, 30.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.0D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.0D)
-                .add(Attributes.ATTACK_DAMAGE, 5.0D);
-    }
-
 
     @Override
     public boolean removeWhenFarAway(double distanceToClosestPlayer) {
@@ -171,7 +171,7 @@ public class KlifourEntity extends ModuledMob {
 		        }
 		
 		        if (this.hideTimer.get().hasEnded()) {
-                    this.mainAnimationHandler.play(this.showUp);
+                    this.mainHandler.play(SHOW_UP);
 			        setHidden(false);
                     this.unhideTimer.get().reset();
 		        }
@@ -183,29 +183,29 @@ public class KlifourEntity extends ModuledMob {
 			        getLookControl().setLookAt(getTarget(), 30.0F, 30.0F);
 		        }
 		
-		        if (this.unhideTimer.get().hasEnded() && this.mainAnimationHandler.isPlayingNull()) {
+		        if (this.unhideTimer.get().hasEnded() && this.mainHandler.isPlayingNull()) {
 			        if (getTarget() == null) {
-                        this.mainAnimationHandler.play(this.hide);
+                        this.mainHandler.play(HIDE);
                         this.hideTimer.get().reset();
 			        } else if (this.attackCount > 8) {
-                        this.mainAnimationHandler.play(this.hide);
+                        this.mainHandler.play(HIDE);
                         this.hideTimer.get().setCurrentBound(DEMath.intRandomOffset(80, 0.3F));
                         this.hideTimer.get().reset();
 			        }
 			
 		        }
 		
-		        if (this.mainAnimationHandler.isPlaying(this.spit)) {
+		        if (this.mainHandler.isPlaying(SPIT)) {
 			
 			        if (true) {
 				
-				        if (this.mainAnimationHandler.getTick() == 4)
+				        if (this.mainHandler.getTick() == 4)
 					        playSound(DESounds.ES_KLIFOUR_SPIT.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.2F);
 				
 				        if (hasAttackTarget()) {
 					        getLookControl().setLookAt(getTarget(), 30.0F, 30.0F);
 					
-					        if (this.mainAnimationHandler.getTick() == 6) {
+					        if (this.mainHandler.getTick() == 6) {
 						
 						        KlifourSpitEntity spit = DEEntities.KLIFOUR_SPIT.get().create(this.level);
 						        spit.setPos(getX(), getEyeY(), getZ());
@@ -216,21 +216,21 @@ public class KlifourEntity extends ModuledMob {
 				        }
 				
 			        }
-		        } else if (this.mainAnimationHandler.isPlaying(this.scrub)) {
-			        if (this.mainAnimationHandler.getTick() == 1)
+		        } else if (this.mainHandler.isPlaying(SCRUB)) {
+			        if (this.mainHandler.getTick() == 1)
 				        playSound(DESounds.ES_KLIFOUR_SCRUB.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.2F);
-			        else if (getTarget() != null && this.mainAnimationHandler.getTick() == 5 && this.getBoundingBox().intersects(getTarget().getBoundingBox().inflate(0.2)))
+			        else if (getTarget() != null && this.mainHandler.getTick() == 5 && this.getBoundingBox().intersects(getTarget().getBoundingBox().inflate(0.2)))
 				        this.getTarget().addEffect(new MobEffectInstance(MobEffects.POISON, 200, this.level.getDifficulty().getId() - 1));
-		        } else if (this.mainAnimationHandler.isPlaying(this.hide)) {
-			        if (this.mainAnimationHandler.getTick() == 1)
+		        } else if (this.mainHandler.isPlaying(HIDE)) {
+			        if (this.mainHandler.getTick() == 1)
 				        playSound(DESounds.ES_KLIFOUR_HIDE.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.2F);
-			        if (this.mainAnimationHandler.getTick() == 15) setHidden(true);
-		        } else if (this.mainAnimationHandler.isPlaying(this.showUp)) {
-			        if (this.mainAnimationHandler.getTick() == 1)
+			        if (this.mainHandler.getTick() == 15) setHidden(true);
+		        } else if (this.mainHandler.isPlaying(SHOW_UP)) {
+			        if (this.mainHandler.getTick() == 1)
 				        playSound(DESounds.ES_KLIFOUR_SHOW_UP.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.2F);
-		        } else if (this.mainAnimationHandler.isPlaying(this.nausea) && this.mainAnimationHandler.getTick() == 54) {
+		        } else if (this.mainHandler.isPlaying(NAUSEA) && this.mainHandler.getTick() == 54) {
                     this.isBadEffectAware = true;
-                    this.mainAnimationHandler.play(this.hide);
+                    this.mainHandler.play(HIDE);
 		        }
 		
 	        }
@@ -269,7 +269,7 @@ public class KlifourEntity extends ModuledMob {
 		         }
 		
 		         if (!this.level.getBlockState(getAttachingBlock()).getCollisionShape(this.level, getAttachingBlock()).equals(Shapes.block())) {
-		             if (!this.mainAnimationHandler.isPlaying(this.death)) this.mainAnimationHandler.play(this.death);
+		             if (!this.mainHandler.isPlaying(DEATH)) this.mainHandler.play(DEATH);
 		         }
 
                 this.blockUpdate = 5;
@@ -300,13 +300,13 @@ public class KlifourEntity extends ModuledMob {
     }
 	
 	@Override
-	public void animationEndCallout(AnimationHandler<?> module, IAnimation animation) {
-		if (animation == this.death)  {
+	public void animationEndCallout(AnimationHandler<?> module, Animation animation) {
+		if (animation == DEATH)  {
 			onDeathAnimationEnd();
 			remove(RemovalReason.KILLED);
-		} else if (animation == this.hide) {
+		} else if (animation == HIDE) {
 			setHidden(true);
-		} else if (animation == this.showUp) {
+		} else if (animation == SHOW_UP) {
 			setHidden(false);
 		}
 	}
@@ -387,8 +387,8 @@ public class KlifourEntity extends ModuledMob {
 
     @Nullable
     @Override
-    public IAnimation getDeathAnimation() {
-        return this.death;
+    public Animation getDeathAnimation() {
+        return DEATH;
     }
 
     //SETTERS
@@ -446,7 +446,7 @@ public class KlifourEntity extends ModuledMob {
         @Override
         public void start() {
             super.start();
-            KlifourEntity.this.mainAnimationHandler.play(KlifourEntity.this.spit);
+            KlifourEntity.this.mainHandler.play(KlifourEntity.SPIT);
             KlifourEntity.this.rangedTimer.reset();
             KlifourEntity.this.attackCount++;
             LivingEntity target = KlifourEntity.this.getTarget();
@@ -461,7 +461,7 @@ public class KlifourEntity extends ModuledMob {
 
         @Override
         public boolean canUse() {
-            return !KlifourEntity.this.isHidden() && KlifourEntity.this.mainAnimationHandler.isPlayingNull() && KlifourEntity.this.getTarget() != null && KlifourEntity.this.rangedTimer.hasEnded() && hasLineOfSight(KlifourEntity.this.getTarget());
+            return !KlifourEntity.this.isHidden() && KlifourEntity.this.mainHandler.isPlayingNull() && KlifourEntity.this.getTarget() != null && KlifourEntity.this.rangedTimer.hasEnded() && hasLineOfSight(KlifourEntity.this.getTarget());
         }
     }
 
@@ -470,7 +470,7 @@ public class KlifourEntity extends ModuledMob {
         @Override
         public void start() {
             super.start();
-            KlifourEntity.this.mainAnimationHandler.play(KlifourEntity.this.scrub);
+            KlifourEntity.this.mainHandler.play(KlifourEntity.SCRUB);
             KlifourEntity.this.meleeTimer.reset();
             KlifourEntity.this.attackCount++;
             LivingEntity target = KlifourEntity.this.getTarget();
@@ -485,7 +485,7 @@ public class KlifourEntity extends ModuledMob {
 
         @Override
         public boolean canUse() {
-            return !KlifourEntity.this.isHidden() && KlifourEntity.this.mainAnimationHandler.isPlayingNull() && KlifourEntity.this.getTarget() != null && KlifourEntity.this.meleeTimer.hasEnded() && KlifourEntity.this.getBoundingBox().intersects(KlifourEntity.this.getTarget().getBoundingBox());
+            return !KlifourEntity.this.isHidden() && KlifourEntity.this.mainHandler.isPlayingNull() && KlifourEntity.this.getTarget() != null && KlifourEntity.this.meleeTimer.hasEnded() && KlifourEntity.this.getBoundingBox().intersects(KlifourEntity.this.getTarget().getBoundingBox());
         }
     }
 
@@ -494,7 +494,7 @@ public class KlifourEntity extends ModuledMob {
         @Override
         public void start() {
             super.start();
-            KlifourEntity.this.mainAnimationHandler.play(KlifourEntity.this.nausea);
+            KlifourEntity.this.mainHandler.play(NAUSEA);
 
         }
 
@@ -505,7 +505,7 @@ public class KlifourEntity extends ModuledMob {
 
         @Override
         public boolean canUse() {
-            return !KlifourEntity.this.isHidden() && KlifourEntity.this.mainAnimationHandler.isPlayingNull() && KlifourEntity.this.getActiveEffects().stream().anyMatch(effectInstance -> effectInstance.getEffect().getCategory() == MobEffectCategory.HARMFUL);
+            return !KlifourEntity.this.isHidden() && KlifourEntity.this.mainHandler.isPlayingNull() && KlifourEntity.this.getActiveEffects().stream().anyMatch(effectInstance -> effectInstance.getEffect().getCategory() == MobEffectCategory.HARMFUL);
         }
     }
 

@@ -1,16 +1,17 @@
 package net.bottomtextdanny.danny_expannny.objects.entities.mob.ghouls;
 
 import net.bottomtextdanny.braincell.mod.base.misc.timer.IntScheduler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.psyche.Psyche;
 import net.bottomtextdanny.braincell.mod.entity.psyche.actions.*;
 import net.bottomtextdanny.braincell.mod.entity.psyche.actions.target.LookForAristocratAction;
 import net.bottomtextdanny.braincell.mod.entity.psyche.actions.target.LookForAttackTargetAction;
 import net.bottomtextdanny.braincell.mod.entity.psyche.actions.target.TargetBullyAction;
+import net.bottomtextdanny.braincell.mod.entity.psyche.data.ActionInputKey;
 import net.bottomtextdanny.braincell.mod.entity.psyche.data.UnbuiltActionInputs;
+import net.bottomtextdanny.braincell.mod.world.helpers.CombatHelper;
 import net.bottomtextdanny.braincell.mod.world.helpers.ReachHelper;
 import net.bottomtextdanny.danny_expannny.object_tables.DESounds;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.ghouls.PetrifiedGhoul;
 import net.bottomtextdanny.dannys_expansion.core.Util.Timer;
 import net.bottomtextdanny.dannys_expansion.core.Util.qol.RandomFloatMapper;
 import net.bottomtextdanny.dannys_expansion.core.Util.qol.RandomIntegerMapper;
@@ -24,6 +25,7 @@ public class PetrifiedGhoulPsyche extends Psyche<PetrifiedGhoul> {
             MAIN_MODULE = 1,
             ANIMATION_ACTIONS_MODULE = 2,
             IDLE_ACTIONS_MODULE = 3;
+    private final IntScheduler.Simple unseenTimer;
     private LookRandomlyAction lookRandomlyAction;
     private RandomStrollAction randomStrollAction;
     private SideAttackAction sideAttackAction;
@@ -32,11 +34,14 @@ public class PetrifiedGhoulPsyche extends Psyche<PetrifiedGhoul> {
 
     public PetrifiedGhoulPsyche(PetrifiedGhoul mob) {
         super(mob);
-        initializeActionMap(MAIN_MODULE, ANIMATION_ACTIONS_MODULE, IDLE_ACTIONS_MODULE);
+        allocateModules(3);
+        this.unseenTimer = IntScheduler.simple(60);
     }
 
     @Override
-    protected void populateInputs(UnbuiltActionInputs inputs) {}
+    protected void populateInputs(UnbuiltActionInputs inputs) {
+        inputs.put(ActionInputKey.UNSEEN_TIMER, () -> this.unseenTimer);
+    }
 
     @Override
     protected void initialize() {
@@ -52,7 +57,7 @@ public class PetrifiedGhoulPsyche extends Psyche<PetrifiedGhoul> {
         this.lookRandomlyAction.addModule(IDLE_ACTIONS_MODULE);
         ConstantThoughtAction<PetrifiedGhoul> globalCheck = ConstantThoughtAction.withUpdateCallback(getMob(), mobo -> {
             if (mobo.getTarget() != null) {
-                if (getMob().mainAnimationHandler.isPlayingNull() && mobo.reachTo(mobo.getTarget()) < PetrifiedGhoul.ATTACK_RANGE) {
+                if (getMob().mainHandler.isPlayingNull() && mobo.reachTo(mobo.getTarget()) < PetrifiedGhoul.ATTACK_RANGE) {
                     if (getMob().attackDelay.get().hasEnded()) {
                         IntScheduler.Variable strongAttackTimer = getMob().attacksTillStrongAttack.get();
                         if (strongAttackTimer.hasEnded()) {
@@ -76,15 +81,15 @@ public class PetrifiedGhoulPsyche extends Psyche<PetrifiedGhoul> {
         });
         tryAddRunningAction(CHECKS_MODULE, globalCheck);
         tryAddRunningAction(CHECKS_MODULE, new TargetBullyAction(getMob()));
-        tryAddRunningAction(CHECKS_MODULE, new LookForAttackTargetAction<>(getMob(), LookForAttackTargetAction.PLAYER_CLASS_TARGET).setUnseeTimer(new Timer(4)));
-        tryAddRunningAction(CHECKS_MODULE, new LookForAristocratAction<>(getMob()).setUnseeTimer(new Timer(0)));
+        tryAddRunningAction(CHECKS_MODULE, new LookForAttackTargetAction<>(getMob(), LookForAttackTargetAction.PLAYER_CLASS_TARGET));
+        tryAddRunningAction(CHECKS_MODULE, new LookForAristocratAction<>(getMob()));
         tryAddRunningAction(IDLE_ACTIONS_MODULE, new FloatAction(getMob(), 1.0F));
     }
 
-    public static class SideAttackAction extends AnimationAction<PetrifiedGhoul, Animation> {
+    public static class SideAttackAction extends AnimationAction<PetrifiedGhoul, SimpleAnimation> {
 
         public SideAttackAction(PetrifiedGhoul mob) {
-            super(mob, mob.getSideAttackAnimation(), mob.mainAnimationHandler);
+            super(mob, PetrifiedGhoul.SIDE_ATTACK, mob.mainHandler);
         }
 
         @Override
@@ -95,16 +100,16 @@ public class PetrifiedGhoulPsyche extends Psyche<PetrifiedGhoul> {
             } else if (this.animationHandler.getTick() == 9) {
                 LivingEntity livingEntity = this.mob.getTarget();
                 if (livingEntity != null && livingEntity.isAlive() && ReachHelper.reachSqr(this.mob, livingEntity) < PetrifiedGhoul.ATTACK_RANGE * 1.2F) {
-                    this.mob.attackWithMultiplier(livingEntity, 1.0F);
+                    CombatHelper.attackWithMultiplier(this.mob, livingEntity, 1.0F);
                 }
             }
         }
     }
 
-    public static class StrongAttackAction extends AnimationAction<PetrifiedGhoul, Animation> {
+    public static class StrongAttackAction extends AnimationAction<PetrifiedGhoul, SimpleAnimation> {
 
         public StrongAttackAction(PetrifiedGhoul mob) {
-            super(mob, mob.getStrongAttackAnimation(), mob.mainAnimationHandler);
+            super(mob, PetrifiedGhoul.STRONG_ATTACK, mob.mainHandler);
         }
 
         @Override
@@ -115,7 +120,7 @@ public class PetrifiedGhoulPsyche extends Psyche<PetrifiedGhoul> {
             } else if (this.animationHandler.getTick() == 14) {
                 LivingEntity livingEntity = this.mob.getTarget();
                 if (livingEntity != null && livingEntity.isAlive() && ReachHelper.reachSqr(this.mob, livingEntity) < PetrifiedGhoul.ATTACK_RANGE * 1.1F) {
-                    this.mob.attackWithMultiplier(livingEntity, 1.33F);
+                    CombatHelper.attackWithMultiplier(this.mob, livingEntity, 1.33F);
                 }
             }
         }

@@ -5,16 +5,16 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.bottomtextdanny.braincell.mod.client_animation.EntityModelAnimator;
 import net.bottomtextdanny.braincell.mod.minecraft_front_rendering.vertex.BCEntityModel;
 import net.bottomtextdanny.braincell.mod.minecraft_front_rendering.vertex.BCVoxel;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.AbstractSlimeEntity;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.AbstractSlime;
 import net.bottomtextdanny.dannys_expansion.core.Util.DEMath;
 import net.bottomtextdanny.dannys_expansion.core.Util.animation.Easing;
 
-public class DannySlimeModel<E extends AbstractSlimeEntity> extends BCEntityModel<E> {
+public class DannySlimeModel<E extends AbstractSlime> extends BCEntityModel<E> {
     protected final BCVoxel body;
 
-    public DannySlimeModel(float width, float height) {
-        this.texWidth = 128;
-        this.texHeight = 128;
+    public DannySlimeModel(float width, float height, int imageWidth, int imageHeight) {
+        this.texWidth = imageWidth;
+        this.texHeight = imageHeight;
 
         this.body = new BCVoxel(this);
         this.body.setPos(0.0F, 24.0F, 0.0F);
@@ -22,6 +22,10 @@ public class DannySlimeModel<E extends AbstractSlimeEntity> extends BCEntityMode
         this.body.texOffs(0, (int)width + (int)height).addBox(-width / 2, -height, -width / 2, width, height, width, 0.0F, false);
 
         setupDefaultState();
+    }
+
+    public DannySlimeModel(float width, float height) {
+        this(width, height, 128, 128);
     }
 
     @Override
@@ -33,9 +37,9 @@ public class DannySlimeModel<E extends AbstractSlimeEntity> extends BCEntityMode
 
     @Override
     public void handleKeyframedAnimations(E entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
-        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 
-        if(entity.mainAnimationHandler.isPlaying(entity.jump)) {
+        if(entity.mainHandler.isPlaying(entity.JUMP)) {
 
             animator.setupKeyframe(4);
             animator.scale(this.body, 0.7692F, -0.3F, 0.7692F);
@@ -48,12 +52,12 @@ public class DannySlimeModel<E extends AbstractSlimeEntity> extends BCEntityMode
             animator.emptyKeyframe(10, Easing.LINEAR);
         }
 
-        if(entity.getLocalAnimationHandler().isPlaying(entity.death)) {
+        if(entity.getLocalAnimationHandler().isPlaying(entity.DEATH)) {
             EntityModelAnimator deathAnimator = new EntityModelAnimator(this, entity.getLocalAnimationHandler().getTick() + getPartialTick());
 
-            animator.setupKeyframe(10);
-            animator.scale(this.body, 0.7692F, -0.3F, 0.7692F);
-            animator.apply();
+            deathAnimator.setupKeyframe(10);
+            deathAnimator.scale(this.body, 0.7692F, -0.3F, 0.7692F);
+            deathAnimator.apply();
         }
     }
 

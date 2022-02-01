@@ -1,10 +1,9 @@
 package net.bottomtextdanny.braincell.mod.entity.modules.variable;
 
 import net.bottomtextdanny.braincell.mod.entity.modules.EntityModule;
-import net.bottomtextdanny.braincell.mod.entity.serialization.EntityData;
 import net.minecraft.world.entity.LivingEntity;
 
-public abstract class VariableModule extends EntityModule<LivingEntity, VariableProvider> {
+public abstract class VariableModule extends EntityModule<LivingEntity, VariantProvider> {
     protected static final String VARIANT_TAG = "variant";
 
     public VariableModule(LivingEntity entity) {

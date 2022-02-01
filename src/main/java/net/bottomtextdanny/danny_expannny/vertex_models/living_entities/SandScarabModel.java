@@ -121,9 +121,9 @@ public class SandScarabModel extends BCEntityModel<SandScarabEntity> {
     public void handleKeyframedAnimations(SandScarabEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
         super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
 
-        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 
-        if (entity.mainAnimationHandler.isPlaying(entity.death)) {
+        if (entity.mainHandler.isPlaying(SandScarabEntity.DEATH)) {
 
             animator.disableAtomic(this.livingRotation, 3, 12, 0);
 

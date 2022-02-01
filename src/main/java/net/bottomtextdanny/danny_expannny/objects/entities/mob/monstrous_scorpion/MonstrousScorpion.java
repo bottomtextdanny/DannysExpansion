@@ -1,7 +1,9 @@
 package net.bottomtextdanny.danny_expannny.objects.entities.mob.monstrous_scorpion;
 
 import net.bottomtextdanny.braincell.mod.base.misc.timer.IntScheduler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
 import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkModule;
 import net.bottomtextdanny.braincell.mod.entity.modules.variable.*;
@@ -65,12 +67,13 @@ public class MonstrousScorpion extends SmartyMob {
                             () -> IntScheduler.ranged(CLAW_ATTACK_DELAY_MIN, CLAW_ATTACK_DELAY_MAX),
                             "claw_attack_delay")
             );
+    public static final SimpleAnimation STING = new SimpleAnimation(15);
+    public static final SimpleAnimation RIGHT_CLAW_ATTACk = new SimpleAnimation(15).identifier(CLAW_ATTACK_IDENTIFIER);
+    public static final SimpleAnimation LEFT_CLAW_ATTACk = new SimpleAnimation(15).identifier(CLAW_ATTACK_IDENTIFIER);
+    public static final SimpleAnimation BOTH_CLAWS_ATTACK = new SimpleAnimation(15).identifier(CLAW_ATTACK_IDENTIFIER);
+    public static final AnimationManager ANIMATIONS = new AnimationManager(STING, RIGHT_CLAW_ATTACk, LEFT_CLAW_ATTACk, BOTH_CLAWS_ATTACK);
     public final EntityData<IntScheduler.Variable> attackDelay;
     public final EntityData<IntScheduler.Variable> clawAttackDelay;
-    private Animation sting;
-    private Animation rightClawAttack;
-    private Animation leftClawAttack;
-    private Animation bothClawsAttack;
 
     public MonstrousScorpion(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
@@ -93,10 +96,11 @@ public class MonstrousScorpion extends SmartyMob {
         super.commonInit();
         this.variableModule = new IndexedVariableModule(this, FORMS);
         this.loopedWalkModule = new LoopedWalkModule(this);
-        this.sting = addAnimation(new Animation(15));
-        this.rightClawAttack = addAnimation(new Animation(15).identifier(CLAW_ATTACK_IDENTIFIER));
-        this.leftClawAttack = addAnimation(new Animation(15).identifier(CLAW_ATTACK_IDENTIFIER));
-        this.bothClawsAttack = addAnimation(new Animation(15).identifier(CLAW_ATTACK_IDENTIFIER));
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return ANIMATIONS;
     }
 
     @Override
@@ -113,24 +117,20 @@ public class MonstrousScorpion extends SmartyMob {
         super.tick();
     }
 
-    public Animation getStingAnimation() {
-        return this.sting;
+    @Override
+    public Form<?> chooseVariant() {
+        if (this.level.getBiome(blockPosition()).getBiomeCategory() == Biome.BiomeCategory.JUNGLE) {
+            return BLACK_FORM;
+        } else if (this.level.getBiome(blockPosition()).getBiomeCategory() == Biome.BiomeCategory.DESERT) {
+            return SANDY_FORM;
+        }
+        return BROWN_FORM;
     }
 
-    public Animation[] getClawAttackAnimations() {
-        return new Animation[] {this.rightClawAttack, this.leftClawAttack, this.bothClawsAttack};
-    }
-
-    public Animation getRightClawAttack() {
-        return this.rightClawAttack;
-    }
-
-    public Animation getLeftClawAttack() {
-        return this.leftClawAttack;
-    }
-
-    public Animation getBothClawsAttack() {
-        return this.bothClawsAttack;
+    @Override
+    public boolean addEffect(MobEffectInstance effectInstance, Entity entityIn) {
+        if (EffectHelper.isToxin(effectInstance.getEffect())) return false;
+        return super.addEffect(effectInstance, entityIn);
     }
 
     @Override
@@ -148,16 +148,6 @@ public class MonstrousScorpion extends SmartyMob {
         return 0.7F;
     }
 
-    @Override
-    public Form<?> chooseVariant() {
-        if (this.level.getBiome(blockPosition()).getBiomeCategory() == Biome.BiomeCategory.JUNGLE) {
-            return BLACK_FORM;
-        } else if (this.level.getBiome(blockPosition()).getBiomeCategory() == Biome.BiomeCategory.DESERT) {
-            return SANDY_FORM;
-        }
-        return BROWN_FORM;
-    }
-
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
@@ -170,10 +160,8 @@ public class MonstrousScorpion extends SmartyMob {
         return DESounds.ES_BLACK_SCORPION_DEATH.get();
     }
 
-    @Override
-    public boolean addEffect(MobEffectInstance effectInstance, Entity entityIn) {
-        if (EffectHelper.isToxin(effectInstance.getEffect())) return false;
-        return super.addEffect(effectInstance, entityIn);
+    public static SimpleAnimation[] getClawAttackAnimations() {
+        return new SimpleAnimation[] {RIGHT_CLAW_ATTACk, LEFT_CLAW_ATTACk, BOTH_CLAWS_ATTACK};
     }
 
     @Override

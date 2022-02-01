@@ -4,7 +4,7 @@ import net.bottomtextdanny.braincell.mod.base.util.Connection;
 import net.bottomtextdanny.danny_expannny.DannysExpansion;
 import net.bottomtextdanny.danny_expannny.objects.entities.modules.phase_affected_provider.PhaseAffectedProvider;
 import net.bottomtextdanny.braincell.mod.entity.modules.variable.VariableModule;
-import net.bottomtextdanny.braincell.mod.entity.modules.variable.VariableProvider;
+import net.bottomtextdanny.braincell.mod.entity.modules.variable.VariantProvider;
 import net.bottomtextdanny.danny_expannny.objects.entities.modules.phase_affected_provider.AttributeTransformer;
 import net.bottomtextdanny.danny_expannny.capabilities.CapabilityHelper;
 import net.bottomtextdanny.danny_expannny.capabilities.world.LevelCapability;
@@ -35,7 +35,7 @@ public abstract class MobMixin extends LivingEntity {
     public void finalizeSpawnHook(ServerLevelAccessor p_21434_, DifficultyInstance p_21435_, MobSpawnType p_21436_, SpawnGroupData p_21437_, CompoundTag p_21438_, CallbackInfoReturnable<SpawnGroupData> cir) {
         if (!this.level.isClientSide()) {
             if (p_21436_ != MobSpawnType.COMMAND) {
-                if (this instanceof VariableProvider provider && provider.operatingVariableModule()) {
+                if (this instanceof VariantProvider provider && provider.operatingVariableModule()) {
                     VariableModule module = provider.variableModule();
 
                     if (!module.isUpdated()) {
@@ -80,7 +80,7 @@ public abstract class MobMixin extends LivingEntity {
     @Inject(at = @At(value = "TAIL"), method = "readAdditionalSaveData", remap = false, cancellable = true)
     public void readAdditionalSaveDataHook(CompoundTag listtag, CallbackInfo ci) {
         if (!this.level.isClientSide()) {
-            if (this instanceof VariableProvider provider && provider.operatingVariableModule()) {
+            if (this instanceof VariantProvider provider && provider.operatingVariableModule()) {
                 VariableModule module = provider.variableModule();
 
                 if (!module.isUpdated()) {

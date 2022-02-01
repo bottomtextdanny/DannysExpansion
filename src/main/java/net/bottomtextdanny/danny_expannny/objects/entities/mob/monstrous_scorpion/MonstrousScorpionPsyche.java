@@ -1,7 +1,7 @@
 package net.bottomtextdanny.danny_expannny.objects.entities.mob.monstrous_scorpion;
 
 import net.bottomtextdanny.braincell.mod.base.misc.timer.IntScheduler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.psyche.Psyche;
 import net.bottomtextdanny.braincell.mod.entity.psyche.actions.*;
 import net.bottomtextdanny.braincell.mod.entity.psyche.actions.target.LookForAristocratAction;
@@ -33,7 +33,7 @@ public class MonstrousScorpionPsyche extends Psyche<MonstrousScorpion> {
 
     public MonstrousScorpionPsyche(MonstrousScorpion mob) {
         super(mob);
-        initializeActionMap(MAIN_MODULE, ANIMATION_ACTIONS_MODULE, IDLE_ACTIONS_MODULE);
+        allocateModules(3);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class MonstrousScorpionPsyche extends Psyche<MonstrousScorpion> {
         ConstantThoughtAction<MonstrousScorpion> globalCheck = ConstantThoughtAction.withUpdateCallback(getMob(), mobo -> {
             if (mobo.getTarget() != null) {
                 float reach = mobo.reachTo(mobo.getTarget());
-                if (getMob().mainAnimationHandler.isPlayingNull() && reach < MonstrousScorpion.ATTACK_RANGE) {
+                if (getMob().mainHandler.isPlayingNull() && reach < MonstrousScorpion.ATTACK_RANGE) {
                     if (getMob().attackDelay.get().hasEnded()) {
                         IntScheduler.Variable clawAttackTimer = getMob().clawAttackDelay.get();
                         if (clawAttackTimer.hasEnded() && reach < MonstrousScorpion.CLAW_ATTACK_RANGE) {
@@ -80,10 +80,10 @@ public class MonstrousScorpionPsyche extends Psyche<MonstrousScorpion> {
         tryAddRunningAction(IDLE_ACTIONS_MODULE, new FloatAction(getMob(), 0.3F));
     }
 
-    public static class StingAttackAction extends AnimationAction<MonstrousScorpion, Animation> {
+    public static class StingAttackAction extends AnimationAction<MonstrousScorpion, SimpleAnimation> {
 
         public StingAttackAction(MonstrousScorpion mob) {
-            super(mob, mob.getStingAnimation(), mob.mainAnimationHandler);
+            super(mob, MonstrousScorpion.STING, mob.mainHandler);
         }
 
         @Override
@@ -123,7 +123,7 @@ public class MonstrousScorpionPsyche extends Psyche<MonstrousScorpion> {
         protected void start() {
             super.start();
             int rgn = this.mob.getRandom().nextInt(3);
-            this.mob.mainAnimationHandler.play(this.mob.getClawAttackAnimations()[rgn]);
+            this.mob.mainHandler.play(MonstrousScorpion.getClawAttackAnimations()[rgn]);
         }
 
         @Override
@@ -133,9 +133,9 @@ public class MonstrousScorpionPsyche extends Psyche<MonstrousScorpion> {
 
             if (livingEntity != null) this.mob.getLookControl().setLookAt(this.mob.getTarget(), 30.0F, 20.0F);
 
-            if (this.mob.mainAnimationHandler.getTick() == 5) {
+            if (this.mob.mainHandler.getTick() == 5) {
                 this.mob.level.playSound(null, this.mob.getX(), this.mob.getEyeY(), this.mob.getZ(), DESounds.ES_SWOOSH.get(), SoundSource.HOSTILE, 0.6F + 0.07F * this.mob.getRandom().nextFloat(), 1.0F + 0.2F * this.mob.getRandom().nextFloat());
-            } else if (this.mob.mainAnimationHandler.getTick() == 7) {
+            } else if (this.mob.mainHandler.getTick() == 7) {
                 if (livingEntity != null && livingEntity.isAlive() && ReachHelper.reachSqr(this.mob, livingEntity) < MonstrousScorpion.CLAW_ATTACK_RANGE * 1.2F) {
                     this.mob.attackWithMultiplier(livingEntity, 1.0F);
                     this.mob.playSound(DESounds.ES_MONSTROUS_SCORPION_CLAW_ATTACK.get(), 1.0F, 1.0F + this.mob.getRandom().nextFloat() * 0.2F);
@@ -149,7 +149,7 @@ public class MonstrousScorpionPsyche extends Psyche<MonstrousScorpion> {
 
         @Override
         public boolean shouldKeepGoing() {
-            return active() && this.mob.mainAnimationHandler.get().from(MonstrousScorpion.CLAW_ATTACK_IDENTIFIER);
+            return active() && this.mob.mainHandler.getAnimation().isFrom(MonstrousScorpion.CLAW_ATTACK_IDENTIFIER);
         }
     }
 

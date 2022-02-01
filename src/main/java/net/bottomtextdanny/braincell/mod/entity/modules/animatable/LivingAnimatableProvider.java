@@ -26,5 +26,5 @@ public interface LivingAnimatableProvider extends BaseAnimatableProvider<LivingA
     }
 
     @Nullable
-    default IAnimation getDeathAnimation() {return null;}
+    default Animation getDeathAnimation() {return null;}
 }

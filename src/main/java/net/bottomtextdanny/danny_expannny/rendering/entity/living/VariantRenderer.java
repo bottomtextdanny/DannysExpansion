@@ -1,8 +1,7 @@
 package net.bottomtextdanny.danny_expannny.rendering.entity.living;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.bottomtextdanny.braincell.mod.entity.modules.variable.VariableProvider;
-import net.bottomtextdanny.danny_expannny.DannysExpansion;
+import net.bottomtextdanny.braincell.mod.entity.modules.variable.VariantProvider;
 import net.bottomtextdanny.braincell.mod.structure.client_sided.variant_data.VariantRenderingData;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -11,7 +10,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 
-public abstract class VariantRenderer<T extends Mob & VariableProvider, M extends EntityModel<T>> extends MobRenderer<T, M> {
+public abstract class VariantRenderer<T extends Mob & VariantProvider, M extends EntityModel<T>> extends MobRenderer<T, M> {
 	private final M defaultModel;
 
 	public VariantRenderer(EntityRendererProvider.Context renderManagerIn, M entityModelIn, float shadowSizeIn) {

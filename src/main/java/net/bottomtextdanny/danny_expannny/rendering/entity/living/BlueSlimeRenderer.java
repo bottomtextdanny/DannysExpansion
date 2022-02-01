@@ -3,7 +3,7 @@ package net.bottomtextdanny.danny_expannny.rendering.entity.living;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.bottomtextdanny.danny_expannny.DannysExpansion;
 import net.bottomtextdanny.danny_expannny.vertex_models.living_entities.BlueSlimeModel;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.BlueSlimeEntity;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.BlueSlimeEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

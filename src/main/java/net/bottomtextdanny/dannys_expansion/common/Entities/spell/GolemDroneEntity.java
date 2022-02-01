@@ -1,6 +1,7 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.spell;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.world.builtin_entities.ModuledMob;
 import net.bottomtextdanny.danny_expannny.object_tables.DEParticles;
 import net.bottomtextdanny.danny_expannny.object_tables.DESounds;
@@ -25,7 +26,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.List;
 
 public class GolemDroneEntity extends SpellEntity {
-    public final Animation hurtAnimation = addAnimation(new Animation(8));
+    public static final SimpleAnimation HURT = new SimpleAnimation(8);
     @OnlyIn(Dist.CLIENT)
     GolemDroneLoopSound tchktchk;
     public byte hitCounter;
@@ -36,6 +37,11 @@ public class GolemDroneEntity extends SpellEntity {
         this.externalMotion = new ExternalMotion(0.8F);
 
         setLifeTime(200);
+    }
+
+    @Override
+    protected AnimationGetter getAnimations() {
+        return HURT;
     }
 
     @Override
@@ -101,17 +107,15 @@ public class GolemDroneEntity extends SpellEntity {
     @Override
     public boolean skipAttackInteraction(Entity entityIn) {
         if (this.invTimer.hasEnded()) {
-
             playSound(DESounds.ES_GOLEM_DRONE_HIT.get(), 1.0F, 1.0F + this.random.nextFloat() * 0.05F);
             this.hitCounter++;
-            this.mainHandler.play(this.hurtAnimation);
+            this.mainHandler.play(HURT);
             this.invTimer.reset();
 
             if (entityIn instanceof Player) {
                 Vec3 vec0 = DEMath.fromPitchYaw(0, DEMath.getTargetYaw(entityIn, this));
                 this.externalMotion.setMotion(vec0.x, 0, vec0.z );
             }
-
 
             for (int i = 0; i < 5; i++) {
                 float xRandom = (float) this.random.nextGaussian() * 0.25F;
@@ -122,9 +126,6 @@ public class GolemDroneEntity extends SpellEntity {
 
             }
         }
-
-
-
         return super.skipAttackInteraction(entityIn);
     }
 

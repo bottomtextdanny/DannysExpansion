@@ -9,15 +9,15 @@ import javax.annotation.Nullable;
 public class PlayerHelper {
 
     public static PlayerBowModule bowModule(Player player) {
-        return player.getCapability(PlayerCapability.CAPABILITY).orElse(null).bowModule();
+        return player.getCapability(PlayerCapability.TOKEN).orElse(null).bowModule();
     }
 
     public static PlayerGunModule gunModule(Player player) {
-        return player.getCapability(PlayerCapability.CAPABILITY).orElse(null).gunModule();
+        return player.getCapability(PlayerCapability.TOKEN).orElse(null).gunModule();
     }
 
     public static PlayerAccessoryModule accessoryModule(Player player) {
-        return player.getCapability(PlayerCapability.CAPABILITY).orElse(null).accessoryModule();
+        return player.getCapability(PlayerCapability.TOKEN).orElse(null).accessoryModule();
     }
 
     public static boolean hasAccessory(Player player, Class<? extends CoreAccessory> clazz) {

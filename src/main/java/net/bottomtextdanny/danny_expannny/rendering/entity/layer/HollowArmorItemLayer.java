@@ -19,7 +19,7 @@ public class HollowArmorItemLayer extends RenderLayer<HollowArmor, HollowArmorMo
     }
 
     public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, HollowArmor entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (entitylivingbaseIn.mainAnimationHandler.isPlaying(entitylivingbaseIn.getHealAnimation()) && entitylivingbaseIn.mainAnimationHandler.getTick() > 6 && entitylivingbaseIn.mainAnimationHandler.getTick() <= 22 ) {
+        if (entitylivingbaseIn.mainHandler.isPlaying(HollowArmor.HEAL) && entitylivingbaseIn.mainHandler.getTick() > 6 && entitylivingbaseIn.mainHandler.getTick() <= 22 ) {
             matrixStackIn.pushPose();
             getParentModel().leftHand.translateRotateWithParents(matrixStackIn);
 
@@ -29,7 +29,7 @@ public class HollowArmorItemLayer extends RenderLayer<HollowArmor, HollowArmorMo
 
             ItemStack itemstack = new ItemStack(Items.HONEY_BOTTLE);
 
-            if (entitylivingbaseIn.mainAnimationHandler.getTick() > 18) {
+            if (entitylivingbaseIn.mainHandler.getTick() > 18) {
                 itemstack = new ItemStack(Items.GLASS_BOTTLE);
             }
             Minecraft.getInstance().getItemInHandRenderer().renderItem(entitylivingbaseIn, itemstack, ItemTransforms.TransformType.GROUND, false, matrixStackIn, bufferIn, packedLightIn);

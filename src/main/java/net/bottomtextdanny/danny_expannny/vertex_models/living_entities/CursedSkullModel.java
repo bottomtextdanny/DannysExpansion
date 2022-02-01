@@ -42,8 +42,8 @@ public class CursedSkullModel extends BCEntityModel<CursedSkullEntity> {
     public void handleKeyframedAnimations(CursedSkullEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
         super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
         
-        if (entity.mainAnimationHandler.isPlaying(entity.spitFire)) {
-	        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick()  + getPartialTick());
+        if (entity.mainHandler.isPlaying(CursedSkullEntity.SPIT_FIRE)) {
+	        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick()  + getPartialTick());
 
             animator.setupKeyframe(16);
             animator.rotate(this.body, -37.5F, 0.0F, 0.0F);

@@ -1,9 +1,6 @@
 package net.bottomtextdanny.braincell.mod.world.builtin_entities;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.IAnimation;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.LivingAnimatableModule;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.LivingAnimatableProvider;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.*;
 import net.bottomtextdanny.danny_expannny.objects.entities.modules.phase_affected_provider.PhaseAffectedModule;
 import net.bottomtextdanny.danny_expannny.objects.entities.modules.phase_affected_provider.PhaseAffectedProvider;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
@@ -12,11 +9,11 @@ import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkMo
 import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkProvider;
 import net.bottomtextdanny.braincell.mod.entity.modules.motion_util.MotionUtilProvider;
 import net.bottomtextdanny.braincell.mod.entity.modules.variable.IndexedVariableModule;
-import net.bottomtextdanny.braincell.mod.entity.modules.variable.VariableProvider;
+import net.bottomtextdanny.braincell.mod.entity.modules.variable.VariantProvider;
 import net.bottomtextdanny.dannys_expansion.core.Util.DEMath;
 import net.bottomtextdanny.dannys_expansion.core.Util.Timer;
 import net.bottomtextdanny.dannys_expansion.core.Util.qol.Schedule;
-import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.ClientManager;
+import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.EntityClientMessenger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
@@ -41,14 +38,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Predicate;
 
 public abstract class ModuledMob extends PathfinderMob
-        implements ClientManager,
-                   BCDataManagerProvider,
-                   LoopedWalkProvider,
-                   LivingAnimatableProvider,
-                   VariableProvider,
-                   PhaseAffectedProvider {
+        implements EntityClientMessenger, BCDataManagerProvider, LoopedWalkProvider,
+        LivingAnimatableProvider, VariantProvider, PhaseAffectedProvider {
     private BCDataManager deDataManager;
-	public AnimationHandler<ModuledMob> mainAnimationHandler;
+	public AnimationHandler<ModuledMob> mainHandler;
     @Deprecated
     public Schedule sleepPathSchedule = new Schedule();
     @Deprecated
@@ -75,13 +68,19 @@ public abstract class ModuledMob extends PathfinderMob
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.animatableModule = new LivingAnimatableModule(this);
-        this.mainAnimationHandler = addAnimationHandler(new AnimationHandler<>(this));
+        this.animatableModule = new LivingAnimatableModule(this, getAnimations());
+        this.mainHandler = addAnimationHandler(new AnimationHandler<>(this));
         this.deDataManager = new BCDataManager(this);
         commonInit();
     }
 
     protected void commonInit() {}
+
+    @Override
+    public void onAddedToWorld() {
+        super.onAddedToWorld();
+
+    }
 
     //-----------looped walk module
     @Override
@@ -113,13 +112,17 @@ public abstract class ModuledMob extends PathfinderMob
 
     //-----------animatable module
 
+    public AnimationGetter getAnimations() {
+        return null;
+    }
+
     @Override
     public LivingAnimatableModule animatableModule() {
         return this.animatableModule;
     }
 
     @Nullable
-    public IAnimation getDeathAnimation() {
+    public Animation getDeathAnimation() {
         return null;
     }
 
@@ -308,7 +311,7 @@ public abstract class ModuledMob extends PathfinderMob
     }
 
     public boolean ifAttackMeleeParamsAnd(Predicate<LivingEntity> target) {
-       return hasAttackTarget() && this.mainAnimationHandler.inactive() && this.meleeTimer.hasEnded() && target.test(getTarget());
+       return hasAttackTarget() && this.mainHandler.isPlayingNull() && this.meleeTimer.hasEnded() && target.test(getTarget());
     }
 
     public boolean ifCollisionMeleeParamsAnd(Predicate<LivingEntity> target) {
@@ -316,7 +319,7 @@ public abstract class ModuledMob extends PathfinderMob
     }
 
     public boolean ifAttackRangedParamsAnd(Predicate<LivingEntity> target) {
-        return hasAttackTarget() && this.mainAnimationHandler.inactive() && this.rangedTimer.hasEnded() && target.test(getTarget());
+        return hasAttackTarget() && this.mainHandler.isPlayingNull() && this.rangedTimer.hasEnded() && target.test(getTarget());
     }
 
     public static void disableShield(Entity entity, int ticks) {

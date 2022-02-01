@@ -108,9 +108,9 @@ public class SporerModel extends BCEntityModel<SporerEntity> {
     public void handleKeyframedAnimations(SporerEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
         super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
 
-        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick()  + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick()  + getPartialTick());
 
-        if(entity.mainAnimationHandler.isPlaying(entity.boing)) {
+        if(entity.mainHandler.isPlaying(SporerEntity.BOING)) {
 
             animator.setupKeyframe(6);
             animator.scale(this.whole, 0.6666F, 0.0F, 0.6666F);

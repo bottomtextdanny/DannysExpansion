@@ -1,6 +1,6 @@
 package net.bottomtextdanny.dannys_expansion.common.hooks;
 
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.BlueSlimeEntity;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.BlueSlimeEntity;
 import net.bottomtextdanny.danny_expannny.accessory.modules.FinnHurt;
 import net.bottomtextdanny.danny_expannny.capabilities.CapabilityHelper;
 import net.bottomtextdanny.danny_expannny.capabilities.player.PlayerAccessoryModule;
@@ -28,7 +28,7 @@ public class HurtHooks {
     }
 
     private static void handlePlayerHurt(Player player, LivingHurtEvent event) {
-        PlayerAccessoryModule accessoryModule = CapabilityHelper.get(player, PlayerCapability.CAPABILITY).accessoryModule();
+        PlayerAccessoryModule accessoryModule = CapabilityHelper.get(player, PlayerCapability.TOKEN).accessoryModule();
         MutableObject<Float> damageTransformer = new MutableObject<>(event.getAmount());
         accessoryModule.getAllAccessoryList().forEach(acc -> {
             if (acc instanceof FinnHurt hurtModule) {

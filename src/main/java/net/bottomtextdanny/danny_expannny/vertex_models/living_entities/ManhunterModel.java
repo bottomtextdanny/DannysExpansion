@@ -160,7 +160,7 @@ public class ManhunterModel extends BCEntityModel<ManhunterEntity> {
     public void handleKeyframedAnimations(ManhunterEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
         super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
 
-        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick()  + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick()  + getPartialTick());
 
         float easedlimbSwingAmount = caculateLimbSwingAmountEasing(entity);
         float f = Mth.clamp(easedlimbSwingAmount * 8F, 0, 1);

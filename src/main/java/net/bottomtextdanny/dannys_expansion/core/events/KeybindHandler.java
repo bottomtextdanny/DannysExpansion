@@ -56,7 +56,7 @@ public class KeybindHandler {
         LocalPlayer player = Minecraft.getInstance().player;
 
         if (player != null && player.isAlive() && Minecraft.getInstance().isWindowActive()) {
-            PlayerCapability capability = CapabilityHelper.get(player, PlayerCapability.CAPABILITY);
+            PlayerCapability capability = CapabilityHelper.get(player, PlayerCapability.TOKEN);
             PlayerAccessoryModule accessoryModule = capability.accessoryModule();
 
             if (event.phase == TickEvent.Phase.START) {

@@ -1,11 +1,11 @@
 package net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations;
 
-import net.bottomtextdanny.dannys_expansion.core.interfaces.InstancedAnimation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
 
-@InstancedAnimation
-public class CuttedAnimation extends Animation {
+import java.util.function.Supplier;
+
+public class CuttedAnimation extends DEAnimation<CuttedAnimationData> {
     private final int cut;
-    private boolean pass;
 
     public CuttedAnimation(int duration, int cut) {
         super(duration);
@@ -13,16 +13,16 @@ public class CuttedAnimation extends Animation {
     }
 
     @Override
-    public int progressTick(int progress) {
-        return this.pass || progress < this.cut ? progress + 1 : progress;
-    }
-
-    public void setPass(boolean pass) {
-        this.pass = pass;
+    public Supplier<CuttedAnimationData> dataForPlay() {
+        return CuttedAnimationData::new;
     }
 
     @Override
-    public void resetInstanceValues() {
-        this.pass = false;
+    public int progressTick(int progress, AnimationHandler<?> handler) {
+        return getData(handler).pass || progress < this.cut ? progress + 1 : progress;
+    }
+
+    public void setPass(AnimationHandler<?> handler, boolean pass) {
+        getData(handler).pass = pass;
     }
 }

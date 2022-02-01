@@ -1,9 +1,11 @@
 package net.bottomtextdanny.danny_expannny.objects.entities;
 
 import net.bottomtextdanny.braincell.mod.base.util.Connection;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.LoopAnimation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.LoopedAnimation;
 import net.bottomtextdanny.danny_expannny.DannysExpansion;
 import net.bottomtextdanny.danny_expannny.object_tables.DESounds;
 import net.bottomtextdanny.danny_expannny.objects.sound_instances.EnderDragonRewardLoopSound;
@@ -34,9 +36,10 @@ import java.util.List;
 public class EnderDragonRewardEntity extends DEBaseEntity {
 	public static final ResourceLocation LOOT_TABLE = new ResourceLocation(DannysExpansion.ID, "gameplay/ender_dragon_reward");
 	public final AnimationHandler<EnderDragonRewardEntity> rotationLoopHandler;
-	public final Animation spawn;
-	public final Animation rotate;
-	public final Animation giveItems;
+	public static final SimpleAnimation SPAWN = new SimpleAnimation(15);
+	public static final LoopedAnimation ROTATE = new LoopedAnimation(200);
+	public static final SimpleAnimation GIVE_ITEMS = new SimpleAnimation(60);
+	public static final AnimationManager ANIMATIONS = new AnimationManager(SPAWN, ROTATE, GIVE_ITEMS);
 	@OnlyIn(Dist.CLIENT)
 	private EnderDragonRewardLoopSound loopSound;
 	private float fxIntensity;
@@ -45,9 +48,6 @@ public class EnderDragonRewardEntity extends DEBaseEntity {
 	public EnderDragonRewardEntity(EntityType<? extends Entity> entityTypeIn, Level worldIn) {
 		super(entityTypeIn, worldIn);
         this.rotationLoopHandler = addAnimationHandler(new AnimationHandler<>(this));
-		this.spawn = addAnimation(new Animation(15));
-		this.rotate = addAnimation(new LoopAnimation(200));
-		this.giveItems = addAnimation(new Animation(60));
 	}
 
 	@Override
@@ -55,11 +55,16 @@ public class EnderDragonRewardEntity extends DEBaseEntity {
 	}
 
 	@Override
+	public AnimationGetter getAnimations() {
+		return ANIMATIONS;
+	}
+
+	@Override
 	public void onAddedToWorld() {
 		super.onAddedToWorld();
 		if (!this.level.isClientSide()) {
-			this.rotationLoopHandler.play(this.rotate);
-			this.mainAnimationHandler.play(this.spawn);
+			this.rotationLoopHandler.play(ROTATE);
+			this.mainAnimationHandler.play(SPAWN);
 		}
 	}
 
@@ -67,7 +72,7 @@ public class EnderDragonRewardEntity extends DEBaseEntity {
 	public void tick() {
 		super.tick();
 		
-		if (this.mainAnimationHandler.isPlaying(this.giveItems)) {
+		if (this.mainAnimationHandler.isPlaying(GIVE_ITEMS)) {
 			int animTick = this.mainAnimationHandler.getTick();
 			
 			if (!this.level.isClientSide()) {
@@ -107,9 +112,9 @@ public class EnderDragonRewardEntity extends DEBaseEntity {
 
 	public void handleLightEffect() {
 		this.prevFxIntensity = this.fxIntensity;
-		if (this.mainAnimationHandler.isPlaying(this.spawn)) {
+		if (this.mainAnimationHandler.isPlaying(SPAWN)) {
 			this.fxIntensity = (float) this.mainAnimationHandler.getTick() / 15.0F;
-		} else if (this.mainAnimationHandler.isPlaying(this.giveItems)) {
+		} else if (this.mainAnimationHandler.isPlaying(GIVE_ITEMS)) {
 			float tick = (float)this.mainAnimationHandler.getTick();
 			if (tick > 45.0F && tick <= 50.0F) {
 				this.fxIntensity = 1.0F + 0.8F * (tick - 45.0F);
@@ -145,7 +150,7 @@ public class EnderDragonRewardEntity extends DEBaseEntity {
 	@Override
 	public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
 		if (!player.level.isClientSide && this.mainAnimationHandler.isPlayingNull()) {
-			this.mainAnimationHandler.play(this.giveItems);
+			this.mainAnimationHandler.play(GIVE_ITEMS);
 		}
 		return super.interactAt(player, vec, hand);
 	}
@@ -169,12 +174,8 @@ public class EnderDragonRewardEntity extends DEBaseEntity {
 	}
 
 	@Override
-	protected void readAdditionalSaveData(CompoundTag p_20052_) {
-
-	}
+	protected void readAdditionalSaveData(CompoundTag p_20052_) {}
 
 	@Override
-	protected void addAdditionalSaveData(CompoundTag p_20139_) {
-
-	}
+	protected void addAdditionalSaveData(CompoundTag p_20139_) {}
 }

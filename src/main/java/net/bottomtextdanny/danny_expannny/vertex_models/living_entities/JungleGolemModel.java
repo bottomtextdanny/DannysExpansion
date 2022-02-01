@@ -93,9 +93,9 @@ public class JungleGolemModel extends BCEntityModel<JungleGolemEntity> {
     public void handleKeyframedAnimations(JungleGolemEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
         super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
 
-        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick()  + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick()  + getPartialTick());
 
-        if (entity.mainAnimationHandler.isPlaying(entity.slam)) {
+        if (entity.mainHandler.isPlaying(JungleGolemEntity.SLAM)) {
 
             animator.setupKeyframe(4);
             animator.rotate(this.hip, -10F, 0F, 0F);
@@ -120,7 +120,7 @@ public class JungleGolemModel extends BCEntityModel<JungleGolemEntity> {
             animator.emptyKeyframe(6, Easing.LINEAR);
         }
 
-        else if (entity.mainAnimationHandler.isPlaying(entity.punch)) {
+        else if (entity.mainHandler.isPlaying(JungleGolemEntity.PUNCH)) {
 
             animator.setupKeyframe(5);
             animator.rotate(this.hip, 0F, 10.0F, 0F);
@@ -186,7 +186,7 @@ public class JungleGolemModel extends BCEntityModel<JungleGolemEntity> {
             animator.emptyKeyframe(8, Easing.LINEAR);
         }
 
-        else if (entity.mainAnimationHandler.isPlaying(entity.heavyPunch)) {
+        else if (entity.mainHandler.isPlaying(JungleGolemEntity.HEAVY_PUNCH)) {
 
             animator.setupKeyframe(7);
             animator.rotate(this.body, 0F, 35F, 0F);
@@ -267,7 +267,7 @@ public class JungleGolemModel extends BCEntityModel<JungleGolemEntity> {
             animator.emptyKeyframe(4, Easing.LINEAR);
         }
 
-        else if (entity.mainAnimationHandler.isPlaying(entity.droneFront)) {
+        else if (entity.mainHandler.isPlaying(JungleGolemEntity.THROW_DRONE)) {
 
             animator.setupKeyframe(10);
             animator.move(this.body, 0.2F, 0.0F, 1.5F);

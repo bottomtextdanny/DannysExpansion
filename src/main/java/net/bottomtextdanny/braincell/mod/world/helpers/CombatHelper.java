@@ -44,7 +44,7 @@ public final class CombatHelper {
         mayDisableShield(attacker, target, ticks, 1.0F);
     }
 
-    public static boolean validAttackTarget(PathfinderMob mob) {
+    public static boolean hasValidAttackTarget(PathfinderMob mob) {
         return mob.getTarget() != null && mob.getTarget().isAlive() && !mob.isRemoved();
     }
 

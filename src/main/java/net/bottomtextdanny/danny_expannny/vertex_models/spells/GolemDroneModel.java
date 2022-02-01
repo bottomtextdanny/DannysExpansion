@@ -85,7 +85,7 @@ public class GolemDroneModel extends BCEntityModel<GolemDroneEntity> {
         animator.setupKeyframe(4);
         animator.apply(Easing.EASE_OUT_CUBIC);
 
-        if (entity.mainHandler.isPlaying(entity.hurtAnimation)) {
+        if (entity.mainHandler.isPlaying(GolemDroneEntity.HURT)) {
             EntityModelAnimator ambientAnimator = new EntityModelAnimator(this, entity.mainHandler.linearProgress());
 
             ambientAnimator.setupKeyframe(1.5F);

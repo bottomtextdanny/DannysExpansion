@@ -1,6 +1,8 @@
 package net.bottomtextdanny.dannys_expansion.common.Entities.living;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.world.builtin_entities.ModuledMob;
 import net.bottomtextdanny.danny_expannny.object_tables.DEEntities;
 import net.bottomtextdanny.danny_expannny.object_tables.DESounds;
@@ -36,10 +38,11 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 
 public class JungleGolemEntity extends ModuledMob implements Enemy {
-    public Animation slam;
-    public Animation punch;
-    public Animation heavyPunch;
-    public Animation droneFront;
+    public static final SimpleAnimation SLAM = new SimpleAnimation(15);
+    public static final SimpleAnimation PUNCH = new SimpleAnimation(15);
+    public static final SimpleAnimation HEAVY_PUNCH = new SimpleAnimation(23);
+    public static final SimpleAnimation THROW_DRONE = new SimpleAnimation(28);
+    public static final AnimationManager ANIMATIONS = new AnimationManager(SLAM, PUNCH, HEAVY_PUNCH, THROW_DRONE);
     public Timer heavyTimer;
 
     public JungleGolemEntity(EntityType<? extends PathfinderMob> type, Level worldIn) {
@@ -51,12 +54,8 @@ public class JungleGolemEntity extends ModuledMob implements Enemy {
     }
 
     @Override
-    protected void commonInit() {
-
-        this.slam = addAnimation(new Animation(15));
-        this.punch = addAnimation(new Animation(15));
-        this.heavyPunch = addAnimation(new Animation(23));
-        this.droneFront = addAnimation(new Animation(28));
+    public AnimationGetter getAnimations() {
+        return ANIMATIONS;
     }
 
     @Override
@@ -69,9 +68,9 @@ public class JungleGolemEntity extends ModuledMob implements Enemy {
     protected void registerExtraGoals() {
 
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(0, new PlayAnimationGoal(this, this.heavyPunch, o -> hasAttackTarget() && this.heavyTimer.hasEnded() && this.mainAnimationHandler.isPlayingNull() && hasLineOfSight(getTarget()) && reachTo(getTarget()) < 1.65F, o -> this.heavyTimer.reset()));
-        this.goalSelector.addGoal(0, new PlayShuffledAnimationsGoal(this, Arrays.asList(this.slam, this.punch), o -> hasAttackTarget() && this.meleeTimer.hasEnded() && this.mainAnimationHandler.isPlayingNull() && hasLineOfSight(getTarget()) && reachTo(getTarget()) < 1.65F, o -> this.meleeTimer.reset()));
-        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, this.droneFront, o -> hasAttackTarget() && this.mainAnimationHandler.isPlayingNull() && hasLineOfSight(getTarget()) && this.rangedTimer.hasEnded(), o -> this.rangedTimer.reset()));
+        this.goalSelector.addGoal(0, new PlayAnimationGoal(this, HEAVY_PUNCH, o -> hasAttackTarget() && this.heavyTimer.hasEnded() && this.mainHandler.isPlayingNull() && hasLineOfSight(getTarget()) && reachTo(getTarget()) < 1.65F, o -> this.heavyTimer.reset()));
+        this.goalSelector.addGoal(0, new PlayShuffledAnimationsGoal(this, Arrays.asList(SLAM, PUNCH), o -> hasAttackTarget() && this.meleeTimer.hasEnded() && this.mainHandler.isPlayingNull() && hasLineOfSight(getTarget()) && reachTo(getTarget()) < 1.65F, o -> this.meleeTimer.reset()));
+        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, THROW_DRONE, o -> hasAttackTarget() && this.mainHandler.isPlayingNull() && hasLineOfSight(getTarget()) && this.rangedTimer.hasEnded(), o -> this.rangedTimer.reset()));
         this.goalSelector.addGoal(2, new FollowTargetGoal(this, 1.2d));
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1d));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
@@ -99,35 +98,35 @@ public class JungleGolemEntity extends ModuledMob implements Enemy {
         super.tick();
         if (isEffectiveAi()) {
 
-            if (this.mainAnimationHandler.isPlaying(this.slam)) {
+            if (this.mainHandler.isPlaying(SLAM)) {
                 this.heavyTimer.tryUp();
                 this.sleepPathSchedule.sleepForNow();
 
-                if (this.mainAnimationHandler.getTick() == 4) {
+                if (this.mainHandler.getTick() == 4) {
 
                     playSound(SoundEvents.BASALT_BREAK, 1.0F, 0.6F + this.random.nextFloat() * 0.4F);
                 }
 
-                else if (hasAttackTarget() && this.mainAnimationHandler.getTick() == 7 && reachTo(getTarget()) < 2) doHurtTarget(getTarget());
+                else if (hasAttackTarget() && this.mainHandler.getTick() == 7 && reachTo(getTarget()) < 2) doHurtTarget(getTarget());
             }
 
-            else if (this.mainAnimationHandler.isPlaying(this.punch)) {
+            else if (this.mainHandler.isPlaying(PUNCH)) {
                 this.heavyTimer.tryUp();
                 this.sleepPathSchedule.sleepForNow();
 
-                if (this.mainAnimationHandler.getTick() == 8) {
+                if (this.mainHandler.getTick() == 8) {
 
                     playSound(SoundEvents.BASALT_BREAK, 1.0F, 0.6F + this.random.nextFloat() * 0.4F);
                 }
 
-                else if (hasAttackTarget() && this.mainAnimationHandler.getTick() == 7 && reachTo(getTarget()) < 2) doHurtTarget(getTarget());
+                else if (hasAttackTarget() && this.mainHandler.getTick() == 7 && reachTo(getTarget()) < 2) doHurtTarget(getTarget());
             }
 
-            else if (this.mainAnimationHandler.isPlaying(this.heavyPunch)) {
+            else if (this.mainHandler.isPlaying(HEAVY_PUNCH)) {
                 this.sleepPathSchedule.sleepForNow();
 
                 if (!this.level.isClientSide()) {
-                    if (this.mainAnimationHandler.getTick() == 10) {
+                    if (this.mainHandler.getTick() == 10) {
 
                         setYRot(this.yHeadRot);
                         playSound(DESounds.ES_SWOOSH.get(), 1.0F, 0.6F + this.random.nextFloat() * 0.4F);
@@ -137,7 +136,7 @@ public class JungleGolemEntity extends ModuledMob implements Enemy {
                         getLookControl().setLookAt(getTarget(), 30.0F, 30.0F);
 
 
-                        if (hasAttackTarget() && this.mainAnimationHandler.getTick() == 12 && reachTo(getTarget()) < 2.5) {
+                        if (hasAttackTarget() && this.mainHandler.getTick() == 12 && reachTo(getTarget()) < 2.5) {
                             playSound(DESounds.ES_JUNGLE_GOLEM_HEAVY_HIT.get(), 1.0F, 0.6F + this.random.nextFloat() * 0.4F);
 
                             attackWithMultiplier(getTarget(), 1.75F);
@@ -147,14 +146,14 @@ public class JungleGolemEntity extends ModuledMob implements Enemy {
                     }
                 }
             }
-            else if (this.mainAnimationHandler.isPlaying(this.droneFront)) {
+            else if (this.mainHandler.isPlaying(THROW_DRONE)) {
                 this.sleepPathSchedule.sleepForNow();
 
                 if (hasAttackTarget()) {
 
                     getLookControl().setLookAt(getTarget(), 30.0F, 30.0F);
 
-                    if (this.mainAnimationHandler.getTick() == 12) {
+                    if (this.mainHandler.getTick() == 12) {
 
                         Vec3 vec = DEMath.fromPitchYaw(0, this.yBodyRot);
                         Vec3 vecCounterClockwise90 = Vec3.directionFromRotation(0, Mth.wrapDegrees(this.yBodyRot) + 270);

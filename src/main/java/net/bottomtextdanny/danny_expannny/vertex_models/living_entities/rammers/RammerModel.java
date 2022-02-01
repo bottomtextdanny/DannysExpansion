@@ -123,10 +123,10 @@ public class RammerModel extends BCEntityModel<RammerEntity> {
     public void handleKeyframedAnimations(RammerEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
         super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
 
-        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 
 
-        if(entity.mainAnimationHandler.isPlaying(entity.ram)) {
+        if(entity.mainHandler.isPlaying(RammerEntity.RAM)) {
 
             animator.setupKeyframe(4);
             animator.move(this.model, 0.0F, -0.2F, 3.0F);

@@ -18,7 +18,7 @@ public class MonstrousScorpionRenderer extends VariantRenderer<MonstrousScorpion
     public MonstrousScorpionRenderer(EntityRendererProvider.Context manager) {
         super(manager, new MonstrousScorpionModel(), 0.35F);
 	    addLayer(new BasicMobLayerRenderer<>(this, e -> {
-		    if (e.variableModule().getForm() == null || !e.variableModule().isUpdated()) return null;
+		    if (!e.variableModule().isUpdated() || e.variableModule().getForm() == null || !e.variableModule().isUpdated()) return null;
 	    	ResourceLocation loc = ((MonstrousScorpionVariantRendering)e.variableModule().getForm().getRendering()).getEyeTexturePath();
 	    	if (loc == null) return null;
 		    return RenderType.eyes(loc);

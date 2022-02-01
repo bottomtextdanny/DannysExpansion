@@ -1,6 +1,8 @@
 package net.bottomtextdanny.danny_expannny.objects.entities.mob.ender_beast;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationManager;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.danny_expannny.object_tables.DESounds;
 import net.bottomtextdanny.dannys_expansion.common.Entities.ai.goals.PlayAnimationGoal;
 import net.bottomtextdanny.dannys_expansion.core.Util.DEMath;
@@ -13,8 +15,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class EnderBeastLancerEntity extends EnderBeastEntity{
-    public Animation impale;
-    public Animation swing;
+    public static final SimpleAnimation IMPALE = new SimpleAnimation(40);
+    public static final SimpleAnimation SWING = new SimpleAnimation(30);
+    public static final AnimationManager ANIMATIONS = AnimationManager.marge(BASE_ANIMATIONS, IMPALE, SWING);
+
 
     public EnderBeastLancerEntity(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
@@ -23,18 +27,6 @@ public class EnderBeastLancerEntity extends EnderBeastEntity{
     @Override
     protected void commonInit() {
         super.commonInit();
-        this.impale = addAnimation(new Animation(40));
-        this.swing = addAnimation(new Animation(30));
-    }
-
-    protected void registerExtraGoals() {
-        super.registerExtraGoals();
-        this.goalSelector.addGoal(0, new PlayAnimationGoal(this, this.swing,
-                o -> hasAttackTarget() && this.mainAnimationHandler.inactive() && this.meleeTimer.hasEnded() && distanceToSqr(getTarget()) <= 11.0F,
-                dannyEntity -> this.meleeTimer.reset()));
-        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, this.impale,
-                o -> hasAttackTarget() && this.mainAnimationHandler.inactive() && this.rangedTimer.hasEnded() && distanceToSqr(getTarget()) <= 17 && distanceToSqr(getTarget()) > 11,
-                dannyEntity -> this.rangedTimer.reset()));
     }
 
     public static AttributeSupplier.Builder Attributes() {
@@ -47,6 +39,21 @@ public class EnderBeastLancerEntity extends EnderBeastEntity{
     }
 
     @Override
+    public AnimationGetter getAnimations() {
+        return ANIMATIONS;
+    }
+
+    protected void registerExtraGoals() {
+        super.registerExtraGoals();
+        this.goalSelector.addGoal(0, new PlayAnimationGoal(this, SWING,
+                o -> hasAttackTarget() && this.mainHandler.isPlayingNull() && this.meleeTimer.hasEnded() && distanceToSqr(getTarget()) <= 11.0F,
+                dannyEntity -> this.meleeTimer.reset()));
+        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, IMPALE,
+                o -> hasAttackTarget() && this.mainHandler.isPlayingNull() && this.rangedTimer.hasEnded() && distanceToSqr(getTarget()) <= 17 && distanceToSqr(getTarget()) > 11,
+                dannyEntity -> this.rangedTimer.reset()));
+    }
+
+    @Override
     public void tick() {
         super.tick();
         if (!this.level.isClientSide() && hasAttackTarget()) {
@@ -54,16 +61,16 @@ public class EnderBeastLancerEntity extends EnderBeastEntity{
         }
 	  
             if (!this.level.isClientSide()) {
-                if (this.mainAnimationHandler.isPlaying(this.impale)) {
+                if (this.mainHandler.isPlaying(IMPALE)) {
                     this.sleepPathSchedule.sleepForNow();
 	                getNavigation().stop();
                     if (hasAttackTarget()) {
                         float yawToTarget = DEMath.getTargetYaw(this, getTarget());
 	
-	                    if (this.mainAnimationHandler.getTick() == 2) {
+	                    if (this.mainHandler.getTick() == 2) {
 		                    playSound(DESounds.ES_ENDER_BEAST_EFFORT.get(), 1.0F, 0.8F + (float) this.random.nextInt(2) * 0.1F);
-                            this.jawModule.play(this.jawAnimation20);
-	                    } else if (this.mainAnimationHandler.getTick() == 10) {
+                            this.jawModule.play(SCREAM);
+	                    } else if (this.mainHandler.getTick() == 10) {
                             if (distanceTo(getTarget()) <= 20) {
                                 Vec3 vec = DEMath.fromPitchYaw(0, getYRot());
 
@@ -77,12 +84,12 @@ public class EnderBeastLancerEntity extends EnderBeastEntity{
                         getLookControl().setLookAt(getTarget(), 7.0F, 30.0F);
 
                     }
-                } else if (this.mainAnimationHandler.isPlaying(this.swing)) {
+                } else if (this.mainHandler.isPlaying(SWING)) {
                     this.sleepPathSchedule.sleepForNow();
 	                getNavigation().stop();
                     if (hasAttackTarget()) {
                         float yawToTarget = DEMath.getTargetYaw(this, getTarget());
-                        if (this.mainAnimationHandler.getTick() == 9) {
+                        if (this.mainHandler.getTick() == 9) {
                             if (distanceTo(getTarget()) <= 18) {
                                 Vec3 vec = DEMath.fromPitchYaw(0, getYRot());
 

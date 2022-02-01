@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = DannysExpansion.ID)
 public class PlayerCapability extends CapabilityWrap<PlayerCapability, Player> {
-    public static Capability<PlayerCapability> CAPABILITY = CapabilityManager.get(new CapabilityToken<>(){});
+    public static Capability<PlayerCapability> TOKEN = CapabilityManager.get(new CapabilityToken<>(){});
     private PlayerAccessoryModule accessoryModule;
     private PlayerGunModule gunModule;
     private PlayerBowModule bowModule;
@@ -45,6 +45,6 @@ public class PlayerCapability extends CapabilityWrap<PlayerCapability, Player> {
 
     @Override
     protected Capability<?> getToken() {
-        return CAPABILITY;
+        return TOKEN;
     }
 }

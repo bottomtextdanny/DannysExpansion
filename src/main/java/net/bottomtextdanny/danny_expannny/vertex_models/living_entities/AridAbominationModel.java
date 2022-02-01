@@ -126,11 +126,11 @@ public class AridAbominationModel extends BCEntityModel<AridAbominationEntity> {
 
     @Override
     public void handleKeyframedAnimations(AridAbominationEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
-        EntityModelAnimator animator = new EntityModelAnimator(this, (float) entity.mainAnimationHandler.getTick() + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, (float) entity.mainHandler.getTick() + getPartialTick());
         float walkMult = 1.0F;
 	    
-        if (entity.hurtAnimation.isWoke()) {
-            EntityModelAnimator ambientAnimator = new EntityModelAnimator(this, (float) entity.mainAnimationHandler.getTick() + getPartialTick());
+        if (entity.mainHandler.isPlaying(AridAbominationEntity.CLAP)) {
+            EntityModelAnimator ambientAnimator = new EntityModelAnimator(this, (float) entity.mainHandler.getTick() + getPartialTick());
 
             ambientAnimator.setupKeyframe(3.0F);
             ambientAnimator.rotate(this.hip, -17.5F, 0.0F, 0.0F);
@@ -145,7 +145,7 @@ public class AridAbominationModel extends BCEntityModel<AridAbominationEntity> {
             ambientAnimator.emptyKeyframe(3.0F, Easing.LINEAR);
         }
 
-        if (entity.mainAnimationHandler.isPlaying(entity.clap)) {
+        if (entity.mainHandler.isPlaying(AridAbominationEntity.CLAP)) {
             walkMult = animator.disable(4.0F, 10.0F, 4.0F);
 
             animator.setupKeyframe(7.0F);
@@ -355,7 +355,7 @@ public class AridAbominationModel extends BCEntityModel<AridAbominationEntity> {
         walkOffset.rotate(this.leftArm, 5.0F, 0.0F, 0.0F);
         walkOffset.apply();
         
-        if (entity.mainAnimationHandler.isPlaying(entity.clap)) {
+        if (entity.mainHandler.isPlaying(AridAbominationEntity.CLAP)) {
         	entity.rightHandPosition = this.rightHand.getAbsolutePosition(Vec3.ZERO, getPartialTick(), entity);
         }
     }

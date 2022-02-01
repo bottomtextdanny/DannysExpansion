@@ -2,6 +2,7 @@ package net.bottomtextdanny.dannys_expansion.common.Entities.projectile;
 
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimatableModule;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimatableProvider;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManagerProvider;
@@ -12,7 +13,7 @@ import net.bottomtextdanny.braincell.mod.serialization.WorldPacketData;
 import net.bottomtextdanny.braincell.mod.serialization.serializers.builtin.BuiltinSerializers;
 import net.bottomtextdanny.dannys_expansion.core.Util.DannyRayTraceHelper;
 import net.bottomtextdanny.braincell.underlying.misc.ObjectFetcher;
-import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.ClientManager;
+import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.EntityClientMessenger;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -28,7 +29,7 @@ import net.minecraftforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
-public abstract class DEProjectile extends Projectile implements BCDataManagerProvider, ClientManager, AnimatableProvider {
+public abstract class DEProjectile extends Projectile implements BCDataManagerProvider, EntityClientMessenger, AnimatableProvider {
     private static final int BASE_UPDATE_TICK_CLIENT_FLAG = 0;
     public static final EntityDataReference<Entity> CASTER_REF =
             BCDataManager.attribute(DEProjectile.class,
@@ -62,8 +63,12 @@ public abstract class DEProjectile extends Projectile implements BCDataManagerPr
     protected void defineSynchedData() {
         this.lifetime = baseLifetime();
         this.deDataManager = new BCDataManager(this);
-        this.animatableModule = new AnimatableModule(this);
+        this.animatableModule = new AnimatableModule(this, getAnimations());
         commonInit();
+    }
+
+    protected AnimationGetter getAnimations() {
+        return null;
     }
 
     public abstract void commonInit();

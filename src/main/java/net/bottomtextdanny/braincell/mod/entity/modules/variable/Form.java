@@ -12,12 +12,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 
 public abstract class Form<E extends LivingEntity> {
-    @OnlyHandledOnClient
-    private final Object rendering;
+    @OnlyIn(Dist.CLIENT)
+    private VariantRenderingData<E> rendering;
 
     public Form() {
         super();
-        this.rendering = Connection.makeClientSideUnknown(() -> createRenderingHandler());
+        Connection.doClientSide(() -> this.rendering =  createRenderingHandler());
     }
 
     protected abstract VariantRenderingData<E> createRenderingHandler();
@@ -27,8 +27,7 @@ public abstract class Form<E extends LivingEntity> {
         applyAttributeBonuses((E) entityIn);
     }
 
-    public void applyAttributeBonuses(E entityIn) {
-    }
+    public void applyAttributeBonuses(E entityIn) {}
 
     @Nullable
     public EntityDimensions boxSize() {
@@ -38,6 +37,6 @@ public abstract class Form<E extends LivingEntity> {
     @SuppressWarnings("unchecked")
     @OnlyIn(Dist.CLIENT)
     public VariantRenderingData<E> getRendering() {
-        return (VariantRenderingData<E>)this.rendering;
+        return this.rendering;
     }
 }

@@ -2,10 +2,10 @@ package net.bottomtextdanny.braincell.mod.entity.psyche.actions;
 
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationHandler;
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.BaseAnimatableProvider;
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.IAnimation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.Animation;
 import net.minecraft.world.entity.PathfinderMob;
 
-public class AnimationAction<E extends PathfinderMob & BaseAnimatableProvider, A extends IAnimation> extends Action<E> {
+public class AnimationAction<E extends PathfinderMob & BaseAnimatableProvider, A extends Animation> extends Action<E> {
     protected final A animation;
     protected final AnimationHandler<?> animationHandler;
 

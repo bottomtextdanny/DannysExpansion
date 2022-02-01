@@ -21,19 +21,4 @@ public class IceElementalRenderer extends MobRenderer<IceElemental, IceElemental
     public ResourceLocation getTextureLocation(IceElemental entity) {
         return TEXTURES;
     }
-
-//    @Override
-//    public void render(IceElementalEntity entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
-//
-//        super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-//    }
-
-//    @Override
-//    public boolean shouldRender(IceElementalEntity livingEntityIn, Frustum camera, double camX, double camY, double camZ) {
-////        if (DE.clientManager.frustum.isSphereInFrustum((float)livingEntityIn.getX(), (float)livingEntityIn.getY(), (float)livingEntityIn.getZ(), 6.0F)) {
-////	        DE.clientManager.shaderManager.lightingWorkflow.addLight(new PointLight(EntityUtil.easedPos(livingEntityIn, DEUtil.PARTIAL_TICK), new Vec3(0.0, 0.4, 1.0), 6.0F, 0.78F, 1.8F));
-////        }
-//
-//	    return super.shouldRender(livingEntityIn, camera, camX, camY, camZ);
-//    }
 }

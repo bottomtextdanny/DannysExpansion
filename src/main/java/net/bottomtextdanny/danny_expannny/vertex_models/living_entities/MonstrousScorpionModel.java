@@ -184,8 +184,8 @@ public class MonstrousScorpionModel extends BCEntityModel<MonstrousScorpion> {
     public void handleKeyframedAnimations(MonstrousScorpion entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
 		super.handleKeyframedAnimations(entity, limbSwing, limbSwingAmount, headYaw, headPitch);
 
-		if (entity.mainAnimationHandler.isPlaying(entity.getStingAnimation())) {
-			EntityModelAnimator attackAnimator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+		if (entity.mainHandler.isPlaying(MonstrousScorpion.STING)) {
+			EntityModelAnimator attackAnimator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 
 			attackAnimator.setupKeyframe(2.0F);
 			attackAnimator.move(this.tail1, 0.0F, 2.0F, 0.0F);
@@ -202,8 +202,8 @@ public class MonstrousScorpionModel extends BCEntityModel<MonstrousScorpion> {
 			attackAnimator.apply(Easing.LINEAR);
 
 			attackAnimator.emptyKeyframe(6.0F, Easing.LINEAR);
-		} else if (entity.mainAnimationHandler.isPlaying(entity.getRightClawAttack())) {
-			EntityModelAnimator attackAnimator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+		} else if (entity.mainHandler.isPlaying(MonstrousScorpion.RIGHT_CLAW_ATTACk)) {
+			EntityModelAnimator attackAnimator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 
 			attackAnimator.setupKeyframe(3.0F);
 			attackAnimator.rotate(this.rightArm, 0.0F, 80.0F, 0.0F);
@@ -231,8 +231,8 @@ public class MonstrousScorpionModel extends BCEntityModel<MonstrousScorpion> {
 
 			attackAnimator.emptyKeyframe(7.0F, Easing.EASE_OUT_SQUARE);
 
-		} else if (entity.mainAnimationHandler.isPlaying(entity.getLeftClawAttack())) {
-			EntityModelAnimator attackAnimator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+		} else if (entity.mainHandler.isPlaying(MonstrousScorpion.LEFT_CLAW_ATTACk)) {
+			EntityModelAnimator attackAnimator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 
 			attackAnimator.setupKeyframe(3.0F);
 			attackAnimator.rotate(this.leftArm, 0.0F, -80.0F, 0.0F);
@@ -260,8 +260,8 @@ public class MonstrousScorpionModel extends BCEntityModel<MonstrousScorpion> {
 
 			attackAnimator.emptyKeyframe(7.0F, Easing.EASE_OUT_SQUARE);
 
-		} else if (entity.mainAnimationHandler.isPlaying(entity.getBothClawsAttack())) {
-			EntityModelAnimator attackAnimator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+		} else if (entity.mainHandler.isPlaying(MonstrousScorpion.BOTH_CLAWS_ATTACK)) {
+			EntityModelAnimator attackAnimator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 
 			attackAnimator.setupKeyframe(3.0F);
 			attackAnimator.rotate(this.rightArm, 0.0F, 80.0F, 0.0F);

@@ -82,9 +82,9 @@ public class SporeWightModel extends BCEntityModel<SporeWightEntity> {
         float f = Mth.clamp(easedlimbSwingAmount / 0.125F, 0, 1);
         float easedLimbSwing = caculateLimbSwingEasing(entity);
         EntityModelAnimator walkAnimator = new EntityModelAnimator(this, Mth.clamp(easedLimbSwing, 0, 0.999F)).multiplier(f);
-        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+        EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 
-        if (entity.mainAnimationHandler.isPlaying(entity.attack)) {
+        if (entity.mainHandler.isPlaying(SporeWightEntity.ATTACK)) {
 
             animator.setupKeyframe(6);
             animator.rotate(this.body, -32.5F, 0F, 0F);
@@ -105,7 +105,7 @@ public class SporeWightModel extends BCEntityModel<SporeWightEntity> {
             animator.emptyKeyframe(8, Easing.LINEAR);
         }
 
-        if (entity.tickAnimation.isWoke()) {
+        if (entity.livingModule.isPlaying(SporeWightEntity.TICK)) {
             EntityModelAnimator tickAnimator = new EntityModelAnimator(this, entity.livingModule.getTick() + getPartialTick());
 
             tickAnimator.setupKeyframe(2);

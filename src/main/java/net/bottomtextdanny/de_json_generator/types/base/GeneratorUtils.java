@@ -7,9 +7,9 @@ import java.nio.file.Path;
 import java.util.regex.Pattern;
 
 public interface GeneratorUtils {
-    String PATH = "C:/Users/pc/minecraft mod/DannysExpansion1-18-build14/src/main/resources";
-    String JAVA_PATH = "C:/Users/pc/minecraft mod/DannysExpansion1-18-build14/src/main/java/";
-    String TEMPLATE_PATH = "C:/Users/pc/minecraft mod/DannysExpansion1-18-build14/src/main/resources/datagentemplates";
+    String PATH = "C:/Users/pc/minecraft mod/DannysExpansion/src/main/resources";
+    String JAVA_PATH = "C:/Users/pc/minecraft mod/DannysExpansion/src/main/java/";
+    String TEMPLATE_PATH = "C:/Users/pc/minecraft mod/DannysExpansion/src/main/resources/datagentemplates";
     String MOD_ID = DannysExpansion.ID;
     String MC_ID = "minecraft";
     Pattern P_NAME = Pattern.compile("_name", Pattern.LITERAL);

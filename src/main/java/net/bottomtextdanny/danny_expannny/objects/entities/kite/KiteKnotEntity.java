@@ -12,7 +12,7 @@ import net.bottomtextdanny.braincell.underlying.misc.ObjectFetcher;
 import net.bottomtextdanny.danny_expannny.capabilities.CapabilityHelper;
 import net.bottomtextdanny.danny_expannny.capabilities.world.LevelCapability;
 import net.bottomtextdanny.danny_expannny.capabilities.world.LevelWindModule;
-import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.ClientManager;
+import net.bottomtextdanny.dannys_expansion.core.interfaces.entity.EntityClientMessenger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -32,7 +32,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
 
-public class KiteKnotEntity extends Entity implements ClientManager, BCDataManagerProvider {
+public class KiteKnotEntity extends Entity implements EntityClientMessenger, BCDataManagerProvider {
     private final BCDataManager deDataManager = new BCDataManager(this);
     public static final EntityDataReference<ItemStack> KITE_ITEMSTACK_REF =
             BCDataManager.attribute(KiteKnotEntity.class,

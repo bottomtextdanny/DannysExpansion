@@ -5,7 +5,7 @@ import net.bottomtextdanny.braincell.mod.entity.modules.animatable.LivingAnimata
 import net.bottomtextdanny.braincell.mod.entity.modules.animatable.LivingAnimatableProvider;
 import net.bottomtextdanny.braincell.mod.entity.modules.looped_walk.LoopedWalkProvider;
 import net.bottomtextdanny.braincell.mod.entity.modules.motion_util.MotionUtilProvider;
-import net.bottomtextdanny.braincell.mod.entity.modules.variable.VariableProvider;
+import net.bottomtextdanny.braincell.mod.entity.modules.variable.VariantProvider;
 import net.bottomtextdanny.danny_expannny.network.servertoclient.MSGTrivialEntityActions;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
@@ -33,7 +33,7 @@ public abstract class LivingEntityMixin extends Entity {
 
 	@Inject(at = @At(value = "HEAD"), method = "getDimensions", remap = false, cancellable = true)
 	public void getDimensionsHook(Pose pose, CallbackInfoReturnable<EntityDimensions> cir) {
-		if (this instanceof VariableProvider provider && provider.operatingVariableModule() && provider.variableModule().isUpdated()) {
+		if (this instanceof VariantProvider provider && provider.operatingVariableModule() && provider.variableModule().isUpdated()) {
 			EntityDimensions formDimensions = provider.variableModule().getForm().boxSize();
 			if (formDimensions != null) {
 				cir.setReturnValue(provider.variableModule().getForm().boxSize());

@@ -8,33 +8,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseAnimatableModule<P extends BaseAnimatableProvider<?>> extends EntityModule<Entity, P> {
-    private final ArrayList<IAnimation> animationsIndexed;
+    private final AnimationGetter animationsIndexed;
     private final ArrayList<AnimationHandler<?>> animationHandlersIndexed;
 
-    public BaseAnimatableModule(Entity entity) {
+    public BaseAnimatableModule(Entity entity, AnimationGetter manager) {
         super(entity);
-        this.animationsIndexed = Lists.newArrayList();
+        this.animationsIndexed = manager;
         this.animationHandlersIndexed = Lists.newArrayList();
     }
 
     public void tick() {
         if (!this.entity.isRemoved()) {
             animationHandlerList().forEach(handler -> {
-                IAnimation animation = handler.get();
+                Animation<?> animation = handler.getAnimation();
 
-                if (!animation.isNull()) {
-                    if (animation.goal(handler.getTick())) {
+                if (animation != Animation.NULL) {
+                    if (animation.goal(handler.getTick(), handler)) {
                         this.provider.animationEndCallout(handler, animation);
-                        handler.trySleep();
+                        handler.deactivate();
                     } else {
-                        handler.update(animation.progressTick(handler.getTick()));
+                        handler.update(animation.progressTick(handler.getTick(), handler));
                     }
                 }
             });
         }
     }
 
-    public List<IAnimation> animationList() {
+    public AnimationGetter animationManager() {
         return this.animationsIndexed;
     }
 

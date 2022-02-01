@@ -5,11 +5,11 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.bottomtextdanny.braincell.mod.client_animation.EntityModelAnimator;
 import net.bottomtextdanny.braincell.mod.minecraft_front_rendering.vertex.BCEntityModel;
 import net.bottomtextdanny.braincell.mod.minecraft_front_rendering.vertex.BCVoxel;
-import net.bottomtextdanny.danny_expannny.objects.entities.mob.slime.mundane_slime.MundaneSlimeEntity;
+import net.bottomtextdanny.danny_expannny.objects.entities.mob.slimes.mundane_slime.MundaneSlime;
 import net.bottomtextdanny.dannys_expansion.core.Util.DEMath;
 import net.bottomtextdanny.dannys_expansion.core.Util.animation.Easing;
 
-public class SpookySlimeModel extends BCEntityModel<MundaneSlimeEntity> {
+public class SpookySlimeModel extends BCEntityModel<MundaneSlime> {
 	private final BCVoxel body;
 	private final BCVoxel mask;
 	
@@ -31,7 +31,7 @@ public class SpookySlimeModel extends BCEntityModel<MundaneSlimeEntity> {
 	}
 	
 	@Override
-	public void handleRotations(MundaneSlimeEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch) {
+	public void handleRotations(MundaneSlime entity, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch) {
 		float idle = DEMath.sin(ageInTicks * 0.4F);
 		
 		addSize(this.body, 0.1111F * idle, -0.1F * idle, 0.1111F * idle);
@@ -39,10 +39,10 @@ public class SpookySlimeModel extends BCEntityModel<MundaneSlimeEntity> {
 	}
 	
 	@Override
-	public void handleKeyframedAnimations(MundaneSlimeEntity entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
-		EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainAnimationHandler.getTick() + getPartialTick());
+	public void handleKeyframedAnimations(MundaneSlime entity, float limbSwing, float limbSwingAmount, float headYaw, float headPitch) {
+		EntityModelAnimator animator = new EntityModelAnimator(this, entity.mainHandler.getTick() + getPartialTick());
 		
-		if(entity.mainAnimationHandler.isPlaying(entity.jump)) {
+		if(entity.mainHandler.isPlaying(entity.JUMP)) {
 			
 			animator.setupKeyframe(4);
 			animator.scale(this.body, 0.7692F, -0.3F, 0.7692F);
@@ -57,7 +57,7 @@ public class SpookySlimeModel extends BCEntityModel<MundaneSlimeEntity> {
 			animator.emptyKeyframe(10, Easing.LINEAR);
 		}
 		
-		if(entity.mainAnimationHandler.isPlaying(entity.death)) {
+		if(entity.mainHandler.isPlaying(entity.DEATH)) {
 			
 			animator.setupKeyframe(10);
 			animator.scale(this.body, 0.7692F, -0.3F, 0.7692F);

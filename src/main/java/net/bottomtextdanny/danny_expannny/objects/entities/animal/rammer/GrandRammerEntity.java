@@ -1,6 +1,7 @@
 package net.bottomtextdanny.danny_expannny.objects.entities.animal.rammer;
 
-import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.Animation;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.AnimationGetter;
+import net.bottomtextdanny.braincell.mod.entity.modules.animatable.builtin_animations.SimpleAnimation;
 import net.bottomtextdanny.braincell.mod.entity.modules.data_manager.BCDataManager;
 import net.bottomtextdanny.braincell.mod.entity.serialization.EntityData;
 import net.bottomtextdanny.braincell.mod.entity.serialization.EntityDataReference;
@@ -51,10 +52,10 @@ public class GrandRammerEntity extends OwnableMountEntity {
                             () -> false,
                             "saddled")
             );
+    public static final SimpleAnimation RAM = new SimpleAnimation(20);
     public final EntityData<Float> size;
     public final EntityData<Boolean> saddled;
     private boolean updatedSize;
-    public Animation ram;
 
     public GrandRammerEntity(EntityType<? extends GrandRammerEntity> type, Level worldIn) {
         super(type, worldIn);
@@ -65,11 +66,15 @@ public class GrandRammerEntity extends OwnableMountEntity {
 
     @Override
     protected void commonInit() {
-        this.ram = addAnimation(new Animation(20));
+    }
+
+    @Override
+    public AnimationGetter getAnimations() {
+        return RAM;
     }
 
     protected void registerExtraGoals() {
-        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, this.ram, o -> hasAttackTarget() && this.mainAnimationHandler.isPlayingNull() && distanceTo(getTarget()) < targetDistance(1.0F)));
+        this.goalSelector.addGoal(1, new PlayAnimationGoal(this, RAM, o -> hasAttackTarget() && this.mainHandler.isPlayingNull() && distanceTo(getTarget()) < targetDistance(1.0F)));
         this.goalSelector.addGoal(2, new FollowTargetGoal(this, 1.25d));
         this.goalSelector.addGoal(3, new RandomStrollGoal(this, 1d));
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
@@ -100,15 +105,15 @@ public class GrandRammerEntity extends OwnableMountEntity {
             this.updatedSize = true;
         }
 
-        if (this.mainAnimationHandler.isPlaying(this.ram)) {
+        if (this.mainHandler.isPlaying(RAM)) {
 
-            if (this.mainAnimationHandler.getTick() == 4) {
+            if (this.mainHandler.getTick() == 4) {
                 this.level.playLocalSound(this.getX(), this.getY(), this.getZ(), DESounds.ES_POSSESSED_ARMOR_SLASH.get(), this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.3F + 0.7F, false);
             }
 
             if (isVehicle()) {
 
-                if (this.mainAnimationHandler.getTick() == 9) {
+                if (this.mainHandler.getTick() == 9) {
                     float f1 = DEMath.sin(this.getYRot() * ((float)Math.PI / 180F));
                     float f2 = DEMath.cos(this.getYRot() * ((float)Math.PI / 180F));
                     List<LivingEntity> entities = this.level.getEntitiesOfClass(LivingEntity.class, new AABB(this.getX() - 1.2 * getSize() + -f1 * 2 * getSize(), this.getY() - 0.3 * getSize(), this.getZ() - 1.2 * getSize() + f2 * 2 * getSize(), this.getX() + 1.2F * getSize() + -f1 * 2 * getSize(), this.getY() + getBbHeight() + 0.3 * getSize(), this.getZ() + 1.2F * getSize() + f2 * 2 * getSize()));
@@ -137,7 +142,7 @@ public class GrandRammerEntity extends OwnableMountEntity {
                 if (hasAttackTarget()) {
                     getLookControl().setLookAt(getTarget(), 30.0F, 30.0F);
 
-                    if (this.mainAnimationHandler.getTick() == 7 && distanceTo(getTarget()) <= 11) doHurtTarget(getTarget());
+                    if (this.mainHandler.getTick() == 7 && distanceTo(getTarget()) <= 11) doHurtTarget(getTarget());
                 }
             }
         }
@@ -210,7 +215,7 @@ public class GrandRammerEntity extends OwnableMountEntity {
                 if (!onGround() || onGround() && isInWater()) {
                     f = (float) (livingentity.xxa * 0.03);
                     f1 = (float) (livingentity.zza * 0.04);
-                } else if (this.mainAnimationHandler.isPlaying(this.ram) && this.mainAnimationHandler.getTick() < 10){
+                } else if (this.mainHandler.isPlaying(RAM) && this.mainHandler.getTick() < 10){
                     f = (float) (livingentity.xxa * 0.075);
                     f1 = (float) (livingentity.zza * 0.1);
                 }
@@ -237,14 +242,14 @@ public class GrandRammerEntity extends OwnableMountEntity {
         passenger.setPos(passenger.getX(), getY() + getBoundingBox().getYsize() - 0.625, passenger.getZ());
 
 
-        if (this.mainAnimationHandler.isPlaying(this.ram)) {
+        if (this.mainHandler.isPlaying(RAM)) {
             float f3 = DEMath.sin(this.yBodyRot * ((float)Math.PI / 180F));
             float f = DEMath.cos(this.yBodyRot * ((float)Math.PI / 180F));
             float f1 = 0;
 
-            f1 += DEMath.freeAnimator(0.7F * getSize(), 0F, 0, 5, Easing.LINEAR, this.mainAnimationHandler.getTick());
-            f1 += DEMath.freeAnimator(-1.3F * getSize(), 0.7F * getSize(), 5, 9, Easing.LINEAR, this.mainAnimationHandler.getTick());
-            f1 += DEMath.freeAnimator(0.6F * getSize(), -0.6F * getSize(), 9, 15, Easing.LINEAR, this.mainAnimationHandler.getTick());
+            f1 += DEMath.freeAnimator(0.7F * getSize(), 0F, 0, 5, Easing.LINEAR, this.mainHandler.getTick());
+            f1 += DEMath.freeAnimator(-1.3F * getSize(), 0.7F * getSize(), 5, 9, Easing.LINEAR, this.mainHandler.getTick());
+            f1 += DEMath.freeAnimator(0.6F * getSize(), -0.6F * getSize(), 9, 15, Easing.LINEAR, this.mainHandler.getTick());
             passenger.setPos(this.getX() + f1 * f3, passenger.getY(), this.getZ() - f1 * f);
         }
     }
@@ -272,7 +277,7 @@ public class GrandRammerEntity extends OwnableMountEntity {
     
     @Override
     public void doAct() {
-        this.mainAnimationHandler.play(this.ram);
+        this.mainHandler.play(RAM);
     }
 
     @Override
