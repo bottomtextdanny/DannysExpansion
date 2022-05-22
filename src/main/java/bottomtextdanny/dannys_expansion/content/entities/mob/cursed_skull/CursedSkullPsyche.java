@@ -1,8 +1,8 @@
 package bottomtextdanny.dannys_expansion.content.entities.mob.cursed_skull;
 
+import bottomtextdanny.braincell.mod.entity.psyche.actions.RandomStrollAction;
 import bottomtextdanny.dannys_expansion._util.DEFloatMappers;
 import bottomtextdanny.dannys_expansion.content.entities.Shared;
-import bottomtextdanny.dannys_expansion.content.entities.mob.RandomStrollAction;
 import bottomtextdanny.dannys_expansion.content.entities.mob.ice_elemental.IceElemental;
 import bottomtextdanny.dannys_expansion.content.entities.projectile.CursedFireball;
 import bottomtextdanny.dannys_expansion.tables.DEEntities;

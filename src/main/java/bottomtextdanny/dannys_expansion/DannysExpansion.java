@@ -51,11 +51,9 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Mod(DannysExpansion.ID)
 public final class DannysExpansion {
     public static final String ID = "dannys_expansion";
-    public static final Logger LOGGER = LogManager.getLogger(ID);
     public static CreativeModeTab TAB = new SortedCreativeTab(ID) {
 	    @Override
 	    public ItemStack makeIcon() {

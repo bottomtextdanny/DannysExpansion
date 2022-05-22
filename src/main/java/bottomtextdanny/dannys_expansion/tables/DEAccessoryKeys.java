@@ -12,7 +12,6 @@ public final class DEAccessoryKeys {
     public static final AccessoryKey<BurbleAccessory> BURBLE = create("burble", BurbleAccessory::new);
     public static final AccessoryKey<EbbewelAccessory> EBBEWEL = create("ebbewel", EbbewelAccessory::new);
     public static final AccessoryKey<EclipseAccessory> ECLIPSE = create("eclipse", EclipseAccessory::new);
-    public static final AccessoryKey<_EndBalloonAccessory> END_BALLOON = create("end_balloon", _EndBalloonAccessory::new);
     public static final AccessoryKey<GelatinousDiplomacyAccessory> GELATINOUS_DIPLOMACY = create("gelatinous_diplomacy", GelatinousDiplomacyAccessory::new);
     public static final AccessoryKey<KlifourTalismanAccessory> KLIFOUR_TALISMAN = create("klifour_talisman", KlifourTalismanAccessory::new);
     public static final AccessoryKey<PiglinMedalAccessory> PIGLIN_MEDAL = create("piglin_medal", PiglinMedalAccessory::new);
