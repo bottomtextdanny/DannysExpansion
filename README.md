@@ -1,2 +1,2 @@
 # DannysExpansion
- A Minecraft mod mostly about fantasized stuff.
+ A Fantasy-oriented minecraft mod attempting to expand the progression of the game.
