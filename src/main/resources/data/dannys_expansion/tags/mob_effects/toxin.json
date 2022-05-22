@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:poison",
+    "minecraft:wither",
+    "dannys_expansion:venom"
+  ]
+}

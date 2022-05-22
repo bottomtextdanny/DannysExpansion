@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "dannys_expansion:block/briostone_bricks",
-    "top": "dannys_expansion:block/briostone_bricks",
-    "side": "dannys_expansion:block/briostone_bricks"
-  }
-}

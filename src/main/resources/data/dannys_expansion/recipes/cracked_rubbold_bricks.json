@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "dannys_expansion:rubbold_bricks"
-  },
-  "result": "dannys_expansion:cracked_rubbold_bricks",
-  "experience": 0.2,
-  "cookingtime": 200
-}

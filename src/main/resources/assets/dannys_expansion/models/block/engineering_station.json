@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "dannys_expansion:block/engineering_station_front",
+    "north": "dannys_expansion:block/engineering_station_front",
+    "south": "dannys_expansion:block/engineering_station_back",
+    "east": "dannys_expansion:block/engineering_station_right",
+    "west": "dannys_expansion:block/engineering_station_left",
+    "up": "dannys_expansion:block/engineering_station_top",
+    "down": "dannys_expansion:block/engineering_station_bottom"
+  }
+}

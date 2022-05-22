@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/wall_inventory",
-  "textures": {
-    "wall": "dannys_expansion:block/rubbold_bricks"
-  }
-}

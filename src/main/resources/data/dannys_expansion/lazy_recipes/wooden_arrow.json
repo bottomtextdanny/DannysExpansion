@@ -1,0 +1,14 @@
+{
+  "type": "dannys_expansion:engineering_station",
+  "index": 7,
+  "ingredients": [
+    {
+      "#item": "minecraft:planks",
+      "count": 6
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:wooden_arrow",
+    "count": 2
+  }
+}

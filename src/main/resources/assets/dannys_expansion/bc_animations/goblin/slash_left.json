@@ -1,0 +1,184 @@
+{
+  "animation": [
+    {
+      "0.0": [
+        {
+          "name": "body",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftarm",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftHandling",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "5.625": [
+        {
+          "name": "body",
+          "rotation": [
+            -45,
+            30,
+            -30
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            25,
+            -10,
+            20
+          ]
+        },
+        {
+          "name": "leftarm",
+          "rotation": [
+            -60,
+            -15,
+            70
+          ]
+        },
+        {
+          "name": "leftHandling",
+          "rotation": [
+            -150,
+            85,
+            -40
+          ]
+        }
+      ],
+      "8.125": [
+        {
+          "name": "body",
+          "rotation": [
+            35,
+            -20,
+            -15
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            -25,
+            25,
+            -10
+          ]
+        },
+        {
+          "name": "leftarm",
+          "rotation": [
+            5,
+            -55,
+            55
+          ]
+        },
+        {
+          "name": "leftHandling",
+          "rotation": [
+            -35,
+            75,
+            -30
+          ]
+        }
+      ],
+      "15.625": [
+        {
+          "name": "body",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftarm",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftHandling",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "0.0": [
+        {
+          "name": "leftEar",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "3.75": [
+        {
+          "name": "leftEar",
+          "rotation": [
+            0,
+            72.5,
+            0
+          ]
+        }
+      ],
+      "8.125": [
+        {
+          "name": "leftEar",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "15.625": [
+        {
+          "name": "leftEar",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

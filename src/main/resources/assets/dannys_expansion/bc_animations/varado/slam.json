@@ -1,0 +1,190 @@
+{
+  "animation": [
+    {
+      "0.0": [
+        {
+          "name": "model",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "hip",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightArm",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftArm",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightLeg",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftLeg",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "10.0": [
+        {
+          "name": "hip",
+          "rotation": [
+            -44.4,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightArm",
+          "rotation": [
+            -237.5,
+            0,
+            -40
+          ]
+        },
+        {
+          "name": "leftArm",
+          "rotation": [
+            -237.5,
+            0,
+            40
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            -67.5,
+            0,
+            0
+          ]
+        }
+      ],
+      "13.75": [
+        {
+          "name": "hip",
+          "rotation": [
+            80.6,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightArm",
+          "rotation": [
+            -75,
+            -20,
+            0
+          ]
+        },
+        {
+          "name": "leftArm",
+          "rotation": [
+            -75,
+            20,
+            0
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            25,
+            0,
+            0
+          ]
+        }
+      ],
+      "18.75": [
+        {
+          "name": "model",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "hip",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightArm",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftArm",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightLeg",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftLeg",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,432 @@
+{
+  "animation": [
+    {
+      "0.0": [
+        {
+          "name": "root",
+          "position": [
+            0,
+            -3.6,
+            0
+          ]
+        }
+      ],
+      "2.5": [
+        {
+          "name": "root",
+          "position": [
+            0,
+            -1,
+            0
+          ]
+        }
+      ],
+      "5.0": [
+        {
+          "name": "root",
+          "position": [
+            0,
+            -0.3,
+            0
+          ]
+        }
+      ],
+      "7.5": [
+        {
+          "name": "root",
+          "position": [
+            0,
+            -1,
+            0
+          ]
+        }
+      ],
+      "10.0": [
+        {
+          "name": "root",
+          "position": [
+            0,
+            -3.6,
+            0
+          ]
+        }
+      ],
+      "12.5": [
+        {
+          "name": "root",
+          "position": [
+            0,
+            -1,
+            0
+          ]
+        }
+      ],
+      "15.0": [
+        {
+          "name": "root",
+          "position": [
+            0,
+            -0.3,
+            0
+          ]
+        }
+      ],
+      "17.5": [
+        {
+          "name": "root",
+          "position": [
+            0,
+            -1,
+            0
+          ]
+        }
+      ],
+      "20.0": [
+        {
+          "name": "root",
+          "position": [
+            0,
+            -3.6,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "0.0": [
+        {
+          "name": "root",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightLeg",
+          "rotation": [
+            -45,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftLeg",
+          "rotation": [
+            45,
+            0,
+            0
+          ]
+        }
+      ],
+      "10.0": [
+        {
+          "name": "root",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightLeg",
+          "rotation": [
+            45,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftLeg",
+          "rotation": [
+            -45,
+            0,
+            0
+          ]
+        }
+      ],
+      "20.0": [
+        {
+          "name": "root",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightLeg",
+          "rotation": [
+            -45,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftLeg",
+          "rotation": [
+            45,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "0.0": [
+        {
+          "name": "hip",
+          "rotation": [
+            22.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightArm",
+          "rotation": [
+            -22.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftArm",
+          "rotation": [
+            -22.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            10,
+            0,
+            0
+          ]
+        }
+      ],
+      "5.0": [
+        {
+          "name": "hip",
+          "rotation": [
+            -12.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightArm",
+          "rotation": [
+            17.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftArm",
+          "rotation": [
+            17.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "10.0": [
+        {
+          "name": "hip",
+          "rotation": [
+            22.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightArm",
+          "rotation": [
+            -22.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftArm",
+          "rotation": [
+            -22.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            12.5,
+            0,
+            0
+          ]
+        }
+      ],
+      "15.0": [
+        {
+          "name": "hip",
+          "rotation": [
+            -12.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightArm",
+          "rotation": [
+            17.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftArm",
+          "rotation": [
+            17.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "20.0": [
+        {
+          "name": "hip",
+          "rotation": [
+            22.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightArm",
+          "rotation": [
+            -22.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftArm",
+          "rotation": [
+            -22.5,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            12.5,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "0.0": [
+        {
+          "name": "rightLeg",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "10.0": [
+        {
+          "name": "rightLeg",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "16.875": [
+        {
+          "name": "rightLeg",
+          "position": [
+            0,
+            3,
+            1
+          ]
+        }
+      ],
+      "20.0": [
+        {
+          "name": "rightLeg",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "0.0": [
+        {
+          "name": "leftLeg",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "7.5": [
+        {
+          "name": "leftLeg",
+          "position": [
+            0,
+            3,
+            1
+          ]
+        }
+      ],
+      "10.0": [
+        {
+          "name": "leftLeg",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "20.0": [
+        {
+          "name": "leftLeg",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -15,36 +15,18 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle'
 
-repositories{
-    maven {
-        url "https://www.cursemaven.com"
-    }
-    maven {
-
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.k-4u.nl"
-    }
-    jcenter()
-    mavenCentral()
-}
-
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.10.1'
-group = 'com.bottomtextdanny'
+version = '1.2.2'
+group = 'bottomtextdanny'
 archivesBaseName = 'dannys_expansion'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    mappings channel: "official", version: "1.18.1"
+    mappings channel: "official", version: "1.18.2"
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -95,25 +77,43 @@ sourceSets.main.resources {
     srcDir 'src/generated/resources'
 }
 
-dependencies {
-    //implementation fg.deobf("curse.maven:alexs_mobs-426558:3575698")
-    //implementation fg.deobf("curse.maven:citadel-331936:3574790")
-    implementation fg.deobf("curse.maven:mob-battle-mod-268746:3573470")
-    implementation fg.deobf("curse.maven:torohealth-damage-indicators-245733:3556931")
-    compileOnly fg.deobf("mezz.jei:jei-1.18:9.0.0.40:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18:9.0.0.40")
-    minecraft 'net.minecraftforge:forge:1.18.1-39.0.59'
+repositories{
+    maven {
+        url "https://www.cursemaven.com"
+    }
 
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    maven {
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+
+    maven {
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
+
+    flatDir {
+        dir 'lib'
+    }
+
+    mavenCentral()
 }
 
-// Example for how to get properties into the manifest for reading by the runtime..
+dependencies {
+    implementation fg.deobf("asd:braincell:1.05")
+    minecraft 'net.minecraftforge:forge:1.18.2-40.1.0'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.5.3.143:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.5.3.143")
+    implementation fg.deobf("curse.maven:better-third-person-435044:3738180")
+}
+
 jar {
     manifest {
         attributes([
                 "Specification-Title": "dannys_expansion",
                 "Specification-Vendor": "bottomtextdanny",
-                "Specification-Version": "1.10.2", // We are version 1 of ourselves
+                "Specification-Version": "1.0", // We are version 1 of ourselves
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"bottomtextdanny",
@@ -121,9 +121,9 @@ jar {
                 "MixinConfigs": "dannys_expansion.mixins.json"
         ])
     }
-    jar.finalizedBy('reobfJar')
-}
 
+}
+//publish.dependsOn('reobfJar')
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -135,4 +135,8 @@ publishing {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }

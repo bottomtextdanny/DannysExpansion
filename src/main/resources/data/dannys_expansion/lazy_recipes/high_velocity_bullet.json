@@ -1,0 +1,18 @@
+{
+  "type": "dannys_expansion:engineering_station",
+  "index": 11,
+  "ingredients": [
+    {
+      "item": "dannys_expansion:bullet",
+      "count": 16
+    },
+    {
+      "item": "dannys_expansion:impulsor",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:high_velocity_bullet",
+    "count": 16
+  }
+}

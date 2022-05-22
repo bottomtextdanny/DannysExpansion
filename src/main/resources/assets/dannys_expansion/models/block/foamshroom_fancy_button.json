@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/button",
-  "textures": {
-    "texture": "dannys_expansion:block/foamshroom_fancy_planks"
-  }
-}

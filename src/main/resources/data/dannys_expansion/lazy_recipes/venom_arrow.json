@@ -1,0 +1,18 @@
+{
+  "type": "dannys_expansion:engineering_station",
+  "index": 9,
+  "ingredients": [
+    {
+      "item": "minecraft:arrow",
+      "count": 12
+    },
+    {
+      "item": "dannys_expansion:venom_vial",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:venom_arrow",
+    "count": 12
+  }
+}

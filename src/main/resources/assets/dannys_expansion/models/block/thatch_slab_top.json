@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "dannys_expansion:block/thatch",
+    "top": "dannys_expansion:block/thatch",
+    "side": "dannys_expansion:block/thatch"
+  }
+}

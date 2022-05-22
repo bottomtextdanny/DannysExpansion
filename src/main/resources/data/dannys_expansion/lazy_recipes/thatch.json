@@ -1,0 +1,14 @@
+{
+  "type": "dannys_expansion:workbench",
+  "index": 1,
+  "ingredients": [
+    {
+      "item": "minecraft:hay_block",
+      "count": 4
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:thatch",
+    "count": 16
+  }
+}

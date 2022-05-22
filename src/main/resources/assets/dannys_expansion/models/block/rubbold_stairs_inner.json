@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "dannys_expansion:block/rubbold",
-    "top": "dannys_expansion:block/rubbold",
-    "side": "dannys_expansion:block/rubbold"
-  }
-}

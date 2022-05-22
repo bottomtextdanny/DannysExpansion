@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "texture_size": [96, 64],
   "textures": {
-    "0": "dannys_expansion:entity/possessed_armor/possessed_armor",
-    "particle": "dannys_expansion:entity/possessed_armor/possessed_armor"
+    "0": "dannys_expansion:entity/hollow_armor/hollow_armor",
+    "particle": "dannys_expansion:entity/hollow_armor/hollow_armor"
   },
   "elements": [
     {

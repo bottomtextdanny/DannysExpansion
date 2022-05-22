@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "dannys_expansion:block/briostone_bricks",
-    "top": "dannys_expansion:block/briostone_bricks",
-    "side": "dannys_expansion:block/briostone_bricks"
-  }
-}

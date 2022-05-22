@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "dannys_expansion:rammer_meat"
-  },
-  "result": "dannys_expansion:cooked_rammer_meat",
-  "experience": 0.35,
-  "cookingtime": 200
-}

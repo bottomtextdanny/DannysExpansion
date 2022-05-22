@@ -1,0 +1,18 @@
+{
+  "type": "dannys_expansion:workbench",
+  "index": 0,
+  "ingredients": [
+    {
+      "#item": "minecraft:planks",
+      "count": 8
+    },
+    {
+      "item": "minecraft:hay_block",
+      "count": 5
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:test_dummy",
+    "count": 1
+  }
+}

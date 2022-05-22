@@ -147,57 +147,49 @@
     ],
     "subtitle": "dannys_expansion.subtitles.block.hollow_metal_step"
   },
-  "block.jold_break": {
+  "entity.monster_cookie_hurt": {
     "category": "neutral",
     "sounds": [
-      "dannys_expansion:block/jold_break_0",
-      "dannys_expansion:block/jold_break_1",
-      "dannys_expansion:block/jold_break_2",
-      "dannys_expansion:block/jold_break_3",
-      "dannys_expansion:block/jold_break_4"
+      "dannys_expansion:entity/monster_cookie_hurt_0",
+      "dannys_expansion:entity/monster_cookie_hurt_1",
+      "dannys_expansion:entity/monster_cookie_hurt_2"
     ],
-    "subtitle": "dannys_expansion.subtitles.block.jold_break"
+    "subtitle": "dannys_expansion.subtitles.entity.monster_cookie_hurt"
   },
-  "block.jold_place": {
+  "entity.monster_cookie_death": {
     "category": "neutral",
     "sounds": [
-      "dannys_expansion:block/jold_place_0",
-      "dannys_expansion:block/jold_place_1",
-      "dannys_expansion:block/jold_place_2",
-      "dannys_expansion:block/jold_place_3",
-      "dannys_expansion:block/jold_place_4"
+      "dannys_expansion:entity/monster_cookie_death_0",
+      "dannys_expansion:entity/monster_cookie_death_1"
     ],
-    "subtitle": "dannys_expansion.subtitles.block.jold_place"
+    "subtitle": "dannys_expansion.subtitles.entity.monster_cookie_death"
   },
-  "block.jold_step": {
+  "entity.monster_cookie_growl": {
     "category": "neutral",
     "sounds": [
-      "dannys_expansion:block/jold_step_0",
-      "dannys_expansion:block/jold_step_1",
-      "dannys_expansion:block/jold_step_2",
-      "dannys_expansion:block/jold_step_3"
+      "dannys_expansion:entity/monster_cookie_growl_0",
+      "dannys_expansion:entity/monster_cookie_growl_1"
     ],
-    "subtitle": "dannys_expansion.subtitles.block.jold_step"
+    "subtitle": "dannys_expansion.subtitles.entity.monster_cookie_growl"
   },
-  "block.sea_chest_close": {
+  "entity.monster_cookie_idle": {
     "category": "neutral",
     "sounds": [
-      "dannys_expansion:block/sea_chest_close_0",
-      "dannys_expansion:block/sea_chest_close_1",
-      "dannys_expansion:block/sea_chest_close_2",
-      "dannys_expansion:block/sea_chest_close_3"
+      "dannys_expansion:entity/monster_cookie_idle_0",
+      "dannys_expansion:entity/monster_cookie_idle_1",
+      "dannys_expansion:entity/monster_cookie_idle_2"
     ],
-    "subtitle": "dannys_expansion.subtitles.block.sea_chest_close"
+    "subtitle": "dannys_expansion.subtitles.entity.monster_cookie_idle"
   },
-  "block.sea_chest_open": {
+  "entity.varado_hit": {
     "category": "neutral",
     "sounds": [
-      "dannys_expansion:block/sea_chest_open_0",
-      "dannys_expansion:block/sea_chest_open_1",
-      "dannys_expansion:block/sea_chest_open_2",
-      "dannys_expansion:block/sea_chest_open_3"
+      "dannys_expansion:entity/varado_hit_0",
+      "dannys_expansion:entity/varado_hit_1",
+      "dannys_expansion:entity/varado_hit_2",
+      "dannys_expansion:entity/varado_hit_3"
     ],
-    "subtitle": "dannys_expansion.subtitles.block.sea_chest_open"
+    "subtitle": "dannys_expansion.subtitles.entity.varado_hit"
   },
   "entity.ender_beast_step": {
     "category": "neutral",
@@ -271,26 +263,6 @@
     ],
     "subtitle": "dannys_expansion.subtitles.entity.ender_beast_confusion"
   },
-  "entity.decay_broader_step": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/decay_broader_step_0",
-      "dannys_expansion:entity/decay_broader_step_1",
-      "dannys_expansion:entity/decay_broader_step_2",
-      "dannys_expansion:entity/decay_broader_step_3",
-      "dannys_expansion:entity/decay_broader_step_4",
-      "dannys_expansion:entity/decay_broader_step_5",
-      "dannys_expansion:entity/decay_broader_step_6"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.decay_broader_step"
-  },
-  "entity.decay_broader_expulse": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/decay_broader_expulse_0"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.decay_broader_expulse"
-  },
   "entity.ender_dragon_reward_init": {
     "category": "neutral",
     "sounds": [
@@ -319,23 +291,6 @@
     ],
     "subtitle": "dannys_expansion.subtitles.entity.ender_dragon_reward_use"
   },
-  "entity.foamshroom_generic_death": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/foamshroom_generic_death_0"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.foamshroom_generic_death"
-  },
-  "entity.foamshroom_generic_hurt": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/foamshroom_generic_hurt_0",
-      "dannys_expansion:entity/foamshroom_generic_hurt_1",
-      "dannys_expansion:entity/foamshroom_generic_hurt_2",
-      "dannys_expansion:entity/foamshroom_generic_hurt_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.foamshroom_generic_hurt"
-  },
   "entity.generic_chest_close": {
     "category": "neutral",
     "sounds": [
@@ -349,24 +304,6 @@
       "dannys_expansion:entity/generic_chest_open_0"
     ],
     "subtitle": "dannys_expansion.subtitles.entity.generic_chest_open"
-  },
-  "entity.spore_wight_hurt": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/spore_wight_hurt_0",
-      "dannys_expansion:entity/spore_wight_hurt_1",
-      "dannys_expansion:entity/spore_wight_hurt_2",
-      "dannys_expansion:entity/spore_wight_hurt_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.spore_wight_hurt"
-  },
-  "entity.spore_wight_idle": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/spore_wight_idle_0",
-      "dannys_expansion:entity/spore_wight_idle_1"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.spore_wight_idle"
   },
   "entity.squig_bubble_pop": {
     "category": "neutral",
@@ -399,93 +336,6 @@
       "dannys_expansion:entity/insect_step_3"
     ],
     "subtitle": "dannys_expansion.subtitles.entity.insect_step"
-  },
-  "entity.petrified_ghoul_hurt": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/petrified_ghoul_hurt_0",
-      "dannys_expansion:entity/petrified_ghoul_hurt_1",
-      "dannys_expansion:entity/petrified_ghoul_hurt_2",
-      "dannys_expansion:entity/petrified_ghoul_hurt_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.petrified_ghoul_hurt"
-  },
-  "entity.petrified_ghoul_death": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/petrified_ghoul_death_0",
-      "dannys_expansion:entity/petrified_ghoul_death_1"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.petrified_ghoul_death"
-  },
-  "entity.petrified_ghoul_idle": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/petrified_ghoul_idle_0",
-      "dannys_expansion:entity/petrified_ghoul_idle_1",
-      "dannys_expansion:entity/petrified_ghoul_idle_2"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.petrified_ghoul_idle"
-  },
-  "entity.petrified_ghoul_attack": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/petrified_ghoul_attack_0",
-      "dannys_expansion:entity/petrified_ghoul_attack_1",
-      "dannys_expansion:entity/petrified_ghoul_attack_2"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.petrified_ghoul_attack"
-  },
-  "entity.arid_abomination_clap": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/arid_abomination_clap_0",
-      "dannys_expansion:entity/arid_abomination_clap_1",
-      "dannys_expansion:entity/arid_abomination_clap_2",
-      "dannys_expansion:entity/arid_abomination_clap_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.arid_abomination_clap"
-  },
-  "entity.arid_abomination_death": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/arid_abomination_death_0",
-      "dannys_expansion:entity/arid_abomination_death_1",
-      "dannys_expansion:entity/arid_abomination_death_2",
-      "dannys_expansion:entity/arid_abomination_death_3",
-      "dannys_expansion:entity/arid_abomination_death_4"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.arid_abomination_death"
-  },
-  "entity.arid_abomination_hurt": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/arid_abomination_hurt_0",
-      "dannys_expansion:entity/arid_abomination_hurt_1",
-      "dannys_expansion:entity/arid_abomination_hurt_2",
-      "dannys_expansion:entity/arid_abomination_hurt_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.arid_abomination_hurt"
-  },
-  "entity.barren_orb_generate": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/barren_orb_generate_0",
-      "dannys_expansion:entity/barren_orb_generate_1",
-      "dannys_expansion:entity/barren_orb_generate_2",
-      "dannys_expansion:entity/barren_orb_generate_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.barren_orb_generate"
-  },
-  "entity.barren_orb_impact": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/barren_orb_impact_0",
-      "dannys_expansion:entity/barren_orb_impact_1",
-      "dannys_expansion:entity/barren_orb_impact_2",
-      "dannys_expansion:entity/barren_orb_impact_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.barren_orb_impact"
   },
   "entity.black_scorpion_claw_attack": {
     "category": "neutral",
@@ -561,20 +411,6 @@
     ],
     "subtitle": "dannys_expansion.subtitles.entity.blade_swing_small"
   },
-  "entity.blue_slime_enter": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/blue_slime_enter_0"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.blue_slime_enter"
-  },
-  "entity.blue_slime_exit": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/blue_slime_exit_0"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.blue_slime_exit"
-  },
   "entity.bullet_impact_dirt": {
     "category": "neutral",
     "sounds": [
@@ -635,99 +471,6 @@
     ],
     "subtitle": "dannys_expansion.subtitles.entity.bullet_impact_wood"
   },
-  "entity.desolated_hurt": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/desolated_hurt_0",
-      "dannys_expansion:entity/desolated_hurt_1",
-      "dannys_expansion:entity/desolated_hurt_2",
-      "dannys_expansion:entity/desolated_hurt_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.desolated_hurt"
-  },
-  "entity.desolated_idle": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/desolated_idle_0",
-      "dannys_expansion:entity/desolated_idle_1",
-      "dannys_expansion:entity/desolated_idle_2",
-      "dannys_expansion:entity/desolated_idle_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.desolated_idle"
-  },
-  "entity.foamshroom_pop": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/foamshroom_pop_0",
-      "dannys_expansion:entity/foamshroom_pop_1",
-      "dannys_expansion:entity/foamshroom_pop_2",
-      "dannys_expansion:entity/foamshroom_pop_3",
-      "dannys_expansion:entity/foamshroom_pop_4"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.foamshroom_pop"
-  },
-  "entity.frozen_ghoul_death": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/frozen_ghoul_death_0",
-      "dannys_expansion:entity/frozen_ghoul_death_1"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.frozen_ghoul_death"
-  },
-  "entity.frozen_ghoul_heavy_attack": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/frozen_ghoul_heavy_attack_0",
-      "dannys_expansion:entity/frozen_ghoul_heavy_attack_1",
-      "dannys_expansion:entity/frozen_ghoul_heavy_attack_2",
-      "dannys_expansion:entity/frozen_ghoul_heavy_attack_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.frozen_ghoul_heavy_attack"
-  },
-  "entity.frozen_ghoul_hurt": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/frozen_ghoul_hurt_0",
-      "dannys_expansion:entity/frozen_ghoul_hurt_1",
-      "dannys_expansion:entity/frozen_ghoul_hurt_2",
-      "dannys_expansion:entity/frozen_ghoul_hurt_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.frozen_ghoul_hurt"
-  },
-  "entity.frozen_ghoul_idle": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/frozen_ghoul_idle_0",
-      "dannys_expansion:entity/frozen_ghoul_idle_1",
-      "dannys_expansion:entity/frozen_ghoul_idle_2",
-      "dannys_expansion:entity/frozen_ghoul_idle_3",
-      "dannys_expansion:entity/frozen_ghoul_idle_4",
-      "dannys_expansion:entity/frozen_ghoul_idle_5"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.frozen_ghoul_idle"
-  },
-  "entity.frozen_ghoul_light_attack": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/frozen_ghoul_light_attack_0",
-      "dannys_expansion:entity/frozen_ghoul_light_attack_1",
-      "dannys_expansion:entity/frozen_ghoul_light_attack_2",
-      "dannys_expansion:entity/frozen_ghoul_light_attack_3",
-      "dannys_expansion:entity/frozen_ghoul_light_attack_4"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.frozen_ghoul_light_attack"
-  },
-  "entity.generic_meat_hit": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/generic_meat_hit_0",
-      "dannys_expansion:entity/generic_meat_hit_1",
-      "dannys_expansion:entity/generic_meat_hit_2",
-      "dannys_expansion:entity/generic_meat_hit_3",
-      "dannys_expansion:entity/generic_meat_hit_4"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.generic_meat_hit"
-  },
   "entity.ghoul_death": {
     "category": "neutral",
     "sounds": [
@@ -765,50 +508,6 @@
       "dannys_expansion:entity/ghoul_punch_2"
     ],
     "subtitle": "dannys_expansion.subtitles.entity.ghoul_punch"
-  },
-  "entity.ghoul_respiration": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/ghoul_respiration_0",
-      "dannys_expansion:entity/ghoul_respiration_1",
-      "dannys_expansion:entity/ghoul_respiration_2"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.ghoul_respiration"
-  },
-  "entity.ghoul_vomit": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/ghoul_vomit_0",
-      "dannys_expansion:entity/ghoul_vomit_1"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.ghoul_vomit"
-  },
-  "entity.golem_drone_explode": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/golem_drone_explode_0",
-      "dannys_expansion:entity/golem_drone_explode_1",
-      "dannys_expansion:entity/golem_drone_explode_2",
-      "dannys_expansion:entity/golem_drone_explode_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.golem_drone_explode"
-  },
-  "entity.golem_drone_hit": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/golem_drone_hit_0",
-      "dannys_expansion:entity/golem_drone_hit_1",
-      "dannys_expansion:entity/golem_drone_hit_2",
-      "dannys_expansion:entity/golem_drone_hit_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.golem_drone_hit"
-  },
-  "entity.golem_drone_loop": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/golem_drone_loop_0"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.golem_drone_loop"
   },
   "entity.high_velocity_bullet": {
     "category": "neutral",
@@ -862,65 +561,6 @@
       "dannys_expansion:entity/ice_spike_hit_2"
     ],
     "subtitle": "dannys_expansion.subtitles.entity.ice_spike_hit"
-  },
-  "entity.ice_bullet_hit": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/ice_bullet_hit_0"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.ice_bullet_hit"
-  },
-  "entity.jungle_golem_death": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/jungle_golem_death_0",
-      "dannys_expansion:entity/jungle_golem_death_1",
-      "dannys_expansion:entity/jungle_golem_death_2",
-      "dannys_expansion:entity/jungle_golem_death_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.jungle_golem_death"
-  },
-  "entity.jungle_golem_heavy_hit": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/jungle_golem_heavy_hit_0",
-      "dannys_expansion:entity/jungle_golem_heavy_hit_1",
-      "dannys_expansion:entity/jungle_golem_heavy_hit_2",
-      "dannys_expansion:entity/jungle_golem_heavy_hit_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.jungle_golem_heavy_hit"
-  },
-  "entity.jungle_golem_hurt": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/jungle_golem_hurt_0",
-      "dannys_expansion:entity/jungle_golem_hurt_1",
-      "dannys_expansion:entity/jungle_golem_hurt_2",
-      "dannys_expansion:entity/jungle_golem_hurt_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.jungle_golem_hurt"
-  },
-  "entity.jungle_golem_release": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/jungle_golem_release_0",
-      "dannys_expansion:entity/jungle_golem_release_1",
-      "dannys_expansion:entity/jungle_golem_release_2",
-      "dannys_expansion:entity/jungle_golem_release_3",
-      "dannys_expansion:entity/jungle_golem_release_4",
-      "dannys_expansion:entity/jungle_golem_release_5"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.jungle_golem_release"
-  },
-  "entity.jungle_golem_step": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/jungle_golem_step_0",
-      "dannys_expansion:entity/jungle_golem_step_1",
-      "dannys_expansion:entity/jungle_golem_step_2",
-      "dannys_expansion:entity/jungle_golem_step_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.jungle_golem_step"
   },
   "entity.kite_attach": {
     "category": "neutral",
@@ -1006,99 +646,6 @@
       "dannys_expansion:entity/klifour_spit_impact_7"
     ],
     "subtitle": "dannys_expansion.subtitles.entity.klifour_spit_impact"
-  },
-  "entity.magma_gulper_death": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/magma_gulper_death_0",
-      "dannys_expansion:entity/magma_gulper_death_1",
-      "dannys_expansion:entity/magma_gulper_death_2",
-      "dannys_expansion:entity/magma_gulper_death_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.magma_gulper_death"
-  },
-  "entity.magma_gulper_expulse": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/magma_gulper_expulse_0",
-      "dannys_expansion:entity/magma_gulper_expulse_1",
-      "dannys_expansion:entity/magma_gulper_expulse_2",
-      "dannys_expansion:entity/magma_gulper_expulse_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.magma_gulper_expulse"
-  },
-  "entity.magma_gulper_flap": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/magma_gulper_flap_0",
-      "dannys_expansion:entity/magma_gulper_flap_1",
-      "dannys_expansion:entity/magma_gulper_flap_2",
-      "dannys_expansion:entity/magma_gulper_flap_3",
-      "dannys_expansion:entity/magma_gulper_flap_4",
-      "dannys_expansion:entity/magma_gulper_flap_5",
-      "dannys_expansion:entity/magma_gulper_flap_6",
-      "dannys_expansion:entity/magma_gulper_flap_7",
-      "dannys_expansion:entity/magma_gulper_flap_8",
-      "dannys_expansion:entity/magma_gulper_flap_9",
-      "dannys_expansion:entity/magma_gulper_flap_10",
-      "dannys_expansion:entity/magma_gulper_flap_11",
-      "dannys_expansion:entity/magma_gulper_flap_12",
-      "dannys_expansion:entity/magma_gulper_flap_13",
-      "dannys_expansion:entity/magma_gulper_flap_14",
-      "dannys_expansion:entity/magma_gulper_flap_15",
-      "dannys_expansion:entity/magma_gulper_flap_16",
-      "dannys_expansion:entity/magma_gulper_flap_17"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.magma_gulper_flap"
-  },
-  "entity.magma_gulper_hurt": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/magma_gulper_hurt_0",
-      "dannys_expansion:entity/magma_gulper_hurt_1",
-      "dannys_expansion:entity/magma_gulper_hurt_2",
-      "dannys_expansion:entity/magma_gulper_hurt_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.magma_gulper_hurt"
-  },
-  "entity.mummy_death": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/mummy_death_0"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.mummy_death"
-  },
-  "entity.mummy_hurt": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/mummy_hurt_0",
-      "dannys_expansion:entity/mummy_hurt_1",
-      "dannys_expansion:entity/mummy_hurt_2"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.mummy_hurt"
-  },
-  "entity.mummy_idle": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/mummy_idle_0",
-      "dannys_expansion:entity/mummy_idle_1",
-      "dannys_expansion:entity/mummy_idle_2"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.mummy_idle"
-  },
-  "entity.mummy_spike": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/mummy_spike_0"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.mummy_spike"
-  },
-  "entity.mummy_summon_abomination": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/mummy_summon_abomination_0"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.mummy_summon_abomination"
   },
   "entity.armor_creak": {
     "category": "neutral",
@@ -1223,65 +770,6 @@
     ],
     "subtitle": "dannys_expansion.subtitles.entity.possessed_armor_swish"
   },
-  "entity.sand_scarab_attack": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/sand_scarab_attack_0",
-      "dannys_expansion:entity/sand_scarab_attack_1",
-      "dannys_expansion:entity/sand_scarab_attack_2",
-      "dannys_expansion:entity/sand_scarab_attack_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.sand_scarab_attack"
-  },
-  "entity.sand_scarab_death": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/sand_scarab_death_0",
-      "dannys_expansion:entity/sand_scarab_death_1",
-      "dannys_expansion:entity/sand_scarab_death_2",
-      "dannys_expansion:entity/sand_scarab_death_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.sand_scarab_death"
-  },
-  "entity.sand_scarab_egg_break": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/sand_scarab_egg_break_0",
-      "dannys_expansion:entity/sand_scarab_egg_break_1",
-      "dannys_expansion:entity/sand_scarab_egg_break_2",
-      "dannys_expansion:entity/sand_scarab_egg_break_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.sand_scarab_egg_break"
-  },
-  "entity.sand_scarab_hurt": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/sand_scarab_hurt_0",
-      "dannys_expansion:entity/sand_scarab_hurt_1",
-      "dannys_expansion:entity/sand_scarab_hurt_2",
-      "dannys_expansion:entity/sand_scarab_hurt_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.sand_scarab_hurt"
-  },
-  "entity.sporer_squish": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/sporer_squish_0",
-      "dannys_expansion:entity/sporer_squish_1",
-      "dannys_expansion:entity/sporer_squish_2",
-      "dannys_expansion:entity/sporer_squish_3",
-      "dannys_expansion:entity/sporer_squish_4"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.sporer_squish"
-  },
-  "entity.spore_bomb_land": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:entity/spore_bomb_land_0",
-      "dannys_expansion:entity/spore_bomb_land_1"
-    ],
-    "subtitle": "dannys_expansion.subtitles.entity.spore_bomb_land"
-  },
   "entity.squig_bubble_generate": {
     "category": "neutral",
     "sounds": [
@@ -1375,6 +863,105 @@
     ],
     "subtitle": "dannys_expansion.subtitles.entity.tumefend_hop"
   },
+  "entity.cursed_skull_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "dannys_expansion:entity/cursed_skull_hurt_0",
+      "dannys_expansion:entity/cursed_skull_hurt_1",
+      "dannys_expansion:entity/cursed_skull_hurt_2"
+    ],
+    "subtitle": "dannys_expansion.subtitles.entity.cursed_skull_hurt"
+  },
+  "entity.cursed_skull_death": {
+    "category": "neutral",
+    "sounds": [
+      "dannys_expansion:entity/cursed_skull_death_0"
+    ],
+    "subtitle": "dannys_expansion.subtitles.entity.cursed_skull_death"
+  },
+  "entity.cursed_skull_spit": {
+    "category": "neutral",
+    "sounds": [
+      "dannys_expansion:entity/cursed_skull_spit_0",
+      "dannys_expansion:entity/cursed_skull_spit_1"
+    ],
+    "subtitle": "dannys_expansion.subtitles.entity.cursed_skull_spit"
+  },
+  "entity.cursed_skull_idle": {
+    "category": "neutral",
+    "sounds": [
+      "dannys_expansion:entity/cursed_skull_idle_0",
+      "dannys_expansion:entity/cursed_skull_idle_1",
+      "dannys_expansion:entity/cursed_skull_idle_2"
+    ],
+    "subtitle": "dannys_expansion.subtitles.entity.cursed_skull_idle"
+  },
+  "entity.cursed_fireball_hit": {
+    "category": "neutral",
+    "sounds": [
+      "dannys_expansion:entity/cursed_fireball_hit_0"
+    ],
+    "subtitle": "dannys_expansion.subtitles.entity.cursed_fireball_hit"
+  },
+  "entity.goblin_attack": {
+    "category": "neutral",
+    "sounds": [
+      "dannys_expansion:entity/goblin_attack_0",
+      "dannys_expansion:entity/goblin_attack_1",
+      "dannys_expansion:entity/goblin_attack_2",
+      "dannys_expansion:entity/goblin_attack_3",
+      "dannys_expansion:entity/goblin_attack_4",
+      "dannys_expansion:entity/goblin_attack_5",
+      "dannys_expansion:entity/goblin_attack_6"
+    ],
+    "subtitle": "dannys_expansion.subtitles.entity.goblin_attack"
+  },
+  "entity.goblin_combat": {
+    "category": "neutral",
+    "sounds": [
+      "dannys_expansion:entity/goblin_combat_0",
+      "dannys_expansion:entity/goblin_combat_1",
+      "dannys_expansion:entity/goblin_combat_2",
+      "dannys_expansion:entity/goblin_combat_3",
+      "dannys_expansion:entity/goblin_combat_4",
+      "dannys_expansion:entity/goblin_combat_5"
+    ],
+    "subtitle": "dannys_expansion.subtitles.entity.goblin_combat"
+  },
+  "entity.goblin_death": {
+    "category": "neutral",
+    "sounds": [
+      "dannys_expansion:entity/goblin_death_0",
+      "dannys_expansion:entity/goblin_death_1",
+      "dannys_expansion:entity/goblin_death_2",
+      "dannys_expansion:entity/goblin_death_3"
+    ],
+    "subtitle": "dannys_expansion.subtitles.entity.goblin_death"
+  },
+  "entity.goblin_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "dannys_expansion:entity/goblin_hurt_0",
+      "dannys_expansion:entity/goblin_hurt_1",
+      "dannys_expansion:entity/goblin_hurt_2",
+      "dannys_expansion:entity/goblin_hurt_3",
+      "dannys_expansion:entity/goblin_hurt_4"
+    ],
+    "subtitle": "dannys_expansion.subtitles.entity.goblin_hurt"
+  },
+  "entity.goblin_idle": {
+    "category": "neutral",
+    "sounds": [
+      "dannys_expansion:entity/goblin_idle_0",
+      "dannys_expansion:entity/goblin_idle_1",
+      "dannys_expansion:entity/goblin_idle_2",
+      "dannys_expansion:entity/goblin_idle_3",
+      "dannys_expansion:entity/goblin_idle_4",
+      "dannys_expansion:entity/goblin_idle_5",
+      "dannys_expansion:entity/goblin_idle_6"
+    ],
+    "subtitle": "dannys_expansion.subtitles.entity.goblin_idle"
+  },
   "item.musket_shot": {
     "category": "neutral",
     "sounds": [
@@ -1384,13 +971,6 @@
       "dannys_expansion:item/musket_shot_3"
     ],
     "subtitle": "dannys_expansion.subtitles.item.musket_shot"
-  },
-  "item.antique_armor_swoosh": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:item/antique_armor_swoosh_0"
-    ],
-    "subtitle": "dannys_expansion.subtitles.item.antique_armor_swoosh"
   },
   "item.eclipse_hit": {
     "category": "neutral",
@@ -1476,23 +1056,6 @@
     ],
     "subtitle": "dannys_expansion.subtitles.item.unpeek"
   },
-  "item.armor_equip_cloth": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:item/armor_equip_cloth_0"
-    ],
-    "subtitle": "dannys_expansion.subtitles.item.armor_equip_cloth"
-  },
-  "item.ayerstone_hit": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:item/ayerstone_hit_0",
-      "dannys_expansion:item/ayerstone_hit_1",
-      "dannys_expansion:item/ayerstone_hit_2",
-      "dannys_expansion:item/ayerstone_hit_3"
-    ],
-    "subtitle": "dannys_expansion.subtitles.item.ayerstone_hit"
-  },
   "item.ebbewel_impulse": {
     "category": "neutral",
     "sounds": [
@@ -1527,13 +1090,6 @@
       "dannys_expansion:item/light_bow_shot_0"
     ],
     "subtitle": "dannys_expansion.subtitles.item.light_bow_shot"
-  },
-  "item.magic_sword_ting": {
-    "category": "neutral",
-    "sounds": [
-      "dannys_expansion:item/magic_sword_ting_0"
-    ],
-    "subtitle": "dannys_expansion.subtitles.item.magic_sword_ting"
   },
   "item.shotgun_shot": {
     "category": "neutral",

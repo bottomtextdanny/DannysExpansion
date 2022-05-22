@@ -1,0 +1,22 @@
+{
+  "type": "dannys_expansion:engineering_station",
+  "index": 8,
+  "ingredients": [
+    {
+      "item": "minecraft:arrow",
+      "count": 12
+    },
+    {
+      "item": "minecraft:blue_ice",
+      "count": 5
+    },
+    {
+      "item": "dannys_expansion:ice_shard",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:ice_arrow",
+    "count": 12
+  }
+}

@@ -1,453 +1,8 @@
 {
   "objects": [
     {
-      "type": "indifferent/unused",
-      "name": "skeleton_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "blaze_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ghoul_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ravager_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "monstrous_scorpion_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "cooked_rammer_meat"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "antique_helmet"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "spore_wight_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "enderman_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "wither_skeleton_kite"
-    },
-    {
-      "type": "bullet",
-      "name": "bullet"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_fence"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_fence_gate"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ice_brick_stairs"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "yellow_kite"
-    },
-    {
-      "type": "material",
-      "name": "life_essence"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "magma_slime_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "briostone_chest"
-    },
-    {
-      "type": "material",
-      "name": "ice_shard"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ice_chest"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "sporer_spawn_egg"
-    },
-    {
-      "type": "accessory",
-      "name": "ebbewel"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "chiseled_rubbold_bricks"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_block"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "rubbold_brick_wall"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "sea_chest"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ice_bricks"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "workbench"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "guardian_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "crimson_mosquito_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "klifour_kite"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "tumefend_spawn_egg"
-    },
-    {
-      "type": "material",
-      "name": "arid_wrapping"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "desertic_slime_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "shooting_star"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ice_trapdoor"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "scorpion_sword"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "trapped_sea_chest"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_chest"
-    },
-    {
-      "type": "accessory",
-      "name": "gelatinous_diplomacy"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "orange_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "cursed_skull_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "sunbird_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ender_beast_spear_tip"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "wither_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "desertic_slime_kite"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "nyctoid_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "frostmaw_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_slab"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "briostone_brick_slab"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "pink_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "possessed_armor_blade"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "trapped_briostone_chest"
-    },
-    {
       "type": "accessory",
       "name": "klifour_talisman"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "jungle_slime_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "slime_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "phantom_kite"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "ghoul_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "emossence_rubbold"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_fancy_stairs"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "lime_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ferrous_wroughtnaut_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "rubbold_stairs"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "blue_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "frozen_bow"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "briostone_crags"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "rubbold_brick_slab"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "petrified_ghoul_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "jungle_golem_kite"
-    },
-    {
-      "type": "boat",
-      "recipe_material_id": "dannys_expansion:foamshroom_planks",
-      "name": "foamshroom_boat"
-    },
-    {
-      "type": "bullet",
-      "name": "high_velocity_bullet"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "husk_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_fancy_button"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "magma_gulper_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ectoshroom_stem"
-    },
-    {
-      "type": "accessory",
-      "name": "burble"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "frozen_slime_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "shulker_kite"
-    },
-    {
-      "type": "material",
-      "name": "emossence_extract"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "chiseled_briostone_bricks"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "tall_emossence_sward"
-    },
-    {
-      "type": "accessory",
-      "name": "end_balloon"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "decay_broader_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ice_button"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "hollow_armor_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "piglin_brute_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_button"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "frozen_slime_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "nightshade_plant"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "trapped_foamshroom_fancy_chest"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "mummy_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "spore_bomb"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_stem"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "lantern_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "spider_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ghast_kite"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "ender_beast_lancer_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "magma_gulper_kite"
-    },
-    {
-      "type": "material",
-      "name": "visceral_essence"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "shotgun"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "rubbold_lost_chest"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "stray_kite"
-    },
-    {
-      "type": "material",
-      "name": "strange_alloy"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "trapped_rubbold_lost_chest"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "vindicator_kite"
-    },
-    {
-      "type": "material",
-      "name": "slime"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "antique_boots"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "white_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_fancy_slab"
-    },
-    {
-      "type": "accessory",
-      "name": "ayerstone"
-    },
-    {
-      "type": "accessory",
-      "name": "antitoxin"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "creeper_kite"
     },
     {
       "type": "spawn_egg",
@@ -462,24 +17,28 @@
       "name": "piglin_medal"
     },
     {
-      "type": "indifferent/unused",
-      "name": "cobbled_briostone"
+      "type": "spawn_egg",
+      "name": "ghoul_spawn_egg"
     },
     {
-      "type": "indifferent/unused",
-      "name": "zombified_piglin_kite"
+      "type": "accessory",
+      "name": "reef_collar"
     },
     {
       "type": "bullet",
       "name": "aquatic_bullet"
     },
     {
-      "type": "spawn_egg",
-      "name": "jungle_slime_spawn_egg"
+      "type": "indifferent/unused",
+      "name": "ice_pressure_plate"
     },
     {
-      "type": "spawn_egg",
-      "name": "jungle_golem_spawn_egg"
+      "type": "arrow",
+      "name": "wooden_arrow"
+    },
+    {
+      "type": "bullet",
+      "name": "bullet"
     },
     {
       "type": "indifferent/unused",
@@ -487,11 +46,27 @@
     },
     {
       "type": "indifferent/unused",
-      "name": "cave_spider_kite"
+      "name": "ice_brick_stairs"
     },
     {
       "type": "indifferent/unused",
-      "name": "witch_kite"
+      "name": "frozen_bow"
+    },
+    {
+      "type": "indifferent/unused",
+      "name": "engineering_station"
+    },
+    {
+      "type": "material",
+      "name": "life_essence"
+    },
+    {
+      "type": "indifferent/unused",
+      "name": "thatch_stairs"
+    },
+    {
+      "type": "spawn_egg",
+      "name": "magma_slime_spawn_egg"
     },
     {
       "type": "spawn_egg",
@@ -499,63 +74,71 @@
     },
     {
       "type": "indifferent/unused",
-      "name": "light_gray_kite"
+      "name": "ice_brick_slab"
     },
     {
       "type": "indifferent/unused",
-      "name": "cave_centipede_kite"
+      "name": "musket"
+    },
+    {
+      "type": "bullet",
+      "name": "high_velocity_bullet"
+    },
+    {
+      "type": "material",
+      "name": "ice_shard"
     },
     {
       "type": "indifferent/unused",
-      "name": "foamshroom_fancy_fence"
+      "name": "ice_chest"
     },
     {
       "type": "indifferent/unused",
-      "name": "magma_cube_kite"
+      "name": "test_dummy"
+    },
+    {
+      "type": "accessory",
+      "name": "ebbewel"
+    },
+    {
+      "type": "material",
+      "name": "venom_vial"
+    },
+    {
+      "type": "accessory",
+      "name": "pierced_doll"
+    },
+    {
+      "type": "accessory",
+      "name": "burble"
+    },
+    {
+      "type": "material",
+      "name": "scorpion_gland"
     },
     {
       "type": "indifferent/unused",
-      "name": "foamshroom_fancy_chest"
+      "name": "ice_bricks"
     },
     {
       "type": "indifferent/unused",
-      "name": "mundane_slime_kite"
+      "name": "workbench"
+    },
+    {
+      "type": "accessory",
+      "name": "brieye"
+    },
+    {
+      "type": "arrow",
+      "name": "ice_arrow"
     },
     {
       "type": "indifferent/unused",
-      "name": "antique_leggings"
+      "name": "ice_button"
     },
     {
-      "type": "indifferent/unused",
-      "name": "briostone_brick_stairs"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "emossence_plant"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ice_elemental_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foliaath_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "pillager_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_fancy_door"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "cyan_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "rammer_meat"
+      "type": "spawn_egg",
+      "name": "squig_spawn_egg"
     },
     {
       "type": "indifferent/unused",
@@ -563,35 +146,39 @@
     },
     {
       "type": "indifferent/unused",
-      "name": "rubbold_pillar"
+      "name": "thatch"
     },
     {
       "type": "indifferent/unused",
-      "name": "light_blue_kite"
+      "name": "thatch_slab"
     },
     {
       "type": "spawn_egg",
-      "name": "ender_beast_archer_spawn_egg"
+      "name": "desertic_slime_spawn_egg"
+    },
+    {
+      "type": "spawn_egg",
+      "name": "goblin_spawn_egg"
     },
     {
       "type": "indifferent/unused",
-      "name": "foamshroom_planks"
+      "name": "shooting_star"
     },
     {
       "type": "indifferent/unused",
-      "name": "gray_kite"
+      "name": "ice_trapdoor"
+    },
+    {
+      "type": "arrow",
+      "name": "venom_arrow"
     },
     {
       "type": "indifferent/unused",
       "name": "plant_matter"
     },
     {
-      "type": "indifferent/unused",
-      "name": "foamshroom_stairs"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "rubbold_brick_stairs"
+      "type": "accessory",
+      "name": "gelatinous_diplomacy"
     },
     {
       "type": "material",
@@ -603,236 +190,11 @@
     },
     {
       "type": "spawn_egg",
-      "name": "grand_rammer_spawn_egg"
-    },
-    {
-      "type": "spawn_egg",
       "name": "cursed_skull_spawn_egg"
     },
     {
       "type": "accessory",
-      "name": "sand_necklace"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ectoshroom_block"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "klifour_spawn_egg"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "jemosselly_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "drowned_kite"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "monstrous_scorpion_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "warped_toad_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "rubbold"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "fly_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "zoglin_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "evoker_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "rubbold_slab"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "emossence_sward"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_fancy_fence_gate"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "briostone_bricks"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "equinox"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "red_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "rubbold_bricks"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "green_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "black_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ice_pressure_plate"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "petrified_ghoul_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "endergrade_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "piglin_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "purple_kite"
-    },
-    {
-      "type": "boat",
-      "recipe_material_id": "dannys_expansion:foamshroom_fancy_planks",
-      "name": "foamshroom_fancy_boat"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "purpolio_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ice_brick_slab"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "musket"
-    },
-    {
-      "type": "material",
-      "name": "hardened_foamshroom"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "test_dummy"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "sporer_kite"
-    },
-    {
-      "type": "material",
-      "name": "scorpion_gland"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_pressure_plate"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "antique_chestplate"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "magma_slime_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "dropbear_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "endermite_kite"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "squig_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "zombie_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "elder_guardian_kite"
-    },
-    {
-      "type": "spawn_egg",
-      "name": "rammer_spawn_egg"
-    },
-    {
-      "type": "material",
-      "name": "spores"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "zombie_villager_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "strider_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "cracked_rubbold_bricks"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "eclipse"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "barako_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_fancy_pressure_plate"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "ice_arrow"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_door"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "frozen_ghoul_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "foamshroom_fancy_planks"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "magenta_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "vex_kite"
+      "name": "sandy_clothes"
     },
     {
       "type": "indifferent/unused",
@@ -840,63 +202,35 @@
     },
     {
       "type": "indifferent/unused",
-      "name": "blue_slime"
+      "name": "shotgun"
     },
     {
-      "type": "indifferent/unused",
-      "name": "illusioner_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "bone_serpent_kite"
+      "type": "spawn_egg",
+      "name": "klifour_spawn_egg"
     },
     {
       "type": "indifferent/unused",
       "name": "ice_door"
     },
     {
-      "type": "indifferent/unused",
-      "name": "emossence"
+      "type": "material",
+      "name": "strange_alloy"
     },
     {
       "type": "spawn_egg",
-      "name": "frozen_ghoul_spawn_egg"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "briostone_pillar"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "silverfish_kite"
+      "name": "monstrous_scorpion_spawn_egg"
     },
     {
       "type": "material",
       "name": "gel"
     },
     {
-      "type": "material",
-      "name": "ender_scales"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "brown_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "naga_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "mummy_kite"
-    },
-    {
-      "type": "indifferent/unused",
-      "name": "trapped_foamshroom_chest"
-    },
-    {
       "type": "indifferent/unused",
       "name": "trapped_ice_chest"
+    },
+    {
+      "type": "indifferent/unused",
+      "name": "possessed_armor_blade"
     }
   ]
 }

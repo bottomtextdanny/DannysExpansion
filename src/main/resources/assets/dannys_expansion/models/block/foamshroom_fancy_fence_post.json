@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/fence_post",
-  "textures": {
-    "texture": "dannys_expansion:block/foamshroom_fancy_planks"
-  }
-}

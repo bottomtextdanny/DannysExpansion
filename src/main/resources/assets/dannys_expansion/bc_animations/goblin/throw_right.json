@@ -1,0 +1,142 @@
+{
+  "animation": [
+    {
+      "0.0": [
+        {
+          "name": "body",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightarm",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftarm",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "7.5": [
+        {
+          "name": "body",
+          "rotation": [
+            -17.5,
+            -50,
+            10
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            20,
+            40,
+            10
+          ]
+        },
+        {
+          "name": "rightarm",
+          "rotation": [
+            0,
+            50,
+            -70
+          ]
+        },
+        {
+          "name": "leftarm",
+          "rotation": [
+            0,
+            37.5,
+            30
+          ]
+        }
+      ],
+      "11.25": [
+        {
+          "name": "body",
+          "rotation": [
+            30,
+            40,
+            0
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            -20,
+            -20,
+            0
+          ]
+        },
+        {
+          "name": "rightarm",
+          "rotation": [
+            -20,
+            -65,
+            -60
+          ]
+        },
+        {
+          "name": "leftarm",
+          "rotation": [
+            0,
+            37.5,
+            30
+          ]
+        }
+      ],
+      "17.5": [
+        {
+          "name": "body",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "head",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "rightarm",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leftarm",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

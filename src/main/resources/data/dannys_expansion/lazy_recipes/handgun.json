@@ -1,0 +1,18 @@
+{
+  "type": "dannys_expansion:engineering_station",
+  "index": 4,
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot",
+      "count": 5
+    },
+    {
+      "#item": "minecraft:planks",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:handgun",
+    "count": 1
+  }
+}

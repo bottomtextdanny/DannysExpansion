@@ -1,11 +1,7 @@
 {
   "replace": false,
   "values": [
-    "dannys_expansion:ice_brick_stairs",
-    "dannys_expansion:briostone_brick_stairs",
-    "dannys_expansion:foamshroom_stairs",
-    "dannys_expansion:foamshroom_fancy_stairs",
-    "dannys_expansion:rubbold_stairs",
-    "dannys_expansion:rubbold_brick_stairs"
+    "dannys_expansion:thatch_stairs",
+    "dannys_expansion:ice_brick_stairs"
   ]
 }

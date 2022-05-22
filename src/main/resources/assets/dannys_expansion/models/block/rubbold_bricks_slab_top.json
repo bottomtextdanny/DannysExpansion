@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "dannys_expansion:block/rubbold_bricks",
-    "top": "dannys_expansion:block/rubbold_bricks",
-    "side": "dannys_expansion:block/rubbold_bricks"
-  }
-}

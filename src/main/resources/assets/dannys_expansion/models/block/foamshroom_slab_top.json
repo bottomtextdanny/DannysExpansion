@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "dannys_expansion:block/foamshroom_planks",
-    "top": "dannys_expansion:block/foamshroom_planks",
-    "side": "dannys_expansion:block/foamshroom_planks"
-  }
-}

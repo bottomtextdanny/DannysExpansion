@@ -17,7 +17,7 @@
                       {
                         "enchantment": "minecraft:silk_touch",
                         "levels": {
-                          "min": 1
+                          "val1": 1
                         }
                       }
                     ]
@@ -32,15 +32,15 @@
                 {
                   "function": "minecraft:set_count",
                   "count": {
-                    "min": _minimum,
-                    "max": _maximum,
+                    "val1": _minimum,
+                    "val2": _maximum,
                     "type": "minecraft:uniform"
                   }
                 },
                 {
                   "function": "minecraft:limit_count",
                   "limit": {
-                    "min": 0
+                    "val1": 0
                   }
                 },
                 {

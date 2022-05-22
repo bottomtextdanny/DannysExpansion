@@ -1,0 +1,26 @@
+{
+  "type": "dannys_expansion:engineering_station",
+  "index": 0,
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot",
+      "count": 3
+    },
+    {
+      "item": "minecraft:gold_ingot",
+      "count": 3
+    },
+    {
+      "item": "minecraft:redstone",
+      "count": 4
+    },
+    {
+      "item": "minecraft:gunpowder",
+      "count": 4
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:impulsor",
+    "count": 1
+  }
+}

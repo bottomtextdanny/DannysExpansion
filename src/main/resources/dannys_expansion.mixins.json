@@ -1,34 +1,19 @@
 {
   "required": true,
-  "package": "net.bottomtextdanny.dannys_expansion.mixin",
+  "package": "bottomtextdanny.dannys_expansion._mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "refmap": "dannys_expansion.refmap.json",
   "client": [
-    "client.EntityRenderersMixin",
-    "client.GameRendererMixin",
-    "client.ItemEntityRendererMixin",
     "client.MinecraftMixin",
-    "client.MouseHelperMixin",
-    "client.ParticleEngineMixin",
-    "client.PlayerModelMixin",
-    "client.WindowMixin",
-    "client.WorldRendererMixin"
+    "client.ParticleEngineMixin"
   ],
   "mixins": [
-    "EndBiomeProviderMixinsd",
-    "EntityMixin",
-    "EntityTypeMixin",
-    "ItemEntityMixin",
-    "LivingEntityMixin",
-    "MobEffectMixin",
     "MobMixin",
     "PiglinAiMixin",
-    "PlayerEntityMixin",
-    "RecipeManagerMixin",
+    "ProjectileMixin",
     "ServerGamePacketListenerImplMixin",
-    "StructureFeatureMixin",
-    "SurfaceRuleDataMixin"
+    "StructureFeatureMixin"
   ],
   "injectors": {
     "defaultRequire": 1

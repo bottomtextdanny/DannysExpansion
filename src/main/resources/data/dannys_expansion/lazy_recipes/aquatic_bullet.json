@@ -1,0 +1,18 @@
+{
+  "type": "dannys_expansion:engineering_station",
+  "index": 12,
+  "ingredients": [
+    {
+      "item": "dannys_expansion:bullet",
+      "count": 12
+    },
+    {
+      "item": "minecraft:prismarine_shard",
+      "count": 20
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:aquatic_bullet",
+    "count": 12
+  }
+}

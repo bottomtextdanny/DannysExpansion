@@ -1,0 +1,18 @@
+{
+  "type": "dannys_expansion:workbench",
+  "index": 2,
+  "ingredients": [
+    {
+      "item": "minecraft:packed_ice",
+      "count": 24
+    },
+    {
+      "item": "dannys_expansion:ice_shard",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:ice_bricks",
+    "count": 16
+  }
+}

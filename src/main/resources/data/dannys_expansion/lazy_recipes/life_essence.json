@@ -1,0 +1,14 @@
+{
+  "type": "dannys_expansion:engineering_station",
+  "index": 1,
+  "ingredients": [
+    {
+      "item": "minecraft:totem_of_undying",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "dannys_expansion:life_essence",
+    "count": 5
+  }
+}

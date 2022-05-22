@@ -1,0 +1,270 @@
+{
+  "animation": [
+    {
+      "0.0": [
+        {
+          "name": "leg",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg2",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg3",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg4",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg5",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg6",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg7",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg8",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "6.875": [
+        {
+          "name": "leg",
+          "rotation": [
+            -155,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg2",
+          "rotation": [
+            -155,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg3",
+          "rotation": [
+            -155,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg4",
+          "rotation": [
+            -155,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg5",
+          "rotation": [
+            -155,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg6",
+          "rotation": [
+            -155,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg7",
+          "rotation": [
+            -155,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg8",
+          "rotation": [
+            -155,
+            0,
+            0
+          ]
+        }
+      ],
+      "10.625": [
+        {
+          "name": "leg",
+          "rotation": [
+            20,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg2",
+          "rotation": [
+            20,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg3",
+          "rotation": [
+            20,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg4",
+          "rotation": [
+            20,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg5",
+          "rotation": [
+            20,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg6",
+          "rotation": [
+            20,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg7",
+          "rotation": [
+            20,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg8",
+          "rotation": [
+            20,
+            0,
+            0
+          ]
+        }
+      ],
+      "15.0": [
+        {
+          "name": "leg",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg2",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg3",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg4",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg5",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg6",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg7",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "leg8",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

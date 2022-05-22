@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dannys_expansion:block/thatch_slab"
+    },
+    "type=double": {
+      "model": "dannys_expansion:block/thatch"
+    },
+    "type=top": {
+      "model": "dannys_expansion:block/thatch_slab_top"
+    }
+  }
+}

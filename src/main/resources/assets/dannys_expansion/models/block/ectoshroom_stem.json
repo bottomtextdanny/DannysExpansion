@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "dannys_expansion:block/ectoshroom_stem",
-    "side": "dannys_expansion:block/ectoshroom_stem"
-  }
-}

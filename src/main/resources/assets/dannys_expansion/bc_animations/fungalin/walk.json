@@ -1,0 +1,236 @@
+{
+  "animation": [
+    {
+      "0.0": [
+        {
+          "name": "body",
+          "position": [
+            0,
+            0,
+            -1
+          ]
+        },
+        {
+          "name": "body",
+          "rotation": [
+            0,
+            10,
+            0
+          ]
+        }
+      ],
+      "5.0": [
+        {
+          "name": "body",
+          "position": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "name": "body",
+          "rotation": [
+            0,
+            0,
+            17.5
+          ]
+        }
+      ],
+      "10.0": [
+        {
+          "name": "body",
+          "position": [
+            0,
+            0,
+            -1
+          ]
+        },
+        {
+          "name": "body",
+          "rotation": [
+            0,
+            -10,
+            0
+          ]
+        }
+      ],
+      "15.0": [
+        {
+          "name": "body",
+          "position": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "name": "body",
+          "rotation": [
+            0,
+            0,
+            -17.5
+          ]
+        }
+      ],
+      "20.0": [
+        {
+          "name": "body",
+          "position": [
+            0,
+            0,
+            -1
+          ]
+        },
+        {
+          "name": "body",
+          "rotation": [
+            0,
+            10,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "0.0": [
+        {
+          "name": "rightFoot",
+          "position": [
+            0,
+            0,
+            3
+          ]
+        },
+        {
+          "name": "leftFoot",
+          "position": [
+            0,
+            0,
+            -3
+          ]
+        }
+      ],
+      "10.0": [
+        {
+          "name": "rightFoot",
+          "position": [
+            0,
+            0,
+            -3
+          ]
+        },
+        {
+          "name": "leftFoot",
+          "position": [
+            0,
+            0,
+            3
+          ]
+        }
+      ],
+      "20.0": [
+        {
+          "name": "rightFoot",
+          "position": [
+            0,
+            0,
+            3
+          ]
+        },
+        {
+          "name": "leftFoot",
+          "position": [
+            0,
+            0,
+            -3
+          ]
+        }
+      ]
+    },
+    {
+      "0.0": [
+        {
+          "name": "rightFoot",
+          "rotation": [
+            0,
+            -20,
+            0
+          ]
+        }
+      ],
+      "10.0": [
+        {
+          "name": "rightFoot",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "15.0": [
+        {
+          "name": "rightFoot",
+          "rotation": [
+            0,
+            -10,
+            17.5
+          ]
+        }
+      ],
+      "20.0": [
+        {
+          "name": "rightFoot",
+          "rotation": [
+            0,
+            -20,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "0.0": [
+        {
+          "name": "leftFoot",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "5.0": [
+        {
+          "name": "leftFoot",
+          "rotation": [
+            0,
+            10,
+            -17.5
+          ]
+        }
+      ],
+      "10.0": [
+        {
+          "name": "leftFoot",
+          "rotation": [
+            0,
+            20,
+            0
+          ]
+        }
+      ],
+      "20.0": [
+        {
+          "name": "leftFoot",
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}
